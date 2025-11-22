@@ -1,0 +1,6 @@
+[includeIf "gitdir:~/work/**/*"]
+path = ~/.gitconfig-work
+
+[url "https://github.com/"]
+insteadOf = git@github.com:
+insteadOf = git://github.com/
