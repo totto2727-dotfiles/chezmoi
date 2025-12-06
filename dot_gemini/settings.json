@@ -33,6 +33,7 @@
     "tools": {
         "allowed": [
             "run_shell_command(ls)",
+            "run_shell_command(git)",
             "run_shell_command(git rm)",
             "run_shell_command(git add)",
             "run_shell_command(git commit)",
