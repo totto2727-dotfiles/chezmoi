@@ -1,0 +1,67 @@
+{
+    "ide": {
+        "enabled": true,
+        "hasSeenNudge": true
+    },
+    "mcpServers": {
+        "serena": {
+            "args": [
+                "--from",
+                "git+https://github.com/oraios/serena",
+                "serena-mcp-server",
+                "--context",
+                "ide-assistant",
+                "--enable-web-dashboard",
+                "false",
+                "--project",
+                "${PWD}"
+            ],
+            "command": "uvx"
+        },
+        "context7": {
+            "httpUrl": "https://mcp.context7.com/mcp",
+            "headers": {
+                "Accept": "application/json, text/event-stream"
+            }
+        }
+    },
+    "security": {
+        "auth": {
+            "selectedType": "oauth-personal"
+        }
+    },
+    "tools": {
+        "allowed": [
+            "run_shell_command(ls)",
+            "run_shell_command(git rm)",
+            "run_shell_command(git add)",
+            "run_shell_command(git commit)",
+            "run_shell_command(git stash push)",
+            "run_shell_command(mkdir)",
+            "run_shell_command(cat)",
+            "run_shell_command(echo)",
+            "run_shell_command(touch)",
+            "run_shell_command(cp)",
+            "run_shell_command(tree)",
+            "run_shell_command(find)",
+            "run_shell_command(grep)",
+            "run_shell_command(sort)",
+            "run_shell_command(uniq)",
+            "run_shell_command(wc)",
+            "run_shell_command(head)",
+            "run_shell_command(tail)",
+            "run_shell_command(xargs)"
+        ],
+        "exclude": [
+            "run_shell_command(sudo)",
+            "run_shell_command(rm)",
+            "run_shell_command(unlink)",
+            "run_shell_command(git reset)",
+            "run_shell_command(git push)",
+            "run_shell_command(git stash clear)",
+            "run_shell_command(id_rsa)",
+            "run_shell_command(id_ed25519)",
+            "run_shell_command(*.local*)"
+        ]
+    }
+}
