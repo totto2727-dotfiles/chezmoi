@@ -2,6 +2,8 @@
 description: Token-efficient Serena MCP command for structured app development and problem-solving
 ---
 
+# serena
+
 ## Quick Reference
 
 ```bash
@@ -71,20 +73,20 @@ Automatically select thinking pattern based on keywords:
 
 ### 2. MCP Selection & Execution
 
-```
 App Development Tasks → Serena MCP
+
 - Component implementation
 - API development
 - Feature building
 - System architecture
 
 All Tasks → Serena MCP
+
 - Component implementation
-- API development 
+- API development
 - Feature building
 - System architecture
 - Problem solving and analysis
-```
 
 ### 3. Output Modes
 
