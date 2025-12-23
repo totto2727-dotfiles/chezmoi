@@ -26,8 +26,11 @@ Analyze the staged and unstaged changes to create appropriate commits with granu
 4. **Process**:
    - Analyze all changes (staged and unstaged)
    - Group related changes logically
-   - **Plan**: Create a TODO list showing the proposed commit messages and the files included in each commit
    - Stage and commit each group separately
    - Provide clear explanations for each commit
+
+5. **Tips**:
+   - Use `git diff` and `git apply --cached` to stage only the necessary changes
+   - If `git apply --cached` fails, run `git diff` again and recreate the diff file
 
 Execute the analysis and create the commits with proper conventional commit messages following the repository's language pattern.
