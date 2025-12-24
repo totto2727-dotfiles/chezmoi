@@ -23,14 +23,17 @@ Analyze the staged and unstaged changes to create appropriate commits with granu
 
 3. **Language Detection**: Analyze the recent commit messages from `git log` to determine the language pattern used in this repository and follow the same language for new commit messages
 
-4. **Process**:
+4. **Direct File Modification Prohibited**: Do not use file editing tools (e.g., `write`, `search_replace`) to modify files directly. Always use `git apply --cached` or other git commands to stage and commit changes.
+
+5. **Process**:
    - Analyze all changes (staged and unstaged)
    - Group related changes logically
    - Stage and commit each group separately
    - Provide clear explanations for each commit
 
-5. **Tips**:
+6. **Tips**:
    - Use `git diff` and `git apply --cached` to stage only the necessary changes
    - If `git apply --cached` fails, run `git diff` again and recreate the diff file
 
 Execute the analysis and create the commits with proper conventional commit messages following the repository's language pattern.
+
