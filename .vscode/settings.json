@@ -4,5 +4,8 @@
     ],
     "cSpell.words": [
         "astronvim"
-    ]
+    ],
+    "[markdown]": {
+        "editor.defaultFormatter": null
+    }
 }
