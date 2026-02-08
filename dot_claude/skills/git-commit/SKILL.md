@@ -36,11 +36,7 @@ When creating commits:
 
 ## Requirements
 
-### 1. Shell Execution
-
-All git commands MUST be executed via `zsh -c '<command>'`.
-
-### 2. GPG Signing (CRITICAL)
+### 1. GPG Signing (CRITICAL)
 
 Commits without GPG signatures are **strictly prohibited**. Never use `--no-gpg-sign` or disable signing.
 
@@ -50,11 +46,11 @@ If a GPG signing error or hang occurs:
 2. Report the error message and current state
 3. Do not attempt workarounds or unsigned commits
 
-### 3. Granular Commits
+### 2. Granular Commits
 
 Create separate commits for logically distinct changes. Do not combine unrelated modifications into a single commit.
 
-### 4. Conventional Commits Format
+### 3. Conventional Commits Format
 
 Use format: `type(scope): description`
 
@@ -75,11 +71,11 @@ Use format: `type(scope): description`
 
 **Description**: Concise description in present tense, lowercase (except proper nouns)
 
-### 5. Language Detection
+### 4. Language Detection
 
 Analyze recent commit messages from `git log --oneline -10` to determine the language pattern used in the repository. Follow the same language for new commit messages.
 
-### 6. Direct File Modification Prohibited
+### 5. Direct File Modification Prohibited
 
 Do not use file editing tools (e.g., `write`, `search_replace`) to modify files directly. Always use git commands to stage and commit changes:
 
@@ -87,7 +83,7 @@ Do not use file editing tools (e.g., `write`, `search_replace`) to modify files 
 - Use `git apply --cached` when staging specific hunks from diffs
 - Use `git commit` for creating commits
 
-### 7. Process
+### 6. Process
 
 1. Analyze all changes (staged and unstaged)
 2. Group related changes logically
