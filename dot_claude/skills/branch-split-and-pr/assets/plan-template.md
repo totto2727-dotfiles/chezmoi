@@ -14,11 +14,11 @@ A plan for splitting current changes into separate branches by unit.
 
 ### Changed Files and Dependencies
 
-| Group | Target File            | Dependent Mocks/Assets (New/Changed) | Type              |
-| ----- | ---------------------- | ------------------------------------- | ----------------- |
-| **A** | (e.g., xxx.test.js)   | (list of dependent mocks)             | New               |
-| **A** | (e.g., yyy.test.js)   | (same as above)                       | Existing Modified |
-| **B** | (e.g., zzz.test.js)   | (same as above)                       | Existing Modified |
+| Group | Target File         | Dependent Mocks/Assets (New/Changed) | Type              |
+| ----- | ------------------- | ------------------------------------ | ----------------- |
+| **A** | (e.g., xxx.test.js) | (list of dependent mocks)            | New               |
+| **A** | (e.g., yyy.test.js) | (same as above)                      | Existing Modified |
+| **B** | (e.g., zzz.test.js) | (same as above)                      | Existing Modified |
 
 ---
 
@@ -26,10 +26,10 @@ A plan for splitting current changes into separate branches by unit.
 
 ### Branches to Create
 
-| #   | Branch Name    | New Target     | Existing Modifications          | Dependencies |
-| --- | -------------- | -------------- | ------------------------------- | ------------ |
-| 1   | `test/<name1>` | (target name)  | (list of related modifications) | None         |
-| 2   | `test/<name2>` | None           | (existing modifications only)   | None         |
+| #   | Branch Name    | New Target    | Existing Modifications          | Dependencies |
+| --- | -------------- | ------------- | ------------------------------- | ------------ |
+| 1   | `test/<name1>` | (target name) | (list of related modifications) | None         |
+| 2   | `test/<name2>` | None          | (existing modifications only)   | None         |
 
 ---
 

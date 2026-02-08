@@ -102,8 +102,7 @@ find . -name "*.ts" -type f | wc -l
 ```typescript
 // Complex file processing with error handling
 try {
-  const files = Array.from(Deno.readDirSync("."))
-    .filter(f => f.isFile && f.name.endsWith(".ts"));
+  const files = Array.from(Deno.readDirSync(".")).filter((f) => f.isFile && f.name.endsWith(".ts"));
 
   for (const file of files) {
     const content = Deno.readTextFileSync(file.name);
@@ -118,8 +117,8 @@ try {
 
 ```javascript
 // DO NOT USE
-const fs = require('fs');
-const files = fs.readdirSync('.');
+const fs = require("fs");
+const files = fs.readdirSync(".");
 ```
 
 ### Bad: Python

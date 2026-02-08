@@ -26,23 +26,23 @@ Three principles for creating disposable scripts:
 
 ```typescript
 // npm packages
-import { z } from "npm:zod@3.22.4"
+import { z } from "npm:zod@3.22.4";
 
 // jsr packages
-import { Hono } from "jsr:@hono/hono@4.0.0"
-import { HttpException } from "jsr:@hono/hono@4.0.0/http-exception"
+import { Hono } from "jsr:@hono/hono@4.0.0";
+import { HttpException } from "jsr:@hono/hono@4.0.0/http-exception";
 
 // Deno standard library (via jsr)
-import { join } from "jsr:@std/path@1.0.0"
-import { parse } from "jsr:@std/yaml@1.0.0"
+import { join } from "jsr:@std/path@1.0.0";
+import { parse } from "jsr:@std/yaml@1.0.0";
 ```
 
 ### Incorrect Format
 
 ```typescript
 // NG: URL imports
-import { serve } from "https://deno.land/std@0.208.0/http/server.ts"
-import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts"
+import { serve } from "https://deno.land/std@0.208.0/http/server.ts";
+import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 ```
 
 ## Best Practices
@@ -53,24 +53,24 @@ Before using external packages, check if Deno built-in APIs can accomplish the t
 
 ```typescript
 // File operations
-const content = await Deno.readTextFile("./data.json")
-await Deno.writeTextFile("./output.txt", result)
+const content = await Deno.readTextFile("./data.json");
+await Deno.writeTextFile("./output.txt", result);
 
 // Directory operations
-await Deno.mkdir("./output", { recursive: true })
+await Deno.mkdir("./output", { recursive: true });
 for await (const entry of Deno.readDir("./src")) {
-  console.log(entry.name)
+  console.log(entry.name);
 }
 
 // Environment variables
-const apiKey = Deno.env.get("API_KEY")
+const apiKey = Deno.env.get("API_KEY");
 
 // Command execution
 const command = new Deno.Command("git", {
   args: ["status"],
   stdout: "piped",
-})
-const { stdout } = await command.output()
+});
+const { stdout } = await command.output();
 ```
 
 ### Minimal Dependencies
@@ -79,10 +79,10 @@ Import only what you need:
 
 ```typescript
 // OK: Import only required functions
-import { parse } from "jsr:@std/yaml@1.0.0"
+import { parse } from "jsr:@std/yaml@1.0.0";
 
 // NG: Import entire package
-import * as yaml from "jsr:@std/yaml@1.0.0"
+import * as yaml from "jsr:@std/yaml@1.0.0";
 ```
 
 ## Examples
@@ -90,22 +90,22 @@ import * as yaml from "jsr:@std/yaml@1.0.0"
 ### Good Example
 
 ```typescript
-import { parse } from "jsr:@std/yaml@1.0.0"
+import { parse } from "jsr:@std/yaml@1.0.0";
 
-const config = parse(await Deno.readTextFile("./config.yaml"))
-console.log(config)
+const config = parse(await Deno.readTextFile("./config.yaml"));
+console.log(config);
 ```
 
 ### Bad Example
 
 ```typescript
 // NG: URL import
-import { parse } from "https://deno.land/std@0.208.0/yaml/mod.ts"
+import { parse } from "https://deno.land/std@0.208.0/yaml/mod.ts";
 
 // NG: Unnecessary external package
-import * as fs from "npm:fs-extra"
+import * as fs from "npm:fs-extra";
 ```
 
 ## Additional Resources
 
-- [Deno.* API Reference](https://docs.deno.com/api/deno/all_symbols) - Deno built-in API reference
+- [Deno.\* API Reference](https://docs.deno.com/api/deno/all_symbols) - Deno built-in API reference

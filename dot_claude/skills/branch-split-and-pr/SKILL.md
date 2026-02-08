@@ -81,9 +81,9 @@ After all PRs are created, present the following markdown format to the user (cl
 ```markdown
 ## Created PRs
 
-- [PR #<number> - <branch-name>](<PR-URL>)
-- [PR #<number> - <branch-name>](<PR-URL>)
-...
+- [PR #<number> - <branch-name>](PR-URL)
+- [PR #<number> - <branch-name>](PR-URL)
+  ...
 ```
 
 ## On Error
