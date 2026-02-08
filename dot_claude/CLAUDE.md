@@ -9,7 +9,7 @@
 ## Language Rules
 
 - **Chat Response**: Always respond in Japanese
-- **Markdown Output**: Always output documentation in Japanese
+- **Markdown Output**: Always output documentation in English
 - **Commit Messages**: Follow the language pattern of existing commits in the repository
 
 ## Development Rules
