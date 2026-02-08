@@ -1,0 +1,36 @@
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "shift shift": "file_finder::Toggle",
+      "ctrl ctrl": "command_palette::Toggle",
+    },
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "alt-t": "editor::ToggleFocus",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "alt-t": "terminal_panel::ToggleFocus",
+    },
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "j j": "vim::NormalBefore",
+    },
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "shift-k": "editor::Hover",
+      "space e": "project_panel::ToggleFocus",
+      "space c r": "editor::Rename",
+      "space c a": "editor::ToggleCodeActions",
+    },
+  },
+]
