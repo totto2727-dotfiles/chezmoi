@@ -1,5 +1,6 @@
 ---
-description: Git Commit Command
+name: git-commit
+description: Rules and workflow for creating well-structured Conventional Commits
 ---
 
 # Git Commit Command
@@ -36,4 +37,3 @@ Analyze the staged and unstaged changes to create appropriate commits with granu
    - If `git apply --cached` fails, run `git diff` again and recreate the diff file
 
 Execute the analysis and create the commits with proper conventional commit messages following the repository's language pattern.
-

@@ -1,27 +1,28 @@
 ---
-description: CSVファイルの解析方法
+name: csv-analyzing
+description: Guide for querying and filtering CSV files using DuckDB SQL
 ---
 
 # CSV Analysis
 
-CSVファイルを解析するためのガイドです。
+A guide for analyzing CSV files.
 
-## 全データの読み込み
+## Load All Data
 
 ```sql
 SELECT * FROM 'data.csv';
 ```
 
-## 特定の列を選択
+## Select Specific Columns
 
 ```sql
 SELECT column1, column2, column3
 FROM 'data.csv';
 ```
 
-## 行のフィルタリング
+## Filter Rows
 
-特定の条件に一致する行のみを取得:
+Retrieve only rows matching a specific condition:
 
 ```sql
 SELECT *
@@ -29,7 +30,7 @@ FROM 'data.csv'
 WHERE column1 = 'value';
 ```
 
-複数条件でフィルタリング:
+Filter with multiple conditions:
 
 ```sql
 SELECT *
@@ -38,7 +39,7 @@ WHERE column1 = 'value'
   AND column2 > 100;
 ```
 
-## 列と行の組み合わせフィルタリング
+## Combined Column and Row Filtering
 
 ```sql
 SELECT column1, column2
@@ -47,9 +48,9 @@ WHERE column1 LIKE '%keyword%'
   AND column3 IS NOT NULL;
 ```
 
-## 行番号によるフィルタリング
+## Filter by Row Number
 
-特定の行範囲を取得 (例: 11〜20行目):
+Retrieve a specific range of rows (e.g., rows 11-20):
 
 ```sql
 SELECT *
@@ -60,7 +61,7 @@ FROM (
 WHERE rn BETWEEN 11 AND 20;
 ```
 
-先頭N行をスキップして取得:
+Skip the first N rows:
 
 ```sql
 SELECT *
@@ -71,11 +72,11 @@ FROM (
 WHERE rn > 100;
 ```
 
-## 追加のSQL機能
+## Additional SQL Features
 
-他の機能が必要な場合のみ公式ドキュメントを参照してください。
+Refer to the official documentation only when you need other features.
 
-**参考ドキュメント**:
+**Reference Documentation**:
 
 - [SQL Introduction](https://duckdb.org/docs/sql/introduction)
 - [CSV Import](https://duckdb.org/docs/data/csv/overview)

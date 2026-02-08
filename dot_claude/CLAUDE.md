@@ -1,4 +1,4 @@
-# Claude Code Guidelines
+# Guidelines
 
 ## Basic Rules
 
