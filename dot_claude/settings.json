@@ -95,7 +95,11 @@
       "Bash(bunx oxc *)",
       "Bash(bunx ultracite *)",
       "Bash(bunx tsgo *)",
-      "Bash(safe-chain *)"
+      "Bash(safe-chain *)",
+      "mcp__context7",
+      "mcp__cloudflare-browser",
+      "mcp__cloudflare-docs",
+      "mcp__exocortex"
     ],
     "ask": ["Bash(gh pr create *)", "Bash(git push *)"],
     "deny": [
