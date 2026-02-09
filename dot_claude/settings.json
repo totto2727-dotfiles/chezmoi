@@ -96,10 +96,10 @@
       "Bash(bunx ultracite *)",
       "Bash(bunx tsgo *)",
       "Bash(safe-chain *)",
-      "mcp__context7",
-      "mcp__cloudflare-browser",
-      "mcp__cloudflare-docs",
-      "mcp__exocortex"
+      "mcp__plugin_totto2727_context7",
+      "mcp__plugin_totto2727_cloudflare-browser",
+      "mcp__plugin_totto2727_cloudflare-docs",
+      "mcp__plugin_totto2727_exocortex"
     ],
     "ask": ["Bash(gh pr create *)", "Bash(git push *)"],
     "deny": [
@@ -162,5 +162,22 @@
       "Bash(sh *)",
       "Bash(zsh *)"
     ]
+  },
+  "enabledPlugins": {
+    "Notion@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "double-shot-latte@superpowers-marketplace": true,
+    "frontend-design@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "hookify@claude-plugins-official": true,
+    "lsp-servers@claude-lsp-servers": true,
+    "plugin-dev@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "superpowers@superpowers-marketplace": true,
+    "totto2727@totto2727": true
   }
 }
