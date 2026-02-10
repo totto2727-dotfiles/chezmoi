@@ -179,5 +179,10 @@
     "security-guidance@claude-plugins-official": true,
     "superpowers@superpowers-marketplace": true,
     "totto2727@totto2727": true
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bunx -y ccstatusline@latest",
+    "padding": 0
   }
 }

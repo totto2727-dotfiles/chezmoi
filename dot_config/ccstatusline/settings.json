@@ -1,0 +1,59 @@
+{
+  "version": 3,
+  "lines": [
+    [
+      {
+        "id": "b3edb544-271c-4f22-bcbc-21c208f093e1",
+        "type": "git-branch"
+      },
+      {
+        "id": "73f9047a-8c03-4acc-8a3e-bcd9ff276448",
+        "type": "git-worktree"
+      },
+      {
+        "id": "413f2d8f-78db-4b3a-84aa-e9ffb94cf69d",
+        "type": "git-changes"
+      },
+      {
+        "id": "fdbb949d-7215-4ecd-8781-4c80ea642520",
+        "type": "current-working-dir"
+      }
+    ],
+    [
+      {
+        "id": "7ec74685-245b-4196-b39a-ca28c2cbc8c6",
+        "type": "context-percentage"
+      },
+      {
+        "id": "5e18cee8-63ad-4b86-9d34-70be67290339",
+        "type": "tokens-total"
+      },
+      {
+        "id": "899fb81b-5462-4a28-89dc-ea5013bafa12",
+        "type": "session-clock"
+      }
+    ],
+    [
+      {
+        "id": "cbe3ce32-8270-442d-819b-56aef5aeeaa2",
+        "type": "custom-command",
+        "commandPath": "bun x ccusage statusline"
+      }
+    ]
+  ],
+  "flexMode": "full-minus-40",
+  "compactThreshold": 60,
+  "colorLevel": 2,
+  "defaultPadding": " ",
+  "inheritSeparatorColors": false,
+  "globalBold": true,
+  "powerline": {
+    "enabled": true,
+    "separators": [""],
+    "separatorInvertBackground": [false],
+    "startCaps": [],
+    "endCaps": [""],
+    "theme": "minimal",
+    "autoAlign": false
+  }
+}
