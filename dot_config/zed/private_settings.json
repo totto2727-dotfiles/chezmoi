@@ -1,4 +1,7 @@
 {
+  "collaboration_panel": {
+    "dock": "right"
+  },
   "// custom settings, run `zed: open default settings` from the command palette (cmd-shift-p / ctrl-shift-p)": "",
   "base_keymap": "Cursor",
   "buffer_font_family": "PlemolJP35",
