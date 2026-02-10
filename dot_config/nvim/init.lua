@@ -13,3 +13,5 @@ end
 vim.opt.rtp:prepend(lazy_path)
 
 require("lazy").setup { "AstroNvim/AstroNvim", version = "^5", import = "astronvim.plugins" }
+
+vim.opt.diffopt = "internal,filler,algorithm:histogram,indent-heuristic"
