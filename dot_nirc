@@ -1,3 +1,0 @@
-defaultAgent=pnpm
-globalAgent=bun
-useSfw=true
