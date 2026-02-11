@@ -7,6 +7,7 @@
 - **Planning**: Create execution plans as a general principle
 - **TODO Management**: Always create TODO tasks even for minor tasks
 - **TODO Triage**: When user feedback is received during work, assess whether it is urgent and related to the current task or a subsequent task, and update TODOs accordingly
+- **No Command Chaining**: As a general rule, execute Bash commands one at a time instead of chaining with `&&`, `||`, or `;` to avoid sandbox detection issues
 
 ## Language Rules
 
