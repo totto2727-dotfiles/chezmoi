@@ -1,20 +1,14 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "language": "japanese",
-  "sandbox": {
-    "enabled": true,
-    "excludedCommands": ["git", "gh"]
+  "fileSuggestion": {
+    "type": "command",
+    "command": "~/.claude/file-suggestion.sh"
   },
   "attribution": {
     "commit": "",
     "pr": ""
   },
-  "fileSuggestion": {
-    "type": "command",
-    "command": "~/.claude/file-suggestion.sh"
-  },
   "permissions": {
-    "defaultMode": "plan",
     "allow": [
       "Read(~/.zshrc)",
       "Bash(echo *)",
@@ -99,9 +93,12 @@
       "mcp__plugin_totto2727_context7",
       "mcp__plugin_totto2727_cloudflare-browser",
       "mcp__plugin_totto2727_cloudflare-docs",
-      "mcp__plugin_totto2727_exocortex"
+      "mcp__plugin_totto2727_exocortex",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(WebFetch\\(domain:github.com\\))",
+      "Read(~/.claude/**/*)",
+      "WebFetch(domain:developer.mozilla.org)"
     ],
-    "ask": ["Bash(gh pr create *)", "Bash(git push *)"],
     "deny": [
       "Read(*.local)",
       "Read(./.env)",
@@ -161,7 +158,14 @@
       "Bash(bash *)",
       "Bash(sh *)",
       "Bash(zsh *)"
-    ]
+    ],
+    "ask": ["Bash(gh pr create *)", "Bash(git push *)"],
+    "defaultMode": "plan"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bunx -y ccstatusline@latest",
+    "padding": 0
   },
   "enabledPlugins": {
     "Notion@claude-plugins-official": true,
@@ -180,9 +184,10 @@
     "superpowers@superpowers-marketplace": true,
     "totto2727@totto2727": true
   },
-  "statusLine": {
-    "type": "command",
-    "command": "bunx -y ccstatusline@latest",
-    "padding": 0
-  }
+  "language": "japanese",
+  "sandbox": {
+    "enabled": true,
+    "excludedCommands": ["git", "gh"]
+  },
+  "effortLevel": "medium"
 }
