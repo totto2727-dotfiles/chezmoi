@@ -5,6 +5,8 @@
 - **Parallel Execution**: Execute independent processes concurrently
 - **Agent Priority**: Prioritize using Agents whenever possible for all tasks
 - **Planning**: Create execution plans as a general principle
+- **TODO Management**: Always create TODO tasks even for minor tasks
+- **TODO Triage**: When user feedback is received during work, assess whether it is urgent and related to the current task or a subsequent task, and update TODOs accordingly
 
 ## Language Rules
 
