@@ -32,5 +32,11 @@
       "space c r": "editor::Rename",
       "space c a": "editor::ToggleCodeActions"
     }
+  },
+  {
+    "context": "Editor && edit_prediction",
+    "bindings": {
+      "alt-tab": "editor::AcceptEditPrediction"
+    }
   }
 ]

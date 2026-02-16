@@ -1,6 +1,6 @@
 {
   "edit_predictions": {
-    "provider": "zed"
+    "provider": "sweep"
   },
   "agent": {
     "default_model": {
