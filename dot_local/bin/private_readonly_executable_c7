@@ -13,7 +13,34 @@ import {
   NodeContext,
   NodeRuntime,
 } from "jsr:@totto/function@2.4.0/effect/platform/node";
+import { Markdown, type MarkdownTheme } from "npm:@mariozechner/pi-tui@0.52";
+import chalk from "npm:chalk@5.6";
+import ora from "npm:ora@8.2";
 import * as process from "node:process";
+
+const mdTheme: MarkdownTheme = {
+  heading: (t) => chalk.bold.cyan(t),
+  link: (t) => chalk.underline.blue(t),
+  linkUrl: (t) => chalk.dim(t),
+  code: (t) => chalk.yellow(t),
+  codeBlock: (t) => chalk.green(t),
+  codeBlockBorder: (t) => chalk.dim(t),
+  quote: (t) => chalk.italic.gray(t),
+  quoteBorder: (t) => chalk.gray(t),
+  hr: (t) => chalk.dim(t),
+  listBullet: (t) => chalk.cyan(t),
+  bold: (t) => chalk.bold(t),
+  italic: (t) => chalk.italic(t),
+  strikethrough: (t) => chalk.strikethrough(t),
+  underline: (t) => chalk.underline(t),
+};
+
+const withSpinner = <A, E, R>(message: string, effect: Effect.Effect<A, E, R>) =>
+  Effect.acquireUseRelease(
+    Effect.sync(() => ora(message).start()),
+    () => effect,
+    (spinner) => Effect.sync(() => spinner.stop()),
+  );
 
 const API_BASE_URL = "https://context7.com";
 const SEARCH_API_URL = `${API_BASE_URL}/api/v2/libs/search`;
@@ -43,11 +70,16 @@ const handleSearch = (libraryName: string, query: string) =>
     const client = (yield* HttpClient.HttpClient).pipe(
       HttpClient.filterStatusOk,
     );
-    const params = new URLSearchParams({ query, libraryName });
-    const req = yield* makeRequest(`${SEARCH_API_URL}?${params}`);
-    const response = yield* client.execute(req);
-    const parsed = yield* HttpClientResponse.schemaBodyJson(SearchResponse)(
-      response,
+    const parsed = yield* withSpinner(
+      `Searching for "${libraryName}"...`,
+      Effect.gen(function* () {
+        const params = new URLSearchParams({ query, libraryName });
+        const req = yield* makeRequest(`${SEARCH_API_URL}?${params}`);
+        const response = yield* client.execute(req);
+        return yield* HttpClientResponse.schemaBodyJson(SearchResponse)(
+          response,
+        );
+      }),
     );
     const libraries = parsed.results;
     if (libraries.length === 0) {
@@ -95,13 +127,24 @@ const handleQuery = (libraryId: string, query: string, type: string) =>
     const client = (yield* HttpClient.HttpClient).pipe(
       HttpClient.filterStatusOk,
     );
-    const params = new URLSearchParams({ query, libraryId, type });
-    const req = yield* makeRequest(`${CONTEXT_API_URL}?${params}`);
-    const response = yield* client.execute(req);
+    const apiType = type === "md" ? "txt" : type;
+    const response = yield* withSpinner(
+      "Fetching context...",
+      Effect.gen(function* () {
+        const params = new URLSearchParams({ query, libraryId, type: apiType });
+        const req = yield* makeRequest(`${CONTEXT_API_URL}?${params}`);
+        return yield* client.execute(req);
+      }),
+    );
     if (type === "json") {
       const data = yield* response.json;
       yield* Console.log(`--- Query Result (JSON) ---`);
       yield* Console.log(JSON.stringify(data, null, 2));
+    } else if (type === "md") {
+      const data = yield* response.text;
+      const md = new Markdown(data, 1, 0, mdTheme);
+      const lines = md.render(process.stdout.columns || 80);
+      yield* Console.log(lines.join("\n"));
     } else {
       const data = yield* response.text;
       yield* Console.log(`--- Query Result (TXT) ---`);
@@ -125,7 +168,7 @@ const handleQuery = (libraryId: string, query: string, type: string) =>
 const libraryName = Args.text({ name: "libraryName" });
 const libraryId = Args.text({ name: "libraryId" });
 const query = Args.text({ name: "query" }).pipe(Args.repeated);
-const outputType = Options.choice("type", ["txt", "json"]).pipe(
+const outputType = Options.choice("type", ["txt", "json", "md"]).pipe(
   Options.withAlias("t"),
   Options.withDefault("txt"),
 );
