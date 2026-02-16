@@ -41,6 +41,7 @@
       "Bash(git delta *)",
       "Bash(git unstage)",
       "Bash(git undo)",
+      "Bash(git stash save *)",
       "Bash(git stash push *)",
       "Bash(git stash apply *)",
       "Bash(git add *)",
