@@ -1,57 +1,57 @@
 {
-  "edit_predictions": {
-    "provider": "sweep"
-  },
   "agent": {
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-haiku-4-5"
+      "model": "claude-haiku-4-5",
+      "provider": "zed.dev"
     },
-    "use_modifier_to_send": true,
     "favorite_models": [
       {
-        "provider": "zed.dev",
-        "model": "claude-haiku-4-5"
+        "model": "claude-haiku-4-5",
+        "provider": "zed.dev"
       },
       {
-        "provider": "anthropic",
-        "model": "claude-haiku-4-5-latest"
+        "model": "claude-haiku-4-5-latest",
+        "provider": "anthropic"
       },
       {
-        "provider": "anthropic",
-        "model": "claude-haiku-4-5-thinking-latest"
+        "model": "claude-haiku-4-5-thinking-latest",
+        "provider": "anthropic"
       },
       {
-        "provider": "zed.dev",
-        "model": "claude-sonnet-4-5"
+        "model": "claude-sonnet-4-5",
+        "provider": "zed.dev"
       },
       {
-        "provider": "zed.dev",
-        "model": "claude-sonnet-4-5-thinking"
+        "model": "claude-sonnet-4-5-thinking",
+        "provider": "zed.dev"
       },
       {
-        "provider": "anthropic",
-        "model": "claude-opus-4-6-thinking-latest"
+        "model": "claude-opus-4-6-thinking-latest",
+        "provider": "anthropic"
       },
       {
-        "provider": "anthropic",
-        "model": "claude-opus-4-6-1m-context-latest"
+        "model": "claude-opus-4-6-1m-context-latest",
+        "provider": "anthropic"
       },
       {
-        "provider": "anthropic",
-        "model": "claude-opus-4-6-1m-context-thinking-latest"
+        "model": "claude-opus-4-6-1m-context-thinking-latest",
+        "provider": "anthropic"
       }
     ],
+    "model_parameters": [],
     "play_sound_when_agent_done": true,
-    "model_parameters": []
+    "use_modifier_to_send": true
   },
-  "collaboration_panel": {
-    "dock": "right"
-  },
-  "// custom settings, run `zed: open default settings` from the command palette (cmd-shift-p / ctrl-shift-p)": "",
   "base_keymap": "Cursor",
   "buffer_font_family": "PlemolJP35",
   "buffer_font_size": 15,
+  "collaboration_panel": {
+    "dock": "right"
+  },
+  "edit_predictions": {
+    "provider": "sweep"
+  },
+  "format_on_save": "on",
   "git": {
     "hunk_style": "staged_hollow",
     "inline_blame": {
@@ -68,10 +68,96 @@
     "tree_view": true
   },
   "icon_theme": "Zed (Default)",
+  "language_servers": ["!typescript-language-server", "!biome", "!dprint", "!prettier", "..."],
+  "languages": {
+    "JSON": {
+      "code_actions_on_format": {
+        "source.fixAll.oxc": true,
+        "source.organizeImports.oxc": true
+      },
+      "formatter": {
+        "language_server": {
+          "name": "oxfmt"
+        }
+      }
+    },
+    "JSONC": {
+      "code_actions_on_format": {
+        "source.fixAll.oxc": true,
+        "source.organizeImports.oxc": true
+      },
+      "formatter": {
+        "language_server": {
+          "name": "oxfmt"
+        }
+      }
+    },
+    "JavaScript": {
+      "code_actions_on_format": {
+        "source.fixAll.oxc": true,
+        "source.organizeImports.oxc": true
+      },
+      "formatter": {
+        "language_server": {
+          "name": "oxfmt"
+        }
+      }
+    },
+    "TSX": {
+      "code_actions_on_format": {
+        "source.fixAll.oxc": true,
+        "source.organizeImports.oxc": true
+      },
+      "formatter": {
+        "language_server": {
+          "name": "oxfmt"
+        }
+      }
+    },
+    "TypeScript": {
+      "code_actions_on_format": {
+        "source.fixAll.oxc": true,
+        "source.organizeImports.oxc": true
+      },
+      "formatter": {
+        "language_server": {
+          "name": "oxfmt"
+        }
+      }
+    }
+  },
   "lsp": {
-    "biome": {
+    "oxfmt": {
+      "initialization_options": {
+        "settings": {
+          "fmt.configPath": null,
+          "run": "onSave"
+        }
+      }
+    },
+    "oxlint": {
+      "initialization_options": {
+        "settings": {
+          "fixKind": "dangerous_fix_or_suggestion",
+          "run": "onType",
+          "typeAware": true,
+          "unusedDisableDirectives": "deny"
+        }
+      }
+    },
+    "vtsls": {
+      "enable_lsp_tasks": true,
       "settings": {
-        "require_config_file": true
+        "javascript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        },
+        "typescript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        }
       }
     }
   },
