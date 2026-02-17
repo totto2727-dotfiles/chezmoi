@@ -18,6 +18,7 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:developer.mozilla.org)",
+      "Bash(c7)",
       "Bash(echo *)",
       "Bash(cat *)",
       "Bash(grep *)",
@@ -185,7 +186,7 @@
   "language": "japanese",
   "sandbox": {
     "enabled": true,
-    "excludedCommands": ["git", "gh"]
+    "excludedCommands": ["git", "gh", "c7"]
   },
   "effortLevel": "medium"
 }
