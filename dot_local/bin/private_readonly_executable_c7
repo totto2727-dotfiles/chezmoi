@@ -1,18 +1,18 @@
 #!/usr/bin/env deno run --allow-env --allow-net --allow-read --allow-ffi
 // Based on https://github.com/quiint/c7 (MIT License)
 
-import { Console, Effect, Schema } from "npm:@totto2727/fp@3.0/effect";
-import { Args, Command, Options } from "npm:@totto2727/fp@3.0/effect/cli";
+import { Console, Effect, Schema } from "jsr:@totto2727/fp@3.0/effect";
+import { Args, Command, Options } from "jsr:@totto2727/fp@3.0/effect/cli";
 import {
   FetchHttpClient,
   HttpClient,
   HttpClientRequest,
   HttpClientResponse,
-} from "npm:@totto2727/fp@3.0/effect/platform";
+} from "jsr:@totto2727/fp@3.0/effect/platform";
 import {
   NodeContext,
   NodeRuntime,
-} from "npm:@totto2727/fp@3.0/effect/platform/node";
+} from "jsr:@totto2727/fp@3.0/effect/platform/node";
 import { Markdown, type MarkdownTheme } from "npm:@mariozechner/pi-tui@0.52";
 import chalk from "npm:chalk@5.6";
 import ora from "npm:ora@8.2";
