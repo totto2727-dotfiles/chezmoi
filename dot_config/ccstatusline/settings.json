@@ -37,7 +37,7 @@
       {
         "id": "cbe3ce32-8270-442d-819b-56aef5aeeaa2",
         "type": "custom-command",
-        "commandPath": "bun x ccusage statusline"
+        "commandPath": "safe-chain bunx ccusage statusline"
       }
     ]
   ],
