@@ -3,41 +3,47 @@
   "lines": [
     [
       {
-        "id": "b3edb544-271c-4f22-bcbc-21c208f093e1",
-        "type": "git-branch"
-      },
-      {
-        "id": "73f9047a-8c03-4acc-8a3e-bcd9ff276448",
-        "type": "git-worktree"
-      },
-      {
-        "id": "413f2d8f-78db-4b3a-84aa-e9ffb94cf69d",
-        "type": "git-changes"
-      },
-      {
         "id": "fdbb949d-7215-4ecd-8781-4c80ea642520",
         "type": "current-working-dir"
       }
     ],
     [
       {
-        "id": "7ec74685-245b-4196-b39a-ca28c2cbc8c6",
-        "type": "context-percentage"
+        "id": "eb0c0208-6658-4dff-8700-b655fee10db2",
+        "type": "git-branch",
+        "backgroundColor": "bgBrightCyan"
       },
       {
-        "id": "5e18cee8-63ad-4b86-9d34-70be67290339",
-        "type": "tokens-total"
+        "id": "37f7e6f1-5018-4134-965d-d7345a1904a7",
+        "type": "git-worktree",
+        "backgroundColor": "bgBrightRed"
       },
       {
-        "id": "899fb81b-5462-4a28-89dc-ea5013bafa12",
-        "type": "session-clock"
+        "id": "699b1a27-7310-49e5-a4e6-a8393b5698f5",
+        "type": "git-changes",
+        "backgroundColor": "bgBrightYellow"
+      },
+      {
+        "id": "f3598eea-99da-4045-bd05-4b76450e1f7b",
+        "type": "custom-text",
+        "backgroundColor": "bgGreen"
       }
     ],
     [
       {
-        "id": "cbe3ce32-8270-442d-819b-56aef5aeeaa2",
-        "type": "custom-command",
-        "commandPath": "safe-chain bunx ccusage statusline"
+        "id": "d110bc5f-2d85-4a60-ba04-992331011afd",
+        "type": "model",
+        "backgroundColor": "bgBlue"
+      },
+      {
+        "id": "e2db2c84-c674-457a-a51b-11d6cdb97a86",
+        "type": "context-percentage",
+        "backgroundColor": "bgRed"
+      },
+      {
+        "id": "596911fc-4712-4d17-887e-93c20acd1341",
+        "type": "context-length",
+        "backgroundColor": "bgYellow"
       }
     ]
   ],
@@ -49,10 +55,16 @@
   "globalBold": true,
   "powerline": {
     "enabled": true,
-    "separators": [""],
-    "separatorInvertBackground": [false],
+    "separators": [
+      ""
+    ],
+    "separatorInvertBackground": [
+      false
+    ],
     "startCaps": [],
-    "endCaps": [""],
+    "endCaps": [
+      ""
+    ],
     "theme": "minimal",
     "autoAlign": false
   }
