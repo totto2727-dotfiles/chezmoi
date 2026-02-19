@@ -42,6 +42,7 @@
       "Bash(sd *)",
       "Bash(fd *)",
       "Bash(delta *)",
+      "Bash(git apply *)",
       "Bash(git delta *)",
       "Bash(git unstage)",
       "Bash(git undo)",
