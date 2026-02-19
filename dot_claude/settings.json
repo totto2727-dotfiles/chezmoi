@@ -135,6 +135,7 @@
       "Bash(wget * | sh)",
       "Bash(eval *)",
       "Bash(exec *)",
+      "Bash(git -C *)",
       "Bash(git push --force)",
       "Bash(git push --force *)",
       "Bash(git push -f *)",
