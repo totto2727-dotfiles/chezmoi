@@ -1,43 +1,27 @@
 {
   "agent": {
-    "default_model": {
-      "model": "claude-haiku-4-5",
-      "provider": "zed.dev"
-    },
     "favorite_models": [
       {
-        "model": "claude-haiku-4-5",
-        "provider": "zed.dev"
+        "provider": "Z",
+        "model": "GLM-5"
       },
       {
-        "model": "claude-haiku-4-5-latest",
-        "provider": "anthropic"
+        "provider": "Z",
+        "model": "GLM-4.7"
       },
       {
-        "model": "claude-haiku-4-5-thinking-latest",
-        "provider": "anthropic"
+        "provider": "Z",
+        "model": "GLM-4.7-FlashX"
       },
       {
-        "model": "claude-sonnet-4-5",
-        "provider": "zed.dev"
-      },
-      {
-        "model": "claude-sonnet-4-5-thinking",
-        "provider": "zed.dev"
-      },
-      {
-        "model": "claude-opus-4-6-thinking-latest",
-        "provider": "anthropic"
-      },
-      {
-        "model": "claude-opus-4-6-1m-context-latest",
-        "provider": "anthropic"
-      },
-      {
-        "model": "claude-opus-4-6-1m-context-thinking-latest",
-        "provider": "anthropic"
+        "provider": "Z",
+        "model": "GLM-4.7-Flash"
       }
     ],
+    "default_model": {
+      "provider": "Z",
+      "model": "GLM-4.7"
+    },
     "model_parameters": [],
     "play_sound_when_agent_done": true,
     "use_modifier_to_send": true
@@ -168,5 +152,66 @@
   },
   "ui_font_family": "PlemolJP35",
   "ui_font_size": 15,
-  "vim_mode": true
+  "vim_mode": true,
+  "language_models": {
+    "openai_compatible": {
+      "Z": {
+        "api_url": "https://api.z.ai/api/coding/paas/v4",
+        "available_models": [
+          {
+            "name": "GLM-4.7-Flash",
+            "max_tokens": 200000,
+            "max_output_tokens": 128000,
+            "max_completion_tokens": 200000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": true,
+              "prompt_cache_key": false,
+              "chat_completions": true
+            }
+          },
+          {
+            "name": "GLM-4.7-FlashX",
+            "max_tokens": 200000,
+            "max_output_tokens": 128000,
+            "max_completion_tokens": 200000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": true,
+              "prompt_cache_key": false,
+              "chat_completions": true
+            }
+          },
+          {
+            "name": "GLM-4.7",
+            "max_tokens": 200000,
+            "max_output_tokens": 128000,
+            "max_completion_tokens": 200000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": true,
+              "prompt_cache_key": false,
+              "chat_completions": true
+            }
+          },
+          {
+            "name": "GLM-5",
+            "max_tokens": 200000,
+            "max_output_tokens": 128000,
+            "max_completion_tokens": 200000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": true,
+              "prompt_cache_key": false,
+              "chat_completions": true
+            }
+          }
+        ]
+      }
+    }
+  }
 }
