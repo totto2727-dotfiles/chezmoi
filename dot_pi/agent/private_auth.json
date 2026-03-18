@@ -1,0 +1,3 @@
+{
+  "zai": { "type": "api_key", "key": "!security find-generic-password -s ZAI_API_KEY -a ZAI_API_KEY -w" }
+}
