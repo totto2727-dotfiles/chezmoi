@@ -1,5 +1,24 @@
 {
   "agent": {
+    "tool_permissions": {
+      "tools": {
+        "terminal": {
+          "always_allow": [
+            {
+              "pattern": "^cat\\b"
+            },
+            {
+              "pattern": "^ls\\b"
+            }
+          ]
+        }
+      }
+    },
+    "inline_assistant_model": {
+      "provider": "Z",
+      "model": "GLM-5",
+      "enable_thinking": false
+    },
     "favorite_models": [
       {
         "provider": "Z",
@@ -20,7 +39,7 @@
     ],
     "default_model": {
       "provider": "Z",
-      "model": "GLM-4.7"
+      "model": "GLM-5"
     },
     "model_parameters": [],
     "play_sound_when_agent_done": true,
@@ -167,7 +186,7 @@
               "tools": true,
               "images": false,
               "parallel_tool_calls": true,
-              "prompt_cache_key": false,
+              "prompt_cache_key": true,
               "chat_completions": true
             }
           },
@@ -180,7 +199,7 @@
               "tools": true,
               "images": false,
               "parallel_tool_calls": true,
-              "prompt_cache_key": false,
+              "prompt_cache_key": true,
               "chat_completions": true
             }
           },
@@ -193,7 +212,7 @@
               "tools": true,
               "images": false,
               "parallel_tool_calls": true,
-              "prompt_cache_key": false,
+              "prompt_cache_key": true,
               "chat_completions": true
             }
           },
@@ -206,7 +225,7 @@
               "tools": true,
               "images": false,
               "parallel_tool_calls": true,
-              "prompt_cache_key": false,
+              "prompt_cache_key": true,
               "chat_completions": true
             }
           }
