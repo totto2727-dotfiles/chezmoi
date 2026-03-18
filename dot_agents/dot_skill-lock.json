@@ -1,0 +1,236 @@
+{
+  "version": 3,
+  "skills": {
+    "vercel-composition-patterns": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
+      "skillPath": "skills/composition-patterns/SKILL.md",
+      "skillFolderHash": "bf90d0a4b83ea054653350f9c67f6de235d3a368",
+      "installedAt": "2026-02-09T17:07:11.133Z",
+      "updatedAt": "2026-02-09T17:07:11.133Z"
+    },
+    "vercel-react-native-skills": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
+      "skillPath": "skills/react-native-skills/SKILL.md",
+      "skillFolderHash": "8b4c6a51914e2111ab6f4f00cb81778652aa241d",
+      "installedAt": "2026-02-09T17:07:11.161Z",
+      "updatedAt": "2026-02-09T17:07:11.161Z"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/agent-skills.git",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "skillFolderHash": "3116f3e62dbd02b44a598b1aa690d2a8938e8f89",
+      "installedAt": "2026-02-09T17:07:11.188Z",
+      "updatedAt": "2026-02-09T17:07:11.188Z"
+    },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/skills.git",
+      "skillPath": "skills/find-skills/SKILL.md",
+      "skillFolderHash": "3013fdeb8a11b10b1eb795ec3ae8bfca38f7c26d",
+      "installedAt": "2026-02-09T17:07:21.092Z",
+      "updatedAt": "2026-03-16T15:10:03.751Z"
+    },
+    "skill-creator": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/anthropics/skills.git",
+      "skillPath": "skills/skill-creator/SKILL.md",
+      "skillFolderHash": "98a510d1cfef9f82c3b1eec200229ca68725e613",
+      "installedAt": "2026-02-09T17:21:56.638Z",
+      "updatedAt": "2026-03-16T15:10:06.801Z"
+    },
+    "moonbit-docs": {
+      "source": "totto2727-dotfiles/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/totto2727-dotfiles/agents.git",
+      "skillPath": "plugins/totto2727/skills/moonbit-docs/SKILL.md",
+      "skillFolderHash": "97f7db9c03c5343593e2df6d9e1d910493a320c7",
+      "installedAt": "2026-02-20T14:46:12.610Z",
+      "updatedAt": "2026-02-21T00:15:11.237Z"
+    },
+    "git-commit": {
+      "source": "totto2727-dotfiles/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/totto2727-dotfiles/agents.git",
+      "skillPath": "plugins/totto2727/skills/git-commit/SKILL.md",
+      "skillFolderHash": "bacedaba05b7916e64662a62271a00a5a3372538",
+      "installedAt": "2026-02-20T14:46:12.697Z",
+      "updatedAt": "2026-02-21T00:15:11.334Z"
+    },
+    "exocortex": {
+      "source": "totto2727-dotfiles/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/totto2727-dotfiles/agents.git",
+      "skillPath": "plugins/totto2727/skills/exocortex/SKILL.md",
+      "skillFolderHash": "791cdf705b4308116ea4ad6da74422612ffdf7fc",
+      "installedAt": "2026-02-20T14:46:12.771Z",
+      "updatedAt": "2026-03-16T15:14:48.508Z"
+    },
+    "git-operations-rules": {
+      "source": "totto2727-dotfiles/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/totto2727-dotfiles/agents.git",
+      "skillPath": "plugins/totto2727/skills/git-operations-rules/SKILL.md",
+      "skillFolderHash": "3345a15d96055c00691a181e434e5ece3c5764d5",
+      "installedAt": "2026-02-20T14:46:12.847Z",
+      "updatedAt": "2026-02-21T00:15:11.495Z"
+    },
+    "c7": {
+      "source": "totto2727-dotfiles/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/totto2727-dotfiles/agents.git",
+      "skillPath": "plugins/totto2727/skills/c7/SKILL.md",
+      "skillFolderHash": "7de850c7210f04fc819ff35bf5222eb30fee149d",
+      "installedAt": "2026-02-20T14:46:12.921Z",
+      "updatedAt": "2026-02-21T00:15:11.565Z"
+    },
+    "file-deletion-rules": {
+      "source": "totto2727-dotfiles/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/totto2727-dotfiles/agents.git",
+      "skillPath": "plugins/totto2727/skills/file-deletion-rules/SKILL.md",
+      "skillFolderHash": "e95933efe74881f9ca9e9b500bef0bd63aae76f8",
+      "installedAt": "2026-02-20T14:46:13.004Z",
+      "updatedAt": "2026-02-21T00:15:11.650Z"
+    },
+    "branch-split-and-pr": {
+      "source": "totto2727-dotfiles/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/totto2727-dotfiles/agents.git",
+      "skillPath": "plugins/totto2727/skills/branch-split-and-pr/SKILL.md",
+      "skillFolderHash": "f7cd158ded8e1bb073cb4ad9e8b80aeb45e044dc",
+      "installedAt": "2026-02-20T14:46:13.088Z",
+      "updatedAt": "2026-02-21T00:15:11.731Z"
+    },
+    "csv-analyzing": {
+      "source": "totto2727-dotfiles/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/totto2727-dotfiles/agents.git",
+      "skillPath": "plugins/totto2727/skills/csv-analysis/SKILL.md",
+      "skillFolderHash": "aab661272a59fba59afbe52407764038f717e79f",
+      "installedAt": "2026-02-20T14:46:13.165Z",
+      "updatedAt": "2026-02-21T00:15:11.807Z"
+    },
+    "doc-research": {
+      "source": "totto2727-dotfiles/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/totto2727-dotfiles/agents.git",
+      "skillPath": "plugins/totto2727/skills/doc-research/SKILL.md",
+      "skillFolderHash": "2254599d522381994e0612ae3492f0dedd908b7a",
+      "installedAt": "2026-02-20T14:46:13.242Z",
+      "updatedAt": "2026-03-16T15:14:48.033Z"
+    },
+    "use-gnu-coreutils": {
+      "source": "totto2727-dotfiles/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/totto2727-dotfiles/agents.git",
+      "skillPath": "plugins/totto2727/skills/use-gnu-coreutils/SKILL.md",
+      "skillFolderHash": "1904646efd7e7372a7e70cb588a39f140097b9ad",
+      "installedAt": "2026-02-20T14:46:13.315Z",
+      "updatedAt": "2026-02-21T00:15:12.042Z"
+    },
+    "script-creation-rules": {
+      "source": "totto2727-dotfiles/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/totto2727-dotfiles/agents.git",
+      "skillPath": "plugins/totto2727/skills/script-creation-rules/SKILL.md",
+      "skillFolderHash": "333164e7eb9b50f22eb58a3571780f3dfc9aa8c9",
+      "installedAt": "2026-02-20T14:46:13.387Z",
+      "updatedAt": "2026-02-21T00:15:12.119Z"
+    },
+    "moonbit-bestpractice": {
+      "source": "totto2727-dotfiles/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/totto2727-dotfiles/agents.git",
+      "skillPath": "plugins/totto2727/skills/moonbit-bestpractice/SKILL.md",
+      "skillFolderHash": "1fdee5a09b8f961848aca2595e8f9b8a83bb9360",
+      "installedAt": "2026-02-20T14:46:13.458Z",
+      "updatedAt": "2026-02-21T00:15:12.196Z"
+    },
+    "use-grealpath": {
+      "source": "totto2727-dotfiles/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/totto2727-dotfiles/agents.git",
+      "skillPath": "plugins/totto2727/skills/use-grealpath/SKILL.md",
+      "skillFolderHash": "e549f15e6bd3152a06475aeec64c4b35a241c872",
+      "installedAt": "2026-02-20T14:46:13.529Z",
+      "updatedAt": "2026-02-21T00:15:12.278Z"
+    },
+    "cloudflare-markdown": {
+      "source": "totto2727-dotfiles/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/totto2727-dotfiles/agents.git",
+      "skillPath": "plugins/totto2727/skills/cloudflare-markdown/SKILL.md",
+      "skillFolderHash": "42109e480b32ad4a61f61b2157d4188f7af935e1",
+      "installedAt": "2026-02-20T17:09:32.283Z",
+      "updatedAt": "2026-02-21T00:15:11.885Z"
+    },
+    "zmx": {
+      "source": "totto2727-dotfiles/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/totto2727-dotfiles/agents.git",
+      "skillPath": "plugins/totto2727/skills/zmx/SKILL.md",
+      "skillFolderHash": "7978f9c1ab4b0eee3511ba74af7a82bf50723485",
+      "installedAt": "2026-02-20T17:09:32.365Z",
+      "updatedAt": "2026-03-16T15:14:50.776Z"
+    },
+    "script-rules": {
+      "source": "totto2727-dotfiles/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/totto2727-dotfiles/agents.git",
+      "skillPath": "plugins/totto2727/skills/script-rules/SKILL.md",
+      "skillFolderHash": "6ae22f3402cbade56060fbe34e66a4ee946024bc",
+      "installedAt": "2026-03-16T15:07:54.422Z",
+      "updatedAt": "2026-03-16T15:14:50.139Z"
+    },
+    "macos-cli-rules": {
+      "source": "totto2727-dotfiles/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/totto2727-dotfiles/agents.git",
+      "skillPath": "plugins/totto2727/skills/macos-cli-rules/SKILL.md",
+      "skillFolderHash": "d518dc096ff091024a2a534451d3d1b52fa9d0c9",
+      "installedAt": "2026-03-16T15:07:54.948Z",
+      "updatedAt": "2026-03-16T15:14:49.625Z"
+    },
+    "git-workflow": {
+      "source": "totto2727-dotfiles/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/totto2727-dotfiles/agents.git",
+      "skillPath": "plugins/totto2727/skills/git-workflow/SKILL.md",
+      "skillFolderHash": "b6687ee2f11fb930d1363c40704724e9f32ae5c3",
+      "installedAt": "2026-03-16T15:07:55.462Z",
+      "updatedAt": "2026-03-16T15:14:49.140Z"
+    },
+    "csv-analysis": {
+      "source": "totto2727-dotfiles/agents",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/totto2727-dotfiles/agents.git",
+      "skillPath": "plugins/totto2727/skills/csv-analysis/SKILL.md",
+      "skillFolderHash": "79ab600b4b414b6250317d05d57c39b388a43878",
+      "installedAt": "2026-03-16T15:07:56.566Z",
+      "updatedAt": "2026-03-16T15:14:47.500Z"
+    }
+  },
+  "dismissed": {
+    "findSkillsPrompt": true
+  },
+  "lastSelectedAgents": [
+    "amp",
+    "cline",
+    "codex",
+    "cursor",
+    "gemini-cli",
+    "github-copilot",
+    "kimi-cli",
+    "opencode",
+    "warp",
+    "claude-code"
+  ]
+}
