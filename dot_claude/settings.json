@@ -49,6 +49,6 @@
   "sandbox": {
     "enabled": true,
     "allowUnsandboxedCommands": true,
-    "excludedCommands": ["git:*", "c7:*", "gh:*"]
+    "excludedCommands": ["git commit:*", "c7:*", "gh:*"]
   }
 }

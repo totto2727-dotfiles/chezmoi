@@ -18,7 +18,6 @@
 - Keep output to the absolute minimum required
   - No excessive decoration or unnecessary specifications
 - **Typo Detection**: Always point out typos and errors found in existing code and documentation
-- **Temporary Directories**: Use the format `/tmp/ai/{{project}}-{{work name}}/`
 
 ## Principle for Claude Code
 
