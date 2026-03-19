@@ -1,7 +1,0 @@
-{
-  "Lua.diagnostics.globals": ["vim"],
-  "cSpell.words": ["astronvim"],
-  "[markdown]": {
-    "editor.defaultFormatter": null
-  }
-}
