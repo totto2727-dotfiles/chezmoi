@@ -9,10 +9,7 @@ import {
   HttpClientRequest,
   HttpClientResponse,
 } from "jsr:@totto2727/fp@3.0/effect/platform";
-import {
-  NodeContext,
-  NodeRuntime,
-} from "jsr:@totto2727/fp@3.0/effect/platform/node";
+import { NodeContext, NodeRuntime } from "jsr:@totto2727/fp@3.0/effect/platform/node";
 import { Markdown, type MarkdownTheme } from "npm:@mariozechner/pi-tui@0.52";
 import chalk from "npm:chalk@5.6";
 import ora from "npm:ora@8.2";
@@ -67,18 +64,14 @@ const makeRequest = (url: string) =>
 
 const handleSearch = (libraryName: string, query: string) =>
   Effect.gen(function* () {
-    const client = (yield* HttpClient.HttpClient).pipe(
-      HttpClient.filterStatusOk,
-    );
+    const client = (yield* HttpClient.HttpClient).pipe(HttpClient.filterStatusOk);
     const parsed = yield* withSpinner(
       `Searching for "${libraryName}"...`,
       Effect.gen(function* () {
         const params = new URLSearchParams({ query, libraryName });
         const req = yield* makeRequest(`${SEARCH_API_URL}?${params}`);
         const response = yield* client.execute(req);
-        return yield* HttpClientResponse.schemaBodyJson(SearchResponse)(
-          response,
-        );
+        return yield* HttpClientResponse.schemaBodyJson(SearchResponse)(response);
       }),
     );
     const libraries = parsed.results;
@@ -87,29 +80,19 @@ const handleSearch = (libraryName: string, query: string) =>
       return;
     }
     yield* Console.log(`Found ${libraries.length} matching library(ies):`);
-    yield* Console.log(
-      `\n--- Search Results (Use "Library ID" for queries) ---`,
-    );
+    yield* Console.log(`\n--- Search Results (Use "Library ID" for queries) ---`);
     for (const lib of libraries) {
       const desc = lib.description ? ` - ${lib.description}` : "";
       const trust = lib.trustScore ? ` [Trust: ${lib.trustScore}]` : "";
       yield* Console.log(`  - ${lib.title} (ID: ${lib.id})${desc}${trust}`);
     }
-    yield* Console.log(
-      `-----------------------------------------------------\n`,
-    );
-    yield* Console.log(
-      `Example query: c7 context ${libraries[0].id} <your query>`,
-    );
+    yield* Console.log(`-----------------------------------------------------\n`);
+    yield* Console.log(`Example query: c7 context ${libraries[0].id} <your query>`);
   }).pipe(
     Effect.catchTag("ResponseError", (e) =>
       Effect.gen(function* () {
-        const body = yield* e.response.text.pipe(
-          Effect.catchAll(() => Effect.succeed("")),
-        );
-        yield* Console.error(
-          `Search failed: ${e.response.status} ${e.message}`,
-        );
+        const body = yield* e.response.text.pipe(Effect.catchAll(() => Effect.succeed("")));
+        yield* Console.error(`Search failed: ${e.response.status} ${e.message}`);
         if (body) yield* Console.error(`Details: ${body}`);
         yield* Effect.fail(e);
       }),
@@ -124,9 +107,7 @@ const handleSearch = (libraryName: string, query: string) =>
 
 const handleQuery = (libraryId: string, query: string, type: string) =>
   Effect.gen(function* () {
-    const client = (yield* HttpClient.HttpClient).pipe(
-      HttpClient.filterStatusOk,
-    );
+    const client = (yield* HttpClient.HttpClient).pipe(HttpClient.filterStatusOk);
     const apiType = type === "md" ? "txt" : type;
     const response = yield* withSpinner(
       "Fetching context...",
@@ -153,12 +134,8 @@ const handleQuery = (libraryId: string, query: string, type: string) =>
   }).pipe(
     Effect.catchTag("ResponseError", (e) =>
       Effect.gen(function* () {
-        const body = yield* e.response.text.pipe(
-          Effect.catchAll(() => Effect.succeed("")),
-        );
-        yield* Console.error(
-          `Context query failed: ${e.response.status} ${e.message}`,
-        );
+        const body = yield* e.response.text.pipe(Effect.catchAll(() => Effect.succeed("")));
+        yield* Console.error(`Context query failed: ${e.response.status} ${e.message}`);
         if (body) yield* Console.error(`Details: ${body}`);
         yield* Effect.fail(e);
       }),
@@ -173,23 +150,17 @@ const outputType = Options.choice("type", ["txt", "json", "md"]).pipe(
   Options.withDefault("txt"),
 );
 
-const search = Command.make(
-  "search",
-  { libraryName, query },
-  ({ libraryName, query }) =>
-    handleSearch(libraryName, Array.from(query).join(" ")),
+const search = Command.make("search", { libraryName, query }, ({ libraryName, query }) =>
+  handleSearch(libraryName, Array.from(query).join(" ")),
 );
 
 const context = Command.make(
   "context",
   { libraryId, query, type: outputType },
-  ({ libraryId, query, type }) =>
-    handleQuery(libraryId, Array.from(query).join(" "), type),
+  ({ libraryId, query, type }) => handleQuery(libraryId, Array.from(query).join(" "), type),
 );
 
-const root = Command.make("c7", {}).pipe(
-  Command.withSubcommands([search, context]),
-);
+const root = Command.make("c7", {}).pipe(Command.withSubcommands([search, context]));
 
 const cli = Command.run(root, {
   name: "Context7 CLI",
