@@ -1,3 +1,9 @@
+[user]
+# signingKey = ""
+
+[commit]
+gpgSign = false
+
 [includeIf "gitdir:~/work/**/*"]
 path = ~/.gitconfig-work
 
