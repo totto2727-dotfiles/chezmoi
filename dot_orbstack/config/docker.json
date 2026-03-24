@@ -1,0 +1,4 @@
+{
+  "ipv6": true,
+  "registry-mirrors": ["https://mirror.gcr.io"]
+}
