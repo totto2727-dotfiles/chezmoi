@@ -1,16 +1,14 @@
 [commit]
 gpgsign = true
 
-### AI用
 [user]
 signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHaHBabtcikSEB4n4ISDsHO1Pe2XMe5szJdN/7gkNlse
 
+# GPG鍵を使用する場合は削除
 [gpg]
 format = ssh
-
-[gpg "ssh"]
-  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-### AI用ここまで
+allowedSignersFile = ~/.ssh/allowed_signers
+# 削除ここまで
 
 [includeIf "gitdir:~/work/**/*"]
 path = ~/.gitconfig-work
