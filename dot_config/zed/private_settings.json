@@ -1,4 +1,21 @@
 {
+  "ssh_connections": [
+    {
+      "host": "nixos-server",
+      "username": "totto2727",
+      "args": [],
+      "projects": [
+        {
+          "paths": ["/home/totto2727/nix"]
+        }
+      ]
+    }
+  ],
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    }
+  },
   "agent": {
     "tool_permissions": {
       "tools": {

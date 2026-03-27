@@ -1,0 +1,17 @@
+[commit]
+gpgsign = true
+
+### AI用
+[user]
+signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHaHBabtcikSEB4n4ISDsHO1Pe2XMe5szJdN/7gkNlse
+
+[gpg]
+format = ssh
+### AI用ここまで
+
+[includeIf "gitdir:~/work/**/*"]
+path = ~/.gitconfig-work
+
+[url "https://github.com/"]
+insteadOf = git@github.com:
+insteadOf = git://github.com/
