@@ -3,10 +3,13 @@
     {
       "host": "nixos-server",
       "username": "totto2727",
-      "args": [],
+      "args": ["-A"],
       "projects": [
         {
-          "paths": ["/home/totto2727/nix"]
+          "paths": ["/home/totto2727/.local/share/chezmoi/./"]
+        },
+        {
+          "paths": ["/home/totto2727/proj/nix"]
         }
       ]
     }
