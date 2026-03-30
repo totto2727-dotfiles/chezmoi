@@ -1,24 +1,21 @@
 # Remote環境 - SSH
 [user]
-name = totto2727
-email = kaihatu.totto2727@gmail.com
+name = totto2727-ai
+email = 2000.0727.hayato+ai@gmail.com
 signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHaHBabtcikSEB4n4ISDsHO1Pe2XMe5szJdN/7gkNlse
 
 [gpg]
 format = ssh
-
-[url "git@github.com:"]
-insteadOf = https://github.com/
 
 # Local環境 - HTTPS
 # [user]
 # name = totto2727
 # email = kaihatu.totto2727@gmail.com
 # signingKey = "BA662CD23E2B4AD8";
-#
-# [url "https://github.com/"]
-# insteadOf = git@github.com:
-# insteadOf = git://github.com/
-#
-# [includeIf "gitdir:~/work/**/*"]
-# path = ~/.gitconfig-work
+
+[url "https://github.com/"]
+insteadOf = git@github.com:
+insteadOf = git://github.com/
+
+[includeIf "gitdir:~/work/**/*"]
+path = ~/.gitconfig-work
