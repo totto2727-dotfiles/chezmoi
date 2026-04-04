@@ -4,7 +4,21 @@
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
   "permissions": {
-    "allow": ["Bash(git commit *)"],
+    "allow": [
+      "Bash(ctx7 library:*)",
+      "Bash(ctx7 docs:*)",
+      "mcp__plugin_totto2727_web-search-prime__web_search_prime",
+      "mcp__plugin_totto2727_web-reader__webReader",
+      "mcp__plugin_totto2727_zread__search_doc",
+      "mcp__plugin_totto2727_zread__get_repo_structure",
+      "WebFetch(domain:npm.flatt.tech)",
+      "WebFetch(domain:jsr.io)",
+      "WebFetch(domain:www.components.build)",
+      "WebFetch(domain:components.build)",
+      "WebFetch(domain:docs.moonbitlang.com)",
+      "WebFetch(domain:www.moonbitlang.com)",
+      "WebFetch(domain:raw.githubusercontent.com)"
+    ],
     "deny": [
       "Bash(git commit --no-verify *)",
       "Bash(git commit --no-gpg-sign *)",
@@ -41,12 +55,9 @@
     }
   },
   "language": "japanese",
-  "fastMode": true,
-  "autoUpdatesChannel": "stable",
-  "minimumVersion": "2.1.76",
   "sandbox": {
     "enabled": true,
     "allowUnsandboxedCommands": true,
-    "excludedCommands": ["git commit:*", "c7:*", "gh:*"]
+    "excludedCommands": ["ctx7:*"]
   }
 }
