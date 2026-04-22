@@ -17,12 +17,15 @@
       "WebFetch(domain:components.build)",
       "WebFetch(domain:docs.moonbitlang.com)",
       "WebFetch(domain:www.moonbitlang.com)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(git switch *)",
+      "Bash(git restore *)"
     ],
     "deny": [
       "Bash(git commit --no-verify *)",
       "Bash(git commit --no-gpg-sign *)",
       "Bash(git reset *)",
+      "Bash(git checkout *)",
       "Bash(git stash pop *)",
       "Bash(git stash clear *)",
       "Bash(git stash drop *)"
@@ -58,6 +61,7 @@
   "sandbox": {
     "enabled": true,
     "allowUnsandboxedCommands": true,
-    "excludedCommands": ["ctx7:*"]
-  }
+    "excludedCommands": ["ctx7:*", "git switch:*"]
+  },
+  "effortLevel": "high"
 }
