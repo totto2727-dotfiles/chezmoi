@@ -18,6 +18,9 @@
       "WebFetch(domain:docs.moonbitlang.com)",
       "WebFetch(domain:www.moonbitlang.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(git commit *)",
+      "Bash(git stash push *)",
+      "Bash(git stash apply *)",
       "Bash(git switch *)",
       "Bash(git restore *)"
     ],
