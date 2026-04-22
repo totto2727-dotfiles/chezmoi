@@ -3,7 +3,6 @@
 ## Principles
 
 - Operate autonomously
-- Minimize user inquiries except during explicit planning phases
 
 ## Language Rules
 
@@ -14,10 +13,8 @@
 ## Development Rules
 
 - Follow existing code patterns
-- Manage sensitive information properly
-- Keep output to the absolute minimum required
-  - No excessive decoration or unnecessary specifications
 - **Typo Detection**: Always point out typos and errors found in existing code and documentation
+- **Large Command Output**: Never truncate long command output with `head` or `tail`. Always redirect the full output to a temporary file, then filter the saved file.
 
 ## Principle for Claude Code
 
