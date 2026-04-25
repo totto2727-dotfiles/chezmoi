@@ -5,12 +5,6 @@
   },
   "permissions": {
     "allow": [
-      "Bash(ctx7 library:*)",
-      "Bash(ctx7 docs:*)",
-      "mcp__plugin_totto2727_web-search-prime__web_search_prime",
-      "mcp__plugin_totto2727_web-reader__webReader",
-      "mcp__plugin_totto2727_zread__search_doc",
-      "mcp__plugin_totto2727_zread__get_repo_structure",
       "WebFetch(domain:npm.flatt.tech)",
       "WebFetch(domain:jsr.io)",
       "WebFetch(domain:www.components.build)",
@@ -34,7 +28,7 @@
       "Bash(git stash drop *)"
     ],
     "ask": ["Bash(gh pr create *)", "Bash(git push *)"],
-    "defaultMode": "plan"
+    "defaultMode": "auto"
   },
   "enabledPlugins": {
     "claude-code-setup@claude-plugins-official": true,
@@ -64,7 +58,7 @@
   "sandbox": {
     "enabled": true,
     "allowUnsandboxedCommands": true,
-    "excludedCommands": ["ctx7:*", "git switch:*"]
+    "excludedCommands": ["ctx7:*"]
   },
-  "effortLevel": "high"
+  "skipAutoPermissionPrompt": true
 }
