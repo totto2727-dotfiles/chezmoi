@@ -1,31 +1,29 @@
 {
-	"repositories": [
-		{
-			"commitHash": "0c27b54001973a356a76417afa506f4b86f46422",
-			"marketplaceKind": "claude",
-			"plugins": [
-				{
-					"enabledSkills": [
-						"adr",
-						"csv-analysis",
-						"deno-cli-tool",
-						"git-workflow",
-						"macos-cli-rules",
-						"realpath",
-						"script-rules",
-						"skill-reviewer",
-						"zmx"
-					],
-					"name": "totto2727",
-					"path": "./plugins/totto2727"
-				}
-			],
-			"source": "totto2727-org/monorepo",
-			"sourceType": "github"
-		}
-	],
-	"skillDirs": [
-		"/Users/hayato.tsuchida/.claude/skills/"
-	],
-	"version": 1
+  "repositories": [
+    {
+      "commitHash": "0c27b54001973a356a76417afa506f4b86f46422",
+      "marketplaceKind": "claude",
+      "plugins": [
+        {
+          "enabledSkills": [
+            "adr",
+            "csv-analysis",
+            "deno-cli-tool",
+            "git-workflow",
+            "macos-cli-rules",
+            "realpath",
+            "script-rules",
+            "skill-reviewer",
+            "zmx"
+          ],
+          "name": "totto2727",
+          "path": "./plugins/totto2727"
+        }
+      ],
+      "source": "totto2727-org/monorepo",
+      "sourceType": "github"
+    }
+  ],
+  "skillDirs": ["/Users/hayato.tsuchida/.claude/skills/"],
+  "version": 1
 }
