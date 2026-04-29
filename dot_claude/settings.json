@@ -16,7 +16,6 @@
       "Read(~/.claude/skills/**)",
       "Read(~/.claude/plugins/marketplaces/**)",
       "Bash(git commit *)",
-      "Bash(git commit *)",
       "Bash(git stash push *)",
       "Bash(git stash apply *)",
       "Bash(git switch *)",
