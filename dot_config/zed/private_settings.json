@@ -20,6 +20,7 @@
     }
   },
   "agent": {
+    "single_file_review": true,
     "tool_permissions": {
       "tools": {
         "terminal": {
@@ -36,10 +37,18 @@
     },
     "inline_assistant_model": {
       "provider": "Z",
-      "model": "GLM-5",
+      "model": "GLM-5.1",
       "enable_thinking": false
     },
     "favorite_models": [
+      {
+        "provider": "Z",
+        "model": "GLM-5.1"
+      },
+      {
+        "provider": "Z",
+        "model": "GLM-5-Turbo"
+      },
       {
         "provider": "Z",
         "model": "GLM-5"
@@ -59,7 +68,7 @@
     ],
     "default_model": {
       "provider": "Z",
-      "model": "GLM-5"
+      "model": "GLM-5.1"
     },
     "model_parameters": [],
     "play_sound_when_agent_done": true,
@@ -72,7 +81,7 @@
     "dock": "right"
   },
   "edit_predictions": {
-    "provider": "sweep"
+    "provider": "copilot"
   },
   "format_on_save": "on",
   "git": {
@@ -238,6 +247,32 @@
           },
           {
             "name": "GLM-5",
+            "max_tokens": 200000,
+            "max_output_tokens": 128000,
+            "max_completion_tokens": 200000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": true,
+              "prompt_cache_key": true,
+              "chat_completions": true
+            }
+          },
+          {
+            "name": "GLM-5-Turbo",
+            "max_tokens": 200000,
+            "max_output_tokens": 128000,
+            "max_completion_tokens": 200000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": true,
+              "prompt_cache_key": true,
+              "chat_completions": true
+            }
+          },
+          {
+            "name": "GLM-5.1",
             "max_tokens": 200000,
             "max_output_tokens": 128000,
             "max_completion_tokens": 200000,

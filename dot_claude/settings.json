@@ -1,22 +1,35 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "fileSuggestion": {
+    "type": "command",
+    "command": "~/.claude/file-suggestion.sh"
+  },
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
   "permissions": {
     "allow": [
+      "Read(/**)",
+      "Read(~/.agents/**)",
+      "Read(~/.claude/CLAUDE.md)",
+      "Read(~/.claude/settings.json)",
+      "Read(~/.claude/skills/**)",
+      "Read(~/.claude/plugins/marketplaces/**)",
+      "Bash(git commit *)",
+      "Bash(git commit *)",
+      "Bash(git stash push *)",
+      "Bash(git stash apply *)",
+      "Bash(git switch *)",
+      "Bash(git restore *)",
+      "Bash(ctx7 library:*)",
+      "Bash(ctx7 docs:*)",
       "WebFetch(domain:npm.flatt.tech)",
       "WebFetch(domain:jsr.io)",
       "WebFetch(domain:www.components.build)",
       "WebFetch(domain:components.build)",
       "WebFetch(domain:docs.moonbitlang.com)",
       "WebFetch(domain:www.moonbitlang.com)",
-      "WebFetch(domain:raw.githubusercontent.com)",
-      "Bash(git commit *)",
-      "Bash(git stash push *)",
-      "Bash(git stash apply *)",
-      "Bash(git switch *)",
-      "Bash(git restore *)"
+      "WebFetch(domain:raw.githubusercontent.com)"
     ],
     "deny": [
       "Bash(git commit --no-verify *)",
@@ -58,7 +71,7 @@
   "sandbox": {
     "enabled": true,
     "allowUnsandboxedCommands": true,
-    "excludedCommands": ["ctx7:*"]
+    "excludedCommands": ["ctx7:*", "git commit:*"]
   },
   "skipAutoPermissionPrompt": true
 }
