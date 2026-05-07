@@ -1,3 +1,0 @@
-#!/bin/bash
-
-exec uv tool run --from "git+https://github.com/fuwasegu/exocortex" exocortex --mode proxy --ensure-server "$@"

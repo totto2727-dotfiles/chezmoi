@@ -1,6 +1,0 @@
-#!/bin/bash
-
-export Z_AI_API_KEY="$(pass-cli get z-ai/api-key --quiet -f password)"
-export Z_AI_MODE="ZAI"
-
-exec bunx -y @z_ai/mcp-server "$@"

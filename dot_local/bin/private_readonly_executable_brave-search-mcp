@@ -1,5 +1,0 @@
-#!/bin/bash
-
-export BRAVE_API_KEY="$(pass-cli get brave-search/api-key --quiet -f password)"
-
-exec bunx -y @brave/brave-search-mcp-server "$@"
