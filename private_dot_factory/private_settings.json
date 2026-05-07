@@ -2,7 +2,7 @@
   "enabledPlugins": {
     "core@factory-plugins": true
   },
-  "logoAnimation": "off",
+  "logoAnimation": "once",
   "customModels": [
     {
       "model": "glm-5.1",
@@ -51,6 +51,24 @@
   ],
   "sessionDefaultSettings": {
     "model": "custom:GLM-5.1-[Z.AI-Coding-Plan]---Openai-0",
-    "reasoningEffort": "none"
-  }
+    "reasoningEffort": "none",
+    "interactionMode": "auto",
+    "autonomyLevel": "high",
+    "autonomyMode": "auto-high"
+  },
+  "missionOrchestratorModel": "custom:GLM-5.1-[Z.AI-Coding-Plan]---Openai-0",
+  "missionOrchestratorReasoningEffort": "none",
+  "missionModelSettings": {
+    "validationWorkerModel": "custom:GLM-5.1-[Z.AI-Coding-Plan]---Openai-0",
+    "validationWorkerReasoningEffort": "none",
+    "skipScrutiny": true,
+    "workerModel": "custom:GLM-4.7-[Z.AI-Coding-Plan]---Openai-1",
+    "workerReasoningEffort": "none",
+    "skipUserTesting": true
+  },
+  "ideAutoConnect": true,
+  "showThinkingInMainView": true,
+  "nerdFont": true,
+  "toolResultDisplay": "expanded",
+  "showTokenUsageIndicator": true
 }
