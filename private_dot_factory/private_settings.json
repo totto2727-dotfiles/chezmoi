@@ -247,10 +247,10 @@
   "missionModelSettings": {
     "validationWorkerModel": "custom:claude-opus-4-7-meridian",
     "validationWorkerReasoningEffort": "high",
-    "skipScrutiny": true,
+    "skipScrutiny": false,
     "workerModel": "custom:claude-sonnet-4-6-meridian",
     "workerReasoningEffort": "high",
-    "skipUserTesting": true
+    "skipUserTesting": false
   },
   "ideAutoConnect": true,
   "showThinkingInMainView": true,
