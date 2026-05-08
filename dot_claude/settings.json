@@ -72,6 +72,6 @@
     "allowUnsandboxedCommands": true,
     "excludedCommands": ["ctx7:*", "git commit:*", "gh:*"]
   },
-  "skipAutoPermissionPrompt": true,
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "skipAutoPermissionPrompt": true
 }

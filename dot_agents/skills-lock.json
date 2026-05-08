@@ -26,7 +26,8 @@
 		}
 	],
 	"skillDirs": [
-		"/Users/hayato.tsuchida/.claude/skills/"
+		"/Users/hayato.tsuchida/.claude/skills/",
+		"/Users/hayato.tsuchida/.claude-work/skills"
 	],
 	"version": 1
 }

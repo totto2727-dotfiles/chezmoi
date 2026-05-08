@@ -59,6 +59,8 @@
     "allowUnsandboxedCommands": true,
     "excludedCommands": ["ctx7:*", "git commit:*", "gh:*"]
   },
+  "theme": "dark",
+  "editorMode": "vim",
   "skipAutoPermissionPrompt": true,
-  "editorMode": "vim"
+  "model": "opus[1m]"
 }
