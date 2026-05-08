@@ -70,7 +70,8 @@
   "sandbox": {
     "enabled": true,
     "allowUnsandboxedCommands": true,
-    "excludedCommands": ["ctx7:*", "git commit:*"]
+    "excludedCommands": ["ctx7:*", "git commit:*", "gh:*"]
   },
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "editorMode": "vim"
 }
