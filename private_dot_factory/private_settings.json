@@ -238,19 +238,18 @@
   ],
   "sessionDefaultSettings": {
     "model": "custom:claude-opus-4-7-meridian",
-    "reasoningEffort": "none",
+    "reasoningEffort": "high",
     "interactionMode": "auto",
-    "autonomyLevel": "high",
-    "autonomyMode": "auto-high"
+    "autonomyLevel": "high"
   },
   "missionOrchestratorModel": "custom:claude-opus-4-7-meridian",
-  "missionOrchestratorReasoningEffort": "none",
+  "missionOrchestratorReasoningEffort": "high",
   "missionModelSettings": {
     "validationWorkerModel": "custom:claude-opus-4-7-meridian",
-    "validationWorkerReasoningEffort": "none",
+    "validationWorkerReasoningEffort": "high",
     "skipScrutiny": true,
     "workerModel": "custom:claude-sonnet-4-6-meridian",
-    "workerReasoningEffort": "none",
+    "workerReasoningEffort": "high",
     "skipUserTesting": true
   },
   "ideAutoConnect": true,
@@ -281,6 +280,6 @@
     "custom:glm-4-7-flash-zai": 64928,
     "custom:glm-4-7-flashx-zai": 64928
   },
-  "compactionTokenLimit": 900000,
+  "compactionTokenLimit": 250000,
   "compactionModelMode": "current-model"
 }
