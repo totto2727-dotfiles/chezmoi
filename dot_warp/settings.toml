@@ -1,0 +1,126 @@
+[appearance]
+
+[appearance.themes]
+system_theme = false
+theme = "adeberry"
+
+[appearance.vertical_tabs]
+enabled = false
+display_granularity = "panes"
+view_mode = "compact"
+primary_info = "branch"
+compact_subtitle = "command"
+show_details_on_hover = true
+use_latest_prompt_as_title = false
+
+[appearance.text]
+font_name = "PlemolJP Console NF"
+font_size = 14.0
+notebook_font_size = 14.0
+line_height_ratio = 1.5
+ai_font_name = "PlemolJP Console NF"
+match_ai_font = false
+
+[appearance.tabs]
+preserve_active_tab_color = true
+workspace_decoration_visibility = "always_show"
+
+[general]
+default_session_mode = "agent"
+
+[agents]
+
+[agents.third_party]
+should_render_cli_agent_toolbar = true
+auto_open_composer_on_cli_agent_start = false
+auto_dismiss_composer_after_submit = false
+
+[agents.third_party.cli_agent_toolbar_enabled_commands]
+c = "Claude"
+o = "OpenCode"
+
+[agents.third_party.cli_agent_toolbar_chip_selection_setting]
+
+[agents.third_party.cli_agent_toolbar_chip_selection_setting.custom]
+left = [
+  "file_attach",
+  "voice_input",
+  "rich_input",
+  "share_session",
+  { context_chip = "git_diff_stats" },
+]
+right = [{ context_chip = "working_directory" }, { context_chip = "shell_git_branch" }]
+
+[agents.warp_agent]
+is_any_ai_enabled = true
+
+[agents.warp_agent.other]
+show_agent_notifications = true
+show_conversation_history = true
+
+[code]
+
+[code.editor]
+show_code_review_button = true
+show_project_explorer = true
+show_global_search = true
+
+[warp_drive]
+enabled = true
+
+[text_editing]
+vim_mode_enabled = true
+vim_unnamed_system_clipboard = true
+
+[terminal]
+
+[terminal.input]
+alias_expansion_enabled = true
+honor_ps1 = false
+input_box_type_setting = "universal"
+
+[terminal.input.extra_meta_keys]
+left_alt = true
+right_alt = true
+
+[terminal.input.autosuggestions]
+show_ignore_button = true
+
+[global_hotkey]
+
+[global_hotkey.dedicated_window]
+enabled = true
+
+[global_hotkey.dedicated_window.settings]
+active_pin_position = "top"
+hide_window_when_unfocused = true
+keybinding = "alt-shift-space"
+
+[global_hotkey.dedicated_window.settings.pin_position_to_size_percentages]
+bottom = { height = 30, width = 100 }
+left = { height = 100, width = 40 }
+right = { height = 100, width = 40 }
+top = { height = 50, width = 100 }
+
+[global_hotkey.toggle_all_windows]
+enabled = false
+
+[notifications]
+toast_duration_secs = 8
+
+[notifications.preferences]
+is_agent_task_completed_enabled = true
+is_long_running_enabled = true
+is_needs_attention_enabled = true
+is_password_prompt_enabled = true
+long_running_threshold = 30
+mode = "enabled"
+play_notification_sound = true
+
+[privacy]
+
+[privacy.secret_redaction]
+enabled = false
+
+[workflows]
+show_global_workflows_in_universal_search = true
