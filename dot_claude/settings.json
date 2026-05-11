@@ -73,5 +73,6 @@
     "excludedCommands": ["ctx7:*", "git commit:*", "gh:*"]
   },
   "editorMode": "vim",
+  "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true
 }
