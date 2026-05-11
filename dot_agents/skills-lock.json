@@ -1,7 +1,7 @@
 {
   "repositories": [
     {
-      "commitHash": "a410ae34595f705194e7e7337da7b1d4811f1d75",
+      "commitHash": "6ccffc5d052b6477afdda92d371f261c11f0244d",
       "marketplaceKind": "claude",
       "plugins": [
         {
@@ -25,9 +25,6 @@
       "sourceType": "github"
     }
   ],
-  "skillDirs": [
-    "/Users/hayato.tsuchida/.claude/skills/",
-    "/Users/hayato.tsuchida/.claude-work/skills"
-  ],
+  "skillDirs": ["~/.claude/skills/", "~/.claude-work/skills"],
   "version": 1
 }
