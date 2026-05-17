@@ -73,6 +73,7 @@ vim_mode_enabled = true
 vim_unnamed_system_clipboard = true
 
 [terminal]
+osc52_clipboard_access = "write_only"
 
 [terminal.input]
 alias_expansion_enabled = true
