@@ -79,6 +79,7 @@ osc52_clipboard_access = "write_only"
 alias_expansion_enabled = true
 honor_ps1 = false
 input_box_type_setting = "universal"
+completions_open_while_typing = true
 
 [terminal.input.extra_meta_keys]
 left_alt = true
