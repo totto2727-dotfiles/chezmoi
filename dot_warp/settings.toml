@@ -119,6 +119,8 @@ mode = "enabled"
 play_notification_sound = true
 
 [privacy]
+telemetry_enabled = false
+crash_reporting_enabled = false
 
 [privacy.secret_redaction]
 enabled = false
