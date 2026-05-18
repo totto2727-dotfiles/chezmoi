@@ -52,7 +52,7 @@ left = [
 right = [{ context_chip = "working_directory" }, { context_chip = "shell_git_branch" }]
 
 [agents.warp_agent]
-is_any_ai_enabled = true
+is_any_ai_enabled = false
 
 [agents.warp_agent.other]
 show_agent_notifications = true
@@ -66,7 +66,7 @@ show_project_explorer = true
 show_global_search = true
 
 [warp_drive]
-enabled = true
+enabled = false
 
 [text_editing]
 vim_mode_enabled = true
