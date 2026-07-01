@@ -1,7 +1,7 @@
 [".config/nvim"]
-  type = "git-repo"
-  url = "https://github.com/totto2727-dotfiles/nvim.git"
-  refreshPeriod = "168h"
+type = "git-repo"
+url = "https://github.com/totto2727-dotfiles/nvim.git"
+refreshPeriod = "168h"
 
-  [".config/nvim".pull]
-    args = ["--ff-only"]
+[".config/nvim".pull]
+args = ["--ff-only"]

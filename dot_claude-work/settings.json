@@ -1,7 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "ANTHROPIC_MODEL": "opus"
   },
   "permissions": {
     "allow": [
@@ -41,8 +42,11 @@
       "Bash(git stash drop *)"
     ],
     "ask": ["Bash(gh pr create *)", "Bash(git push *)"],
-    "defaultMode": "auto"
+    "defaultMode": "auto",
+    "disableBypassPermissionsMode": "disable",
+    "additionalDirectories": []
   },
+  "model": "opus[1m]",
   "enabledPlugins": {
     "claude-code-setup@claude-plugins-official": true,
     "claude-md-management@claude-plugins-official": true,
@@ -64,8 +68,9 @@
     "allowUnsandboxedCommands": true,
     "excludedCommands": ["ctx7:*", "git commit:*", "gh:*"]
   },
+  "effortLevel": "xhigh",
   "theme": "dark",
-  "editorMode": "vim",
+  "editorMode": "normal",
   "skipAutoPermissionPrompt": true,
-  "model": "opus[1m]"
+  "tui": "fullscreen"
 }

@@ -1,4 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["@warp-dot-dev/opencode-warp@latest", "oh-my-openagent@latest"]
+  "plugin": ["@warp-dot-dev/opencode-warp@latest", "oh-my-openagent@latest"],
+  "disabled_providers": ["opencode"]
 }
