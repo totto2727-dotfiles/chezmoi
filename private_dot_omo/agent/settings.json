@@ -1,0 +1,21 @@
+{
+  "lastChangelogVersion": "2026.8.12-4",
+  "theme": "dark",
+  "tipsHistory": {
+    "thinking-level": 1786869163288,
+    "favorite-model-rotation": 1786869163658,
+    "model-selector-favorites": 1786869163929,
+    "model-command-search": 1786869164132,
+    "model-cycling-scope": 1786869369247,
+    "thinking-budgets": 1786869586391,
+    "prompt-preset": 1786869605176,
+    "provider-login": 1786870616070,
+    "fallback-chains-setting": 1786870638296,
+    "fallback-command": 1786870660773,
+    "queue-follow-up": 1786870665817,
+    "steering-message": 1786870675215,
+    "edit-queued-message": 1786870682301
+  },
+  "defaultProvider": "opencode-go",
+  "defaultModel": "deepseek-v4-flash"
+}
