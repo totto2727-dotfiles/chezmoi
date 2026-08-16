@@ -1,4 +1,8 @@
 {
+  "markdown_preview": {
+    "limit_content_width": false
+  },
+  "markdown_preview_font_size": 15.0,
   "preview_tabs": {
     "enabled": false
   },
