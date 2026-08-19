@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
-    "ANTHROPIC_MODEL": "opus"
+    "ANTHROPIC_MODEL": "claude-opus-5"
   },
   "permissions": {
     "allow": [
@@ -12,11 +12,11 @@
       "Read(~/.claude/settings.json)",
       "Read(~/.claude/skills/**)",
       "Read(~/.claude/plugins/marketplaces/**)",
-      "Write(/.claude/CLAUDE.md)",
-      "Write(/.claude/skills/**)",
-      "Write(~/.claude/CLAUDE.md)",
-      "Write(~/.claude/skills/**)",
-      "Write(//tmp/**)",
+      "Edit(/.claude/CLAUDE.md)",
+      "Edit(/.claude/skills/**)",
+      "Edit(~/.claude/CLAUDE.md)",
+      "Edit(~/.claude/skills/**)",
+      "Edit(//tmp/**)",
       "Bash(git commit *)",
       "Bash(git stash push *)",
       "Bash(git stash apply *)",
@@ -34,19 +34,16 @@
     ],
     "deny": [
       "Bash(git commit --no-verify *)",
-      "Bash(git commit --no-gpg-sign *)",
-      "Bash(git reset *)",
-      "Bash(git checkout *)",
-      "Bash(git stash pop *)",
-      "Bash(git stash clear *)",
-      "Bash(git stash drop *)"
+      "Bash(git commit --no-gpg-sign *)"
     ],
-    "ask": ["Bash(gh pr create *)", "Bash(git push *)"],
+    "ask": [
+      "Bash(gh pr create *)",
+      "Bash(git push *)"
+    ],
     "defaultMode": "auto",
     "disableBypassPermissionsMode": "disable",
     "additionalDirectories": []
   },
-  "model": "opus[1m]",
   "enabledPlugins": {
     "claude-code-setup@claude-plugins-official": true,
     "claude-md-management@claude-plugins-official": true,
@@ -66,11 +63,15 @@
   "sandbox": {
     "enabled": true,
     "allowUnsandboxedCommands": true,
-    "excludedCommands": ["ctx7:*", "git commit:*", "gh:*"]
+    "excludedCommands": [
+      "ctx7:*",
+      "git commit:*",
+      "gh:*"
+    ]
   },
-  "effortLevel": "xhigh",
+  "effortLevel": "medium",
+  "tui": "fullscreen",
   "theme": "dark",
   "editorMode": "normal",
-  "skipAutoPermissionPrompt": true,
-  "tui": "fullscreen"
+  "skipAutoPermissionPrompt": true
 }
