@@ -1,9 +1,0 @@
-{
-  "$schema": "https://raw.githubusercontent.com/denoland/deno/refs/heads/main/cli/schemas/config-file.v1.json",
-  "lint": {
-    "rules": {
-      "exclude": ["no-import-prefix"]
-    }
-  },
-  "lock": false
-}
