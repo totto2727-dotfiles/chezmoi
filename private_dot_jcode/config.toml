@@ -20,7 +20,7 @@ searxng_url_env = "JCODE_SEARXNG_URL"
 [provider]
 default_model = "gpt-5.6-sol"
 default_provider = "openai"
-openai_reasoning_effort = "high"
+openai_reasoning_effort = "medium"
 # Disable OpenAI Fast mode and use the standard service tier.
 openai_service_tier = "off"
 

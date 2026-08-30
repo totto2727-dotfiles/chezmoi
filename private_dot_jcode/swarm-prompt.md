@@ -10,9 +10,9 @@ Model routing guidance for spawned swarm agents. Pass `model` (and optionally
 when you need to confirm which models/routes are actually available.
 
 - Worker models are selected by the operator through `agents.swarm_model`; do not attempt to override them per spawn.
-- Implementation tasks: `gpt-5.5` with `effort: "low"`.
-- Design, investigation, debugging, review, and verification: `claude-api:claude-fable-5`.
-- Context fetching / bulk reading / summarization: `gpt-5.5` with `effort: "none"`.
+- Implementation tasks: `gpt-5.6-terra` with `effort: "medium"`.
+- Design, investigation, debugging, review, and verification: `gpt-5.6-sol` with `effort: "high"`.
+- Context fetching / bulk reading / summarization: use `gpt-5.6-luna` with `effort: "low"` by default. If Luna low is not sufficiently reliable for the task or its result, use `deepseek-v4-flash` with `effort: "high"`.
 - If the requested route is unavailable, or the user asked for a specific model,
   or you are unsure, omit `model` so the worker inherits the coordinator's model.
 
