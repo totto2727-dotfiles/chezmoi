@@ -1,0 +1,74 @@
+# Keep dictation settings explicit for possible future use.
+[dictation]
+command = ""
+mode = "send"
+key = "off"
+timeout_secs = 90
+
+[display]
+# Show only the reasoning trace currently in progress.
+reasoning_display = "current"
+
+# Keep web search settings explicit for future customization.
+[websearch]
+engine = "duckduckgo"
+fallback_engines = ["bing"]
+bing_api_key_env = "JCODE_BING_API_KEY"
+bing_market = "en-US"
+searxng_url_env = "JCODE_SEARXNG_URL"
+
+[provider]
+default_model = "gpt-5.6-sol"
+default_provider = "openai"
+openai_reasoning_effort = "high"
+# Disable OpenAI Fast mode and use the standard service tier.
+openai_service_tier = "off"
+
+# Keep ambient automation settings explicit for possible future use.
+[ambient]
+enabled = false
+allow_api_keys = false
+min_interval_minutes = 5
+max_interval_minutes = 120
+pause_on_active_session = true
+proactive_work = true
+work_branch_prefix = "ambient/"
+visible = true
+
+# Keep safety integrations explicit for possible future use.
+[safety]
+ntfy_server = "https://ntfy.sh"
+desktop_notifications = true
+email_enabled = false
+email_smtp_port = 587
+email_imap_port = 993
+email_reply_enabled = false
+telegram_enabled = false
+telegram_reply_enabled = false
+discord_enabled = false
+discord_reply_enabled = false
+jade_relay_enabled = false
+jade_relay_reply_enabled = false
+jade_relay_launch_enabled = false
+
+# Keep gateway settings explicit for possible future use.
+[gateway]
+enabled = false
+port = 7643
+bind_addr = "0.0.0.0"
+
+# Keep disabled for now; enable if regressions, missed validation,
+# or test gaps become recurring.
+[autoreview]
+enabled = false
+
+# Keep disabled for now; enable if premature completion, missed requirements,
+# or incomplete follow-through become recurring.
+[autojudge]
+enabled = false
+
+[launch_hotkeys]
+# Keep global launch hotkeys off because this config is shared across machines.
+enabled = false
+# Prevent device-specific mappings from being regenerated automatically.
+imported = true
