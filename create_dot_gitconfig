@@ -11,7 +11,10 @@ format = ssh
 # [user]
 # name = totto2727
 # email = kaihatu.totto2727@gmail.com
-# signingKey = "BA662CD23E2B4AD8";
+# signingKey = BA662CD23E2B4AD8
+#
+# [commit]
+# gpgsign = true
 
 [url "https://github.com/"]
 insteadOf = git@github.com:
