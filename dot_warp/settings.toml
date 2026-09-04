@@ -128,3 +128,6 @@ enabled = false
 
 [workflows]
 show_global_workflows_in_universal_search = true
+
+[system]
+prefer_low_power_gpu = false
