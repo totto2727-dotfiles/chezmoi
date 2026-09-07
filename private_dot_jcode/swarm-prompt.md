@@ -13,7 +13,7 @@ when you need to confirm which models/routes are actually available.
 - Otherwise, follow the task-specific routing rules below and pass the specified `provider` and `model`, `effort` when the swarm interface supports them.
 - If the swarm interface does not expose per-spawn model selection, state that limitation rather than claiming the requested task-specific route was applied.
 - Implementation tasks: OpenAI via `openai-oauth`, model `gpt-5.6-terra`, with `effort: "medium"`.
-- Design, investigation, debugging, review, and verification: OpenAI via `openai-oauth`, model `gpt-5.6-sol`, with `effort: "high"`.
+- Design, investigation, debugging, review, and verification: OpenAI via `openai-oauth`, model `gpt-6-astra`, with `effort: "high"`.
 - Context fetching / bulk reading / summarization: use OpenAI via `openai-oauth`, model `gpt-5.6-luna`, with `effort: "low"` by default. Do not use the OpenCode Go route for `gpt-5.6-luna`. If Luna low is not sufficiently reliable for the task or its result, use OpenCode Go via `openai-compatible:opencode-go`, model `deepseek-v4-flash`, with `effort: "high"`.
 - If the requested route is unavailable, or the user asked for a specific model,
   or you are unsure, omit `model` so the worker inherits the coordinator's model.
