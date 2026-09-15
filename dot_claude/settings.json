@@ -1,10 +1,43 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
-    "ANTHROPIC_MODEL": "claude-opus-5"
+  "editorMode": "normal",
+  "effortLevel": "medium",
+  "enabledPlugins": {
+    "claude-code-setup@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true,
+    "plugin-dev@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true
   },
+  "env": {
+    "ANTHROPIC_MODEL": "claude-opus-5",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "command": "'/Users/hayato.tsuchida/.local/bin/jcode' setup-hotkey --notify-cli-launch claude",
+            "timeout": 5,
+            "type": "command"
+          }
+        ],
+        "matcher": "startup|resume"
+      }
+    ]
+  },
+  "language": "japanese",
   "permissions": {
+    "additionalDirectories": [],
     "allow": [
       "Read(/**)",
       "Read(~/.agents/**)",
@@ -32,46 +65,18 @@
       "WebFetch(domain:www.moonbitlang.com)",
       "WebFetch(domain:raw.githubusercontent.com)"
     ],
-    "deny": [
-      "Bash(git commit --no-verify *)",
-      "Bash(git commit --no-gpg-sign *)"
-    ],
-    "ask": [
-      "Bash(gh pr create *)",
-      "Bash(git push *)"
-    ],
+    "ask": ["Bash(gh pr create *)", "Bash(git push *)"],
     "defaultMode": "auto",
-    "disableBypassPermissionsMode": "disable",
-    "additionalDirectories": []
+    "deny": ["Bash(git commit --no-verify *)", "Bash(git commit --no-gpg-sign *)"],
+    "disableBypassPermissionsMode": "disable"
   },
-  "enabledPlugins": {
-    "claude-code-setup@claude-plugins-official": true,
-    "claude-md-management@claude-plugins-official": true,
-    "code-review@claude-plugins-official": true,
-    "frontend-design@claude-plugins-official": true,
-    "plugin-dev@claude-plugins-official": true,
-    "pr-review-toolkit@claude-plugins-official": true,
-    "security-guidance@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true,
-    "pyright-lsp@claude-plugins-official": true,
-    "gopls-lsp@claude-plugins-official": true,
-    "rust-analyzer-lsp@claude-plugins-official": true,
-    "lua-lsp@claude-plugins-official": true,
-    "skill-creator@claude-plugins-official": true
-  },
-  "language": "japanese",
   "sandbox": {
-    "enabled": true,
     "allowUnsandboxedCommands": true,
-    "excludedCommands": [
-      "ctx7:*",
-      "git commit:*",
-      "gh:*"
-    ]
+    "enabled": true,
+    "excludedCommands": ["ctx7:*", "git commit:*", "gh:*"]
   },
-  "effortLevel": "medium",
-  "tui": "fullscreen",
+  "skipAutoPermissionPrompt": true,
   "theme": "dark",
-  "editorMode": "normal",
-  "skipAutoPermissionPrompt": true
+  "tui": "fullscreen",
+  "outputStyle": "Concise"
 }
