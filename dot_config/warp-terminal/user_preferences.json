@@ -1,0 +1,32 @@
+{
+  "prefs": {
+    "WelcomeTipsFeaturesUsed": "[{\"Action\":\"ThemePicker\"},{\"Hint\":\"CreateBlock\"},{\"Hint\":\"BlockSelect\"},{\"Action\":\"SplitPane\"}]",
+    "TelemetryEnabled": "true",
+    "AIRequestQuotaInfoSetting": "{\"cycle_history\":[]}",
+    "IsAnyAIEnabled": "true",
+    "ShowAgentNotifications": "true",
+    "ExperimentId": "5bda04de-d969-4b92-b148-bac3c42146f6",
+    "ShowConversationHistory": "true",
+    "ShowCodeReviewButton": "true",
+    "ShowGlobalSearch": "true",
+    "VimModeEnabled": "true",
+    "DefaultSessionMode": "\"Agent\"",
+    "ShowProjectExplorer": "true",
+    "SavedPrompt": "{\"CustomChipSelection\":{\"chips\":[{\"chip\":\"Ssh\",\"config\":{}},{\"chip\":\"Subshell\",\"config\":{}},{\"chip\":\"WorkingDirectory\",\"config\":{}},{\"chip\":\"GitDiffStats\",\"config\":{}},{\"chip\":\"GitBranchStatus\",\"config\":{}},{\"chip\":\"GithubPullRequest\",\"config\":{}}],\"did_separate_git_diff_stats\":true,\"same_line_prompt_enabled\":false,\"separator\":\"None\"}}",
+    "CloudConversationStorageEnabled": "true",
+    "EnteredAgentModeNumTimes": "1",
+    "HasCompletedHOAOnboarding": "true",
+    "VimKeybindingsBannerState": "\"Dismissed\"",
+    "AliasExpansionBannerSeen": "true",
+    "ChangelogVersions": "{\"v0.2026.10.14.08.27.stable_01\":true}",
+    "CrashReportingEnabled": "true",
+    "SettingsFileMigrationComplete": "true",
+    "AutosuggestionAcceptedCount": "2",
+    "ShouldRenderCLIAgentToolbar": "true",
+    "EnableWarpDrive": "true",
+    "MCPExecutionPath": "\"/home/totto2727/.local/bin:/home/totto2727/.cargo/bin:/home/totto2727/.moon/bin:/run/wrappers/bin:/home/totto2727/.local/share/flatpak/exports/bin:/var/lib/flatpak/exports/bin:/home/totto2727/.nix-profile/bin:/nix/profile/bin:/home/totto2727/.local/state/nix/profile/bin:/etc/profiles/per-user/totto2727/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:/home/totto2727/.zsh/plugins/by-binds-yourself\"",
+    "UseVerticalTabs": "true",
+    "HasCompletedOnboarding": "true",
+    "GithubPrChipDefaultValidation": "\"Validated\""
+  }
+}
