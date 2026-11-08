@@ -1,15 +1,6 @@
 {
   "version": 3,
   "skills": {
-    "archify": {
-      "source": "tt-a1i/archify",
-      "sourceType": "github",
-      "sourceUrl": "https://github.com/tt-a1i/archify.git",
-      "skillPath": "archify/SKILL.md",
-      "skillFolderHash": "d5fc699feb186e8be4e2d9e86f850a8ea1b6959e",
-      "installedAt": "2026-10-17T15:00:32.691Z",
-      "updatedAt": "2026-10-31T10:41:43.993Z"
-    },
     "cloudflare-ai": {
       "source": "totto2727-org/agent",
       "sourceType": "github",
