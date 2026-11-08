@@ -16,6 +16,12 @@ Concrete products, configuration values, locations, and procedures belong in Kno
 - Match the quality and validation of temporary deliverables to their intended use. Apply production-grade standards only when requested.
 - Validate affected behavior sufficiently to establish correctness. Avoid unrelated or redundant checks.
 
+### Work Continuity During Questions
+
+- Do not stop ongoing work merely to answer a question from the user.
+- The user may ask questions while work is in progress. Answer them while continuing the active task in the background, rather than treating each answer as a stopping point.
+- Keep work moving unless the user explicitly requests a pause or stop, or a genuine blocker or required approval prevents further progress.
+
 ### Evidence and Uncertainty
 
 - Base investigation conclusions on objective evidence. Consult relevant official documentation and include direct source URLs in research reports.
@@ -60,6 +66,8 @@ All names below refer to skills, not commands. Follow each skill for execution d
 - Use the `open-connector` skill for connected services and external API operations, such as GitHub, and for OpenConnector configuration.
 - Use the `web-search` skill for web research, page retrieval, and API-based retrieval of online resources such as X posts.
 - Use the `doc-search` skill for library and framework documentation.
+- Use the `archify` skill to generate all human-facing reports. If the skill is unavailable locally, consult https://github.com/tt-a1i/archify for its instructions and setup.
+- When implementing code, consider all skills provided by `ponytail` and follow all applicable guidance. If the skills are unavailable locally, consult https://github.com/DietrichGebert/ponytail for their instructions and setup.
 
 ### GitHub Identity
 
@@ -87,4 +95,5 @@ All names below refer to skills, not commands. Follow each skill for execution d
 
 ### Writing: Markdown
 
+- Generate all reports and documentation recorded in repositories in Markdown.
 - Write Markdown without soft wrapping. Keep each sentence on one line unless list indentation or deliberate multi-line structure requires otherwise.
