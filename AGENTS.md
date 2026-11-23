@@ -63,11 +63,13 @@ Their placement here does not make mandatory operational constraints optional.
 
 All names below refer to skills, not commands. Follow each skill for execution details.
 
+- Use pstack as the default workflow. For non-trivial tasks, use `poteto-mode` and follow the playbook that fits the task.
+- For human-facing reports, use a pstack skill when it fits the purpose and format: `ketchup` for session recaps, `technical-writing` for technical reports, or `statechart` for state diagrams backed by a TLA+ model. If no pstack skill fits, use the format required by the task.
+
+- Use the installed [`projektor`](https://github.com/totto2727-org/agent/blob/main/plugins/external-information/skills/projektor/SKILL.md) skill for project and issue management through OpenConnector. If the skill is unavailable locally, follow the linked source.
 - Use the `open-connector` skill for connected services and external API operations, such as GitHub, and for OpenConnector configuration.
 - Use the `web-search` skill for web research, page retrieval, and API-based retrieval of online resources such as X posts.
 - Use the `doc-search` skill for library and framework documentation.
-- Use the `archify` skill to generate all human-facing reports. If the skill is unavailable locally, consult https://github.com/tt-a1i/archify for its instructions and setup.
-- When implementing code, consider all skills provided by `ponytail` and follow all applicable guidance. If the skills are unavailable locally, consult https://github.com/DietrichGebert/ponytail for their instructions and setup.
 
 ### GitHub Identity
 

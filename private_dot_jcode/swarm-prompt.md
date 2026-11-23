@@ -1,24 +1,34 @@
 <!-- Swarm routing policy: global ~/.jcode/swarm-prompt.md, overridden per project by ./.jcode/swarm-prompt.md. -->
 
-Model routing guidance for spawned swarm agents:
+# Swarm model routing
 
-- Priority: an explicit user request for a worker model or route, then configured `agents.swarm_model`, then the task-specific defaults below.
-- Honor an explicit user-requested worker model or route using a supported `model` value. If it is unavailable or cannot be selected, report the limitation instead of silently substituting a different model.
-- Without an explicit user override, preserve configured `agents.swarm_model` by omitting `model`; do not override it with task-specific defaults.
-- For task-specific routing, pass `model` and optionally `effort`. There is no separate `provider` argument in the current swarm interface. Use `swarm list_models` to confirm available models/routes and use a supported `model` identifier for the intended route rather than inventing a provider argument or route identifier.
-- If the swarm interface cannot select the intended model or route, state that limitation rather than claiming it was applied.
-- Implementation tasks: OpenAI via `openai-oauth`, model `gpt-6.1-sol`, with `effort: "medium"`.
-- Design, investigation, debugging, review, and verification: default to OpenAI via `openai-oauth`, model `gpt-6.1-sol`, with `effort: "medium"`. Routine design decisions, substantive judgment, cross-file reasoning, root-cause analysis, and correctness or security reviews should start on this route, not automatically on Astra.
-- Escalation only: use OpenAI via `openai-oauth`, model `gpt-6-astra`, with `effort: "high"` or higher (`"xhigh"` or `"max"`) only when Sol cannot resolve a required judgment or the task needs advanced architectural design beyond Sol's capability. State the concrete unresolved question and why Sol is insufficient before escalating. Task size, multiple files, or the label "design" or "review" alone is not a reason to escalate. Missing access, unavailable sources, or user-controlled prerequisites are blockers, not reasons to escalate.
-- Purely mechanical checks, such as locating symbols, extracting facts, or summarizing a small diff without assessing correctness, may use the context-fetching route below. Do not downgrade a task solely because its input or diff is small.
-- Context fetching / bulk reading / summarization: use OpenAI via `openai-oauth`, model `gpt-6-luna`, with `effort: "high"` by default. Do not use the OpenCode Go route for `gpt-6-luna`.
-- If Luna's result omits required information, contradicts the supplied sources, or fails the requested output requirements, retry with OpenAI via `openai-oauth`, model `gpt-6.1-sol`, with `effort: "medium"`. Missing access or unavailable source material is a blocker to report, not a reason to retry with another model.
-- If a context-fetching task turns out to require substantive investigation or judgment, reclassify it and use the Sol design/investigation route rather than treating it as a summarization retry. Apply the same escalation-only condition before considering Astra.
-- If a task-specific default route is unavailable or uncertain after checking available routes, and neither an explicit user choice nor configured `agents.swarm_model` applies, use `model: "inherit"` to explicitly inherit the coordinator's model and route. Disclose the fallback.
-- Omitting `model` uses configured `agents.swarm_model` when set, otherwise it inherits the coordinator's model. Do not describe omission as unconditional coordinator inheritance.
+## Selection and verification
 
-Structure guidance for spawned swarm agents:
+- Priority: the user's explicit model or route request, then configured `agents.swarm_model`, then the task defaults below.
+- The standard model family is OpenAI Sol 6.2 and Astra 6.2 through `openai-oauth`. Do not silently use an older Sol, Astra, or another provider.
+- Use `swarm list_models` to verify candidate identifiers and routes. Use `swarm list` after spawn to verify the worker's effective model and reasoning effort. A catalog entry or a configured default alone does not prove effective selection.
+- When `model` is exposed and allowed by `agents.swarm_model_selection` and `agents.swarm_model_allowlist`, pass the exact model identifier. Pass `effort` only if the tool exposes it. Do not invent a separate `provider` argument or an unsupported route identifier.
+- If the tool does not expose model selection, omit `model` to use the configured `agents.swarm_model`. Without a configured default, omission inherits the coordinator. Do not change the shared default just to route one lane.
+- Verify the spawned worker's effective model before assigning substantive work. If selection is unavailable or cannot be verified, report the limitation instead of claiming that the requested model is active.
+- After a user changes the required model, preserve partial edits, drain or stop old-model workers, and continue their tasks on verified new-model workers. Resuming an existing worker must not be described as changing its model unless the effective model was actually changed and checked.
 
-- Always pass `label` when spawning (e.g. `label: "api reviewer"`) so the swarm UI shows what each agent is for. The explicit `spawn` action rejects missing or blank labels.
-- In normal and light-swarm mode, only the root session may spawn agents. Workers must complete their assigned task directly and report back rather than creating another generation.
-- Recursive spawning is reserved for a root running in `swarm-deep` mode. In that mode the spawner owns its children, and manager-style decomposition may create deeper subtrees when it materially improves coverage.
+## Task defaults
+
+- Implementation, debugging, investigation, routine architecture, review, and verification: `gpt-6.2-sol`, normally `effort: "medium"`. Use `"high"` for a concrete need for deeper cross-file reasoning, difficult diagnosis, or a demanding independent review, not just for task size.
+- Context fetching, bulk reading, extraction, and summarization: `gpt-6.2-sol`, normally `effort: "medium"`, with bounded source scope and an explicit output contract. Do not add a separate older-model route merely because the work is mechanical.
+- Advanced architectural judgment or a critical unresolved correctness question: `gpt-6.2-astra`, normally `effort: "high"`. Escalate after Sol identifies a concrete unresolved question, competing explanations, or a verification failure that requires stronger reasoning. State the question, evidence already gathered, and why another Sol pass is unlikely to resolve it.
+- Use Astra directly when the user explicitly requests it. Otherwise, a label such as "design", "security", or "review", a large diff, or multiple files alone does not justify Astra.
+- Reserve `"xhigh"` or `"max"` for a specific unresolved problem that remained after a high-effort Astra pass, or an explicit user request. Increase effort only when the additional reasoning can change a necessary decision.
+- Missing access, unavailable sources, authentication, permissions, and user-controlled prerequisites are blockers, not reasons to change models or increase effort.
+- If the requested 6.2 route is unavailable, report that exact limitation. Obtain approval before substituting an older model or a different provider. An explicit user model request must not silently fall back to `inherit`.
+
+## Work allocation and handoff
+
+- Always pass a nonempty, task-specific `label` when spawning.
+- Give each worker a verifiable outcome, bounded source scope, file ownership, required checks, and a concise reporting contract. Prefer separate files or independent read-only questions over shared writes.
+- Use the smallest useful number of workers. Do not fan out several agents over the same question without distinct hypotheses or independently valuable coverage.
+- A review worker should judge behavior and evidence independently. Do not use a stronger model as a substitute for running the real acceptance workflow.
+- Workers must distinguish verified observations, assumptions, remaining risks, and blockers. Include exact commands, source locations, or URLs sufficient for the coordinator to verify claims.
+- On escalation or model change, hand off the unresolved question, relevant evidence, partial edits, and the next discriminating check. Do not restart completed investigation or discard valid work.
+- In normal and light-swarm mode, only the root session may spawn agents. Workers complete their assigned tasks directly and report back.
+- Recursive spawning is reserved for a root running in `swarm-deep` mode, and only when another level materially improves coverage.
