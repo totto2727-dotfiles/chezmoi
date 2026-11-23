@@ -65,6 +65,7 @@ All names below refer to skills, not commands. Follow each skill for execution d
 
 - Use pstack as the default workflow. For non-trivial tasks, use `poteto-mode` and follow the playbook that fits the task.
 - For human-facing reports, use a pstack skill when it fits the purpose and format: `ketchup` for session recaps, `technical-writing` for technical reports, or `statechart` for state diagrams backed by a TLA+ model. If no pstack skill fits, use the format required by the task.
+- For standalone HTML reports, keep the relevant pstack workflow for analysis and drafting. Use `visual-explainer` for the page and figures, and `visual-explainer-ja` for Japanese and the shared dark theme unless the user requests another language or theme.
 
 - Use the installed [`projektor`](https://github.com/totto2727-org/agent/blob/main/plugins/external-information/skills/projektor/SKILL.md) skill for project and issue management through OpenConnector. If the skill is unavailable locally, follow the linked source.
 - Use the `open-connector` skill for connected services and external API operations, such as GitHub, and for OpenConnector configuration.
