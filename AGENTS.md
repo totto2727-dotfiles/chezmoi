@@ -37,6 +37,12 @@ Concrete products, configuration values, locations, and procedures belong in Kno
 - Keep temporary deliverables that the user needs as local files, without committing them by default. Keeping a file does not imply committing it. Temporary reports, one-off experiments, and progress logs do not belong in permanent project history by default.
 - Before finalizing changes, review your task-created artifacts. Delete unneeded temporary files and exclude needed temporary deliverables from commits. Do not delete files belonging to the user or other agents.
 
+### Documentation generation
+
+- Write documentation deliverables that will be committed in English Markdown. Use the relevant pstack skill for analysis, drafting, and the committed version.
+- Present materials to the user as Japanese HTML by default. Refine the pstack draft or committed document with `visual-explainer-ja` and its shared dark theme. Preserve the findings, sources, and caveats. Follow an explicit request for another language or format.
+- When neither pstack nor Visual Explainer can produce a needed complex diagram or chart, use [Diagram Design](https://github.com/cathrynlavery/diagram-design). Match the destination's style, using the `visual-explainer-ja` theme tokens for the HTML version. Embed the resulting figure in the draft or deliverable rather than substituting a separate report.
+
 ### Dependency Safety
 
 - Prefer the newest compatible dependency releases that satisfy supply-chain safeguards, including the configured release-age policy.
@@ -64,8 +70,8 @@ Their placement here does not make mandatory operational constraints optional.
 All names below refer to skills, not commands. Follow each skill for execution details.
 
 - Use pstack as the default workflow. For non-trivial tasks, use `poteto-mode` and follow the playbook that fits the task.
-- For human-facing reports, use a pstack skill when it fits the purpose and format: `ketchup` for session recaps, `technical-writing` for technical reports, or `statechart` for state diagrams backed by a TLA+ model. If no pstack skill fits, use the format required by the task.
-- For standalone HTML reports, keep the relevant pstack workflow for analysis and drafting. Use `visual-explainer` for the page and figures, and `visual-explainer-ja` for Japanese and the shared dark theme unless the user requests another language or theme.
+- For documentation, use `ketchup` for session recaps, `technical-writing` for technical reports, and `statechart` for state diagrams backed by a TLA+ model.
+- The [`visual-explainer-ja`](https://github.com/totto2727-org/agent/blob/main/plugins/totto2727-coding/skills/visual-explainer-ja/SKILL.md) skill and theme are maintained in `totto2727-org/agent`. Use Visual Explainer for the HTML page and standard figures.
 
 - Use the installed [`projektor`](https://github.com/totto2727-org/agent/blob/main/plugins/external-information/skills/projektor/SKILL.md) skill for project and issue management through OpenConnector. If the skill is unavailable locally, follow the linked source.
 - Use the `open-connector` skill for connected services and external API operations, such as GitHub, and for OpenConnector configuration.
@@ -98,5 +104,4 @@ All names below refer to skills, not commands. Follow each skill for execution d
 
 ### Writing: Markdown
 
-- Generate all reports and documentation recorded in repositories in Markdown.
 - Write Markdown without soft wrapping. Keep each sentence on one line unless list indentation or deliberate multi-line structure requires otherwise.
