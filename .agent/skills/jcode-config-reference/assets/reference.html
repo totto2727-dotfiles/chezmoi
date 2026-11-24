@@ -1,0 +1,126 @@
+<!doctype html>
+<!-- Generated from config.toml by .agent/skills/jcode-config-reference. Do not edit by hand. -->
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'">
+<title>Jcode 設定リファレンス | @@VERSION@@</title>
+<style>
+:root{color-scheme:light dark;--bg:#f6f5ef;--card:#fffefa;--ink:#182720;--muted:#4b6156;--line:#d4ddd4;--accent:#075b45;--soft:#e3f0e7;--mark:#f1e9d8;--focus:#096e90;--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+@media(prefers-color-scheme:dark){:root{--bg:#131a17;--card:#1b2620;--ink:#edf2ec;--muted:#becfc2;--line:#384c40;--accent:#9adbbe;--soft:#213a2d;--mark:#3c3122;--focus:#92d6fb}}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-padding-top:6.5rem}
+body{margin:0;background:var(--bg);color:var(--ink);font:1rem/1.65 system-ui,-apple-system,sans-serif}
+a{color:var(--accent);text-underline-offset:.18em}
+a:focus-visible,input:focus-visible,button:focus-visible{outline:.18rem solid var(--focus);outline-offset:.16rem}
+code{font-family:var(--mono);font-size:.86em;overflow-wrap:anywhere}
+.skip{position:absolute;top:.5rem;left:.5rem;transform:translateY(-200%);padding:.5rem;background:var(--card);z-index:5}.skip:focus{transform:none}
+.wrap{max-width:92rem;margin:auto;padding-inline:clamp(1rem,4vw,4rem)}
+.hero{padding-block:clamp(2.5rem,6vw,5.5rem) 2rem;border-bottom:1px solid var(--line);background:var(--soft)}
+.eyebrow{font:700 .76rem/1.5 var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--accent);margin:0 0 .8rem}
+h1{font-size:clamp(2rem,5.7vw,4.3rem);line-height:1.12;letter-spacing:-.045em;margin:0 0 1rem;font-weight:760}
+.hero p:not(.eyebrow){max-width:52rem;margin:.55rem 0;color:var(--muted)}
+.metrics{display:flex;align-items:baseline;gap:1rem 2rem;flex-wrap:wrap;margin:1.4rem 0 0}.metrics div{display:flex;align-items:baseline;gap:.55rem}.metrics dt{font-size:.85rem;color:var(--muted)}.metrics dd{order:-1;margin:0;color:var(--accent);font:700 1.38rem/1.2 var(--mono)}
+.layout{display:grid;grid-template-columns:minmax(11rem,15rem) minmax(0,1fr);gap:clamp(1rem,3.3vw,3.4rem);align-items:start}
+.index{position:sticky;top:1.2rem;max-height:calc(100vh - 2.4rem);overflow:auto;padding:.9rem .35rem 1rem 0;margin-top:1rem;scrollbar-width:thin}
+.index summary{font-size:.91rem;font-weight:700;margin:.25rem 0 .5rem;cursor:pointer}.index h3{margin:.85rem 0 .16rem;color:var(--muted);font-size:.75rem;letter-spacing:.04em}.index ul{padding:0;margin:0;list-style:none}.index a{display:block;padding:.11rem .3rem;border-radius:.25rem;text-decoration:none}.index a:hover{background:var(--soft);text-decoration:underline}.index code{font-size:.8rem}
+main{min-width:0;padding:1.5rem 0 3rem}.lead{margin-bottom:1.35rem}.lead h2{font-size:1.13rem;margin:0 0 .25rem}.lead p{margin:.25rem 0;color:var(--muted);font-size:.92rem}
+.shortcuts{display:flex;flex-wrap:wrap;gap:.45rem;margin:.9rem 0}.shortcuts a{border:1px solid var(--line);border-radius:999px;background:var(--card);padding:.27rem .7rem;font-size:.83rem;text-decoration:none}.shortcuts a:hover{background:var(--soft);text-decoration:underline}
+.filters{position:sticky;top:0;z-index:2;padding:.75rem;margin:0 0 1.25rem;background:var(--bg);border:1px solid var(--line);border-radius:.65rem;display:flex;align-items:center;gap:.65rem;flex-wrap:wrap}
+.search{display:flex;align-items:center;gap:.52rem;flex:1 1 15rem}.search label{font-size:.85rem;font-weight:700;white-space:nowrap}.search input{width:100%;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:.42rem;color:var(--ink);padding:.48rem .62rem;font:inherit;font-size:.9rem}.filter-option{display:flex;gap:.36rem;align-items:center;font-size:.86rem;white-space:nowrap}.filter-option input{accent-color:var(--accent);width:1rem;height:1rem}.filters button{background:var(--card);border:1px solid var(--line);border-radius:.4rem;color:var(--accent);padding:.38rem .6rem;font:inherit;font-size:.84rem;cursor:pointer}.filters button:hover{background:var(--soft)}.filters output{color:var(--muted);font-size:.78rem;white-space:nowrap}
+.group-title{font-size:clamp(1.3rem,2.8vw,1.85rem);margin:2rem 0 .8rem;padding-top:.45rem;border-top:1px solid var(--line)}
+.config-section{margin:0 0 1.25rem;min-width:0}.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:.35rem .8rem;flex-wrap:wrap;margin:.9rem 0 .34rem}.section-head h3{margin:0;font-size:1.02rem}.section-head .topic{color:var(--muted);font-size:.86rem;margin-left:.6rem}.source{font-size:.78rem}
+.table-frame{background:var(--card);border:1px solid var(--line);border-radius:.65rem;overflow:hidden}
+table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:.86rem}col:nth-child(1){width:24%}col:nth-child(2){width:30%}col:nth-child(3){width:29%}col:nth-child(4){width:17%}
+th,td{text-align:left;vertical-align:top;padding:.6rem .65rem;overflow-wrap:anywhere}thead th{font-size:.76rem;color:var(--muted);background:var(--soft)}tbody tr+tr{border-top:1px solid var(--line)}tbody th{font-weight:640}tbody tr:target{outline:2px solid var(--focus);outline-offset:-2px;background:var(--soft)}.row-link{color:var(--ink);text-decoration:none}.row-link:hover{text-decoration:underline}.row-link code{font-size:.8rem}.values{color:var(--muted)}.value-line+.value-line{margin-top:.3rem}.value-line span{display:block;font-size:.7rem;font-weight:700;color:var(--muted)}.value-line code{font-size:.76rem}.value-line.overridden{border-radius:.3rem;background:var(--mark);padding:.24rem .34rem}.unset{font-size:.76rem;color:var(--muted)}
+.section-note{margin:.35rem 0 .55rem;color:var(--muted);font-size:.84rem}.example{font-size:.86rem;color:var(--muted);margin:.6rem 0}.example summary{color:var(--accent);cursor:pointer}.example pre{background:var(--card);border:1px solid var(--line);border-radius:.35rem;padding:.55rem;overflow:auto}
+.footer{margin-top:2rem;border-top:1px solid var(--line);padding-top:1rem;color:var(--muted);font-size:.85rem}.footer p{margin:.45rem 0}#empty{padding:1rem;border:1px dashed var(--line);border-radius:.5rem}
+@media(max-width:60rem){.layout{grid-template-columns:minmax(0,1fr);gap:0}.index{position:static;max-height:unset;border-bottom:1px solid var(--line);padding-top:0}.index-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(8rem,1fr));gap:.7rem}.index summary{margin:0}.index h3{margin:0}.index ul{margin:.24rem 0}}
+@media(max-width:42rem){html{scroll-padding-top:1rem}.filters{position:static}.table-frame{border-radius:.5rem}table,tbody,tr,th,td{display:block;width:100%}thead{position:absolute;clip:rect(0,0,0,0);width:1px;height:1px;overflow:hidden}tbody tr{padding:.5rem .65rem}tbody th,tbody td{padding:.24rem .1rem}tbody td::before{content:attr(data-label);display:block;color:var(--muted);font-size:.7rem;font-weight:700}.value-line{display:inline-block;margin-right:.8rem}.value-line+.value-line{margin-top:0}}
+@media print{.index,.filters,.skip,.shortcuts{display:none!important}.layout{display:block}.hero{padding:0}.wrap{padding:0}.config-section{break-inside:auto}tr{break-inside:avoid}a{color:inherit}}
+</style>
+</head>
+<body id="top">
+<a class="skip" href="#main">設定表に移動</a>
+<header class="hero"><div class="wrap">
+<p class="eyebrow">Jcode CLI / Configuration reference</p>
+<h1>Jcode 設定リファレンス</h1>
+<p>Jcode の各設定について、何が変わるか、指定できる値、macOS での既定値、chezmoi の <a href="config.toml"><code>config.toml</code></a> にある上書き値をまとめました。</p>
+<dl class="metrics"><div><dt>設定項目</dt><dd>@@SETTING_COUNT@@</dd></div><div><dt>上書き</dt><dd>@@OVERRIDE_COUNT@@</dd></div><div><dt>Jcode CLI</dt><dd>@@VERSION@@</dd></div></dl>
+</div></header>
+<div class="layout wrap">
+<nav class="index" aria-label="設定セクション"><details id="section-menu" open><summary>セクション</summary><div class="index-groups">@@INDEX@@</div></details></nav>
+<main id="main">
+<div class="lead">
+<h2>この表の読み方</h2>
+<p><strong>上書き</strong>は、隣の <code>config.toml</code> に記載された値のスナップショットです。上書きがなければ既定値を使います。環境変数、起動オプション、セッション内の操作で実際の動作が変わる場合があります。</p>
+<p><strong>未指定</strong>は TOML に値を置かない状態です。空文字 <code>""</code>、空配列 <code>[]</code>、<code>false</code> とは別です。</p>
+<details class="example"><summary>TOML での変更例</summary><p>この例では進行中の推論だけを表示します。すでに有効な <code>[display]</code> がある場合は、そのテーブル内で <code>reasoning_display</code> を追加または変更します。</p><pre><code>[display]
+reasoning_display = "current"</code></pre></details>
+<div class="shortcuts"><a href="#provider.default_model">モデルの選択</a><a href="#display.reasoning_display">推論の表示</a><a href="#tools.disabled">ツールを除外</a><a href="#hooks.session_start">Orca フック</a><a href="#keybindings.commit_log">Alt+G の割り当て</a></div>
+</div>
+<div class="filters" id="filters" hidden>
+<div class="search"><label for="query">検索</label><input id="query" type="search" placeholder="例：推論、alt+g、swarm" autocomplete="off" spellcheck="false" aria-controls="settings"></div>
+<label class="filter-option"><input id="overrides" type="checkbox" aria-controls="settings">上書きのみ</label>
+<button id="clear" type="button">クリア</button>
+<output id="match-count" aria-live="polite"></output>
+</div>
+<p id="empty" hidden>一致する設定はありません。検索語や「上書きのみ」を変更してください。</p>
+<div id="settings">@@SETTINGS@@</div>
+<footer class="footer">
+<p>対象: CLI @@VERSION@@（<a href="https://github.com/1jehuang/jcode/tree/@@REVISION@@">@@SHORT_REVISION@@</a>）。この設定ファイルの全項目と、一部の関連する任意項目を掲載しています。Jcode Desktop 専用の <code>desktop.*</code> は対象外です。</p>
+<p>既定値は macOS 上の実行バイナリと設定型が基準です。<a href="https://github.com/1jehuang/jcode/blob/@@REVISION@@/crates/jcode-base/src/config/default_file.rs">公式の初期化テンプレート</a>は例示値を含むため、実行時の既定値と異なる箇所があります。</p>
+<p>この HTML は設定を変更せず、外部リンクを開かない限りオフラインで使えます。<a href="#top">ページ先頭へ</a></p>
+</footer>
+</main>
+</div>
+<script>
+const filters = document.querySelector('#filters');
+const query = document.querySelector('#query');
+const overrides = document.querySelector('#overrides');
+const count = document.querySelector('#match-count');
+const empty = document.querySelector('#empty');
+const groups = [...document.querySelectorAll('.category')].map(group => ({group, sections: [...group.querySelectorAll('.config-section')].map(section => ({section, rows: [...section.querySelectorAll('tbody tr')].map(row => ({row, text: row.textContent.normalize('NFKC').toLowerCase()}))}))}));
+function filter() {
+  const terms = query.value.trim().normalize('NFKC').toLowerCase().split(/\s+/u).filter(Boolean);
+  let total = 0;
+  for (const {group, sections} of groups) {
+    let groupTotal = 0;
+    for (const {section, rows} of sections) {
+      let visible = 0;
+      for (const {row, text} of rows) {
+        row.hidden = (overrides.checked && row.dataset.override !== 'true') || !terms.every(term => text.includes(term));
+        if (!row.hidden) visible++;
+      }
+      section.hidden = visible === 0;
+      groupTotal += visible;
+    }
+    group.hidden = groupTotal === 0;
+    total += groupTotal;
+  }
+  count.textContent = `${total} 件を表示`;
+  empty.hidden = total !== 0;
+}
+function reset() {
+  query.value = '';
+  overrides.checked = false;
+  filter();
+}
+query.addEventListener('input', filter);
+overrides.addEventListener('change', filter);
+document.querySelector('#clear').addEventListener('click', () => {reset(); query.focus();});
+for (const link of document.querySelectorAll('a[href^="#"]')) {
+  link.addEventListener('click', () => {
+    const target = document.getElementById(link.getAttribute('href').slice(1));
+    if (target?.closest('[hidden]')) reset();
+  });
+}
+if (matchMedia('(max-width: 60rem)').matches) document.querySelector('#section-menu').open = false;
+filters.hidden = false;
+filter();
+</script>
+</body>
+</html>

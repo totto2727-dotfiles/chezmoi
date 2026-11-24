@@ -1,328 +1,1197 @@
-# Jcode v1.0.3 (a0ae514c4) defaults on macOS.
-# To override a default, uncomment the setting and its table header if needed.
-# For an existing override, edit the active line.
+# @jcode v1.0.3 a0ae514c45451f12d5633ed4fa7c71614a9f4a42
+# Jcode defaults on macOS. These annotations generate config-reference.html.
+# To override a default, activate its table header and add a setting below the commented default.
+# To restore a default, remove the active setting and leave its annotation.
 
-# [cloud]
-# local_access_seconds = 86400
+# @group 画面・入力
 
-# [session]
-# hibernation_idle_secs = 1800
-# hibernation_mode = "caches"
-
-# [server]
-# wake_mode = "internal"
-
+# @section キーバインド
+# @source crates/jcode-config-types/src/lib.rs#L899
+# @note 既定の Alt+G はコミット履歴を開きます。差分表示切り替えは未割り当てです。両方に同じキーを割り当てると、コミット履歴が優先されます。
 [keybindings]
+
+# @effect 会話を上にスクロールする。
+# @values キー文字列。例: "ctrl+shift+k"。空文字や無効値は既定キーに戻る。
 # scroll_up = "ctrl+shift+k"
+
+# @effect 会話を下にスクロールする。
+# @values キー文字列。例: "ctrl+shift+j"。空文字や無効値は既定キーに戻る。
 # scroll_down = "ctrl+shift+j"
+
+# @effect 会話を1ページ上にスクロールする。
+# @values キー文字列。例: "alt+u"。空文字や無効値は既定キーに戻る。
 # scroll_page_up = "alt+u"
+
+# @effect 会話を1ページ下にスクロールする。
+# @values キー文字列。例: "alt+d"。空文字や無効値は既定キーに戻る。
 # scroll_page_down = "alt+d"
+
+# @effect 次のモデルに切り替える。
+# @values キー文字列。例: "ctrl+tab"。空文字や無効値は既定キーに戻る。
 # model_switch_next = "ctrl+tab"
+
+# @effect 前のモデルに切り替える。
+# @values キー文字列。例: "ctrl+shift+tab"。空文字で無効。
 # model_switch_prev = "ctrl+shift+tab"
+
+# @effect エラー後に提示された代替モデルまたは認証方式に切り替え、失敗したターンを再送する。
+# @values キー文字列。例: "ctrl+y"。空文字で無効。
 # fallback_switch = "ctrl+y"
+
+# @effect モデルの推論の強度を上げる。
+# @values キー文字列。例: "cmd+right"（macOS）、"alt+right"（その他）。空文字や無効値は既定キーに戻る。
 # effort_increase = "cmd+right"
+
+# @effect モデルの推論の強度を下げる。
+# @values キー文字列。例: "cmd+left"（macOS）、"alt+left"（その他）。空文字や無効値は既定キーに戻る。
 # effort_decrease = "cmd+left"
+
+# @effect モデルの速度を標準、高速、超高速の順に上げる。
+# @values キー文字列。例: "alt+up"。空文字で無効。
 # speed_increase = "alt+up"
 speed_increase = ""
+
+# @effect モデルの速度を超高速、高速、標準の順に下げる。
+# @values キー文字列。例: "alt+down"。空文字で無効。
 # speed_decrease = "alt+down"
 speed_decrease = ""
+
+# @effect 会話の中央寄せを切り替える。
+# @values キー文字列。例: "alt+c"。空文字で無効。
 # centered_toggle = "alt+c"
+
+# @effect 前のプロンプトに移動する。
+# @values キー文字列。例: "ctrl+k"。空文字や無効値は既定キーに戻る。
 # scroll_prompt_up = "ctrl+k"
+
+# @effect 次のプロンプトに移動する。
+# @values キー文字列。例: "ctrl+j"。空文字や無効値は既定キーに戻る。
 # scroll_prompt_down = "ctrl+j"
+
+# @effect 会話のスクロール位置をしおりに記録し、戻る操作に使う。
+# @values キー文字列。例: "ctrl+g"。空文字や無効値は既定キーに戻る。
 # scroll_bookmark = "ctrl+g"
+
+# @effect 未完了の TODO に対する自動フォローアップを切り替える。
+# @values キー文字列。例: "ctrl+p"。空文字で無効。
 # auto_poke_toggle = "ctrl+p"
+
+# @effect 上方向のスクロールに補助キーを割り当てる。
+# @values キー文字列。例: "alt+pageup"。空文字で補助キーなし。
 # scroll_up_fallback = ""
+
+# @effect 下方向のスクロールに補助キーを割り当てる。
+# @values キー文字列。例: "alt+pagedown"。空文字で補助キーなし。
 # scroll_down_fallback = ""
+
+# @effect ワークスペースを左へ移動する。
+# @values キー文字列。例: "alt+h"。カンマ区切りで複数指定可。空文字は既定キーに戻る。
 # workspace_left = "alt+h"
+
+# @effect ワークスペースを下へ移動する。
+# @values キー文字列。例: "alt+j"。カンマ区切りで複数指定可。空文字は既定キーに戻る。
 # workspace_down = "alt+j"
+
+# @effect ワークスペースを上へ移動する。
+# @values キー文字列。例: "alt+k"。カンマ区切りで複数指定可。空文字は既定キーに戻る。
 # workspace_up = "alt+k"
+
+# @effect ワークスペースを右へ移動する。
+# @values キー文字列。例: "alt+l"。カンマ区切りで複数指定可。空文字は既定キーに戻る。
 # workspace_right = "alt+l"
+
+# @effect サイドパネルの表示を切り替える。
+# @values キー文字列。例: "alt+m"。空文字で無効。
 # side_panel_toggle = "alt+m"
+
+# @effect テキストを選択してコピーするモードを切り替える。
+# @values キー文字列。例: "alt+y"。空文字で無効。
 # copy_selection_toggle = "alt+y"
+
+# @effect 図の専用ペインを横または上に移す。
+# @values キー文字列。例: "alt+t"。空文字で無効。
 # diagram_pane_toggle = "alt+t"
+
+# @effect 固定された図の専用ペインを表示または非表示にする。
+# @values キー文字列。例: "alt+shift+m"。空文字で無効。
 # diagram_pane_visibility_toggle = "alt+shift+m"
+
+# @effect 入力中のスクロール固定を切り替える。
+# @values キー文字列。例: "alt+s"。空文字で無効。
 # typing_scroll_lock_toggle = "alt+s"
+
+# @effect 差分表示を非表示、会話内、会話内の全差分、サイドパネルの順に切り替える。
+# @values キー文字列。空文字で無効。"alt+g" を commit_log と共用するとコミット履歴が優先される。
 # diff_mode_cycle = ""
+
+# @effect 現在のプロジェクトの Git コミット履歴を開閉する。
+# @values キー文字列。例: "alt+g"。空文字で無効。
 # commit_log = "alt+g"
+
+# @effect 情報ウィジェットの表示を切り替える。
+# @values キー文字列。例: "alt+i"。空文字で無効。
 # info_widget_toggle = "alt+i"
+
+# @effect セッションの TODO 一覧を会話内のカードとして表示または非表示にする。
+# @values キー文字列。例: "alt+x"。空文字で無効。
 # todo_card_toggle = "alt+x"
+
+# @effect 会話内の swarm パネルにキーボードフォーカスを移すか戻す。インライン表示で、セッションがエージェントを管理している場合に限る。
+# @values キー文字列。例: "alt+n"。空文字で無効。
 # swarm_panel_focus = "alt+n"
+
+# @effect 新しい端末ウィンドウで Jcode の新規セッションを開く。
+# @values キー文字列。例: "cmd+shift+;"。空文字で無効。
 # new_terminal = "cmd+shift+;"
+
+# @effect セッション再開用の選択画面（/resume）を開く。
+# @values キー文字列。例: "cmd+b"（macOS）、"alt+r"（その他）。空文字で無効。
 # open_resume = "cmd+b"
+
+# @effect 内蔵音声入力の録音を開始または停止する。認識結果をプロンプトとして送信する。
+# @values キー文字列。例: "ctrl+space"。空文字で無効。
 # voice_input = "ctrl+space"
+
+# @effect セッション選択画面で Enter を押したときの再開先を決める。Ctrl+Enter は逆の動作をする。
+# @values "current-terminal"（現在の端末）、"new-terminal"（新しい端末）。
 # session_picker_enter = "current-terminal"
 
-# [dictation]
-# command = ""
-# mode = "send"
-# key = "off"
-# timeout_secs = 90
-# vocabulary = []
-# recorder = ""
-# global_devices = []
-# composer_preview = true
-
-# [jarvis]
-# show_raw_requests = false
-# show_exact_request_payload = false
-
-# [jarvis.speech]
-# model = "piper-jarvis"
-# voice = "jarvis"
-
-# [jarvis.listening]
-# max_audio_seconds_per_hour = 600
-# max_classifications_per_hour = 120
-# max_agent_turns_per_hour = 0
-# action_probability = 0.97
-# trigger_sound = "/usr/share/sounds/freedesktop/stereo/message-new-instant.oga"
-# warm_nari = false
-
+# @section 端末画面とセッション一覧
+# @source crates/jcode-config-types/src/display.rs#L12
+# @note 推論の表示方法（reasoning_display）と、モデルへの推論要求（show_thinking など）は別の設定です。
 # [display]
+
+# @effect ファイル編集ツールによる差分の表示方法を選ぶ。
+# @values "off"（非表示）、"inline"（会話内のプレビュー）、"full-inline"（会話内の全差分）、"file"（サイドパネルでファイル全体と差分を表示）。
 # diff_mode = "inline"
+
+# @effect 処理中に次の入力を受け付けたとき、既定でキューに入れて処理の終了を待つ。
+# @values 真偽値（true / false）。
 # queue_mode = false
+
+# @effect 新しいリモートサーバーバイナリが見つかったときにサーバーを自動リロードする。
+# @values 真偽値（true / false）。
 # auto_server_reload = true
+
+# @effect マウス操作を端末から Jcode に渡し、ホイールなどを使えるようにする。
+# @values 真偽値。true では端末標準の選択操作の代わりに Jcode がマウスを扱う。
 # mouse_capture = true
+
+# @effect 外部から Jcode を操作するデバッグ用ソケットを有効にする。
+# @values 真偽値（true / false）。
 # debug_socket = false
+
+# @effect 端末向けの TUI と CLI 出力で絵文字を表示する。
+# @values 真偽値（true / false）。
 # emoji = true
+
+# @effect 会話の表示内容を中央に寄せる。
+# @values 真偽値（true / false）。
 # centered = false
+
+# @effect 推論表示の旧設定。reasoning_display が優先される。
+# @values 真偽値。旧設定として参照される場合は true で全表示、false で非表示。
 # show_thinking = true
+
+# @effect 推論表示の直前に入る空行を省く。
+# @values 真偽値（true / false）。
 # compact_thinking = false
+
+# @effect モデルの推論を会話内にどこまで表示するか決める。
+# @values "off"（非表示）、"full"（履歴に残す）、"current"（現在の推論だけ表示し、返答やツール呼び出しの確定後に折りたたむ）。
 # reasoning_display = "full"
+
+# @effect Mermaid 図を会話内に加えて専用の場所にも表示するか選ぶ。
+# @values "none"（会話内のみ。別名 "inline"、"off"）、"margin"（空きがあれば情報ウィジェットの余白）、"pinned"（専用ペインに固定）。
 # diagram_mode = "none"
+
+# @effect Markdown ブロック間の余白を切り替える。
+# @values "compact"（詰める）、"document"（文書向けの余白）。
 # markdown_spacing = "compact"
+
+# @effect Markdown リンクの表示名の後ろにリンク先 URL を追加する。
+# @values 真偽値（true / false）。
 # show_link_urls = false
+
+# @effect Markdown の LaTeX 数式をどう表示するか選ぶ。
+# @values "none"（原文のまま）、"unicode"（対応する記法を文字に変換）、"image"（PNG 画像）。
 # latex_rendering = "image"
+
+# @effect 読み込んだ画像をサイドペインに固定する。
+# @values 真偽値（true / false）。
 # pin_images = true
+
+# @effect スクロール中もセッション全体の TODO 一覧を会話欄の上端に固定する。
+# @values 真偽値（true / false）。
 # pin_todos = true
+
+# @effect 最初のプロンプトを送る前に待機アニメーションを表示する。
+# @values 真偽値（true / false）。実際に表示できるかは端末や性能設定にもよる。
 # idle_animation = false
+
+# @effect プロンプト行が画面に入ったときに短いアニメーションを表示する。
+# @values 真偽値（true / false）。実際に表示できるかは端末や性能設定にもよる。
 # prompt_entry_animation = true
+
+# @effect 名前で指定した個別アニメーションを無効にする。
+# @values 文字列の配列。例: ["donut", "orbit_rings"]。[] で個別指定なし。
 # disabled_animations = []
+
+# @effect 環境に応じた自動判定の代わりに、描画やアニメーションの性能プロファイルを指定する。
+# @values 空文字または "auto"（自動）、"full"（制限なしのプロファイル）、"reduced"（軽量）、"minimal"（最小）。
 # performance = ""
+
+# @effect アニメーションに用いる最大フレームレートを指定する。
+# @values 整数（fps）。実行時に 1～120 に収められ、端末や性能設定によって上限が下がる。
 # animation_fps = 60
+
+# @effect 処理中やストリーミング中の再描画の最大頻度を指定する。
+# @values 整数（fps）。実行時に 1～120 に収められ、端末や性能設定によって上限が下がる。
 # redraw_fps = 60
+
+# @effect 直前のプロンプトが画面外に出たとき、会話欄の上端に短いプレビューを表示する。
+# @values 真偽値（true / false）。
 # prompt_preview = true
+
+# @effect swarm やファイル変更の通知を、差分付き複数行カードではなく1行で表示する。
+# @values 真偽値（true / false）。
 # compact_notifications = false
+
+# @effect コピー用のキーバッジで Alt キーの表示名を変更する。
+# @values 文字列。空文字で自動（macOS では ⌥、その他では Alt）。
 # copy_badge_alt_label = ""
+
+# @effect agentgrep の要約だけでなく、ツールの出力を会話内に表示する。
+# @values 真偽値（true / false）。
 # show_agentgrep_output = false
+
+# @effect bash のツール要約の下に出力の末尾を表示する。
+# @values 真偽値。true で末尾の空でない行を最大3行表示する。
 # show_bash_output = false
+
+# @effect ツールの目的に加え、コマンドやパスなどの技術的な詳細を表示する。目的がない行は設定に関係なく詳細を表示する。
+# @values 真偽値（true / false）。
 # tool_call_details = false
+
+# @effect スラッシュコマンドなどを繰り返し使ったときに、対応するショートカットのヒントを表示する。
+# @values 真偽値（true / false）。
 # keybinding_hints = true
+
+# @effect TUI の配色を切り替える。自動では端末の背景色に合わせる。
+# @values 空文字または "auto"（自動）、"dark"（暗色）、"light"（明色）。
 # theme = ""
+
+# @effect 入力欄が空のとき、左矢印で接続中セッションの一覧を開く。/active は設定に関係なく使える。
+# @values 真偽値（true / false）。
 # active_sessions_manager = false
+
+# @effect セッション選択画面に他のエージェント CLI の会話履歴も含める。
+# @values 真偽値。false で Jcode 自身のセッションに限定。
 # external_sessions = true
+
+# @effect 現在のプロジェクトにセッションがある場合、/resume をそのプロジェクトに絞って開く。
+# @values 真偽値（true / false）。
 # resume_project_scope = false
+
+# @effect クライアントの接続が最近閉じたセッションを /resume で強調し、上位に表示する期間を指定する。
+# @values 0 以上の整数（秒）。0 で無効。最後のメッセージ時刻ではなく切断時刻を使用。
 # resume_recent_close_seconds = 30
+
+# @effect 再開画面の経過時間の基準と並び順を決める。
+# @values "message"（最終メッセージ）、"activity"（最終メッセージと最終オープンの新しい方）、"opened"（最終オープン）、"created"（作成）。
 # resume_time = "message"
+
+# @effect 別のローカルクライアントが選択したセッションを表示中の場合の再開方法を選ぶ。
+# @values "off"（既存ウィンドウを残して追加接続）、"move"（既存ウィンドウを移動・フォーカス。非対応環境では replace）、"replace"（再開し、既存クライアントを閉じる）。
 # resume_open_elsewhere = "off"
+
+# @effect 使用量の割合を残量または使用済みとして表示する。
+# @values "left"（残量）、"used"（使用済み）。
 # usage_display = "left"
 
+# @section ネイティブスクロールバー
+# @source crates/jcode-config-types/src/lib.rs#L1042
 # [display.native_scrollbars]
+
+# @effect 対応端末で会話欄のネイティブスクロールバーを使う。
+# @values 真偽値（true / false）。
 # chat = true
+
+# @effect 対応端末でサイドパネルのネイティブスクロールバーを使う。
+# @values 真偽値（true / false）。
 # side_panel = true
 
+# @section UI の配色
+# @source crates/jcode-config-types/src/display.rs#L117
 # [display.colors]
 
+# @effect TUI の色を役割名ごとに上書きする。/colors で役割を確認できる。
+# @values TOML テーブル。例: user = "#8ab4f8"。RGB は "#rrggbb"、"#rgb"、または # なしの16進表記。
+# @table-default 空のテーブル
+
+# @section 音声入力と文字起こし
+# @source crates/jcode-base/src/config.rs#L1124
+# [dictation]
+
+# @effect 標準出力に文字起こし結果を返す外部プログラムを指定する。
+# @values シェルコマンド文字列。空文字なら外部コマンド未設定。
+# command = ""
+
+# @effect 外部音声入力で得た文字列をどう扱うか決める。
+# @values "insert"（カーソル位置に挿入）、"append"（末尾に追加）、"replace"（入力を置換）、"send"（送信）。
+# mode = "send"
+
+# @effect 外部音声入力を開始するアプリ内ショートカットを設定する。
+# @values キー文字列。例: "alt+v"。"off" または空文字で無効。
+# key = "off"
+
+# @effect 外部音声入力コマンドの終了を待つ上限を指定する。
+# @values 0 以上の整数（秒）。0 でタイムアウトなし。
+# timeout_secs = 90
+
+# @effect 内蔵の音声認識で使う標準語彙に、人名や専門用語を追加する。
+# @values 文字列の配列。例: ["Jcode", "ChezMoi"]。[] で追加なし。
+# vocabulary = []
+
+# @effect 内蔵音声入力の録音に外部コマンドを使う。
+# @values モノラル 16 kHz、符号付き 16 ビットのリトルエンディアン PCM を標準出力に返すシェルコマンド文字列。空文字で録音ツールを自動検出。
+# recorder = ""
+
+# @effect Linux の companion が Copilot キーの押下を検知するキーボードを指定する。
+# @values Linux evdev デバイスパスの配列。/dev/input/by-id/ 以下を推奨。[] でグローバル監視を無効化。
+# global_devices = []
+
+# @effect 録音中の波形と逐次認識結果の表示先を選ぶ。
+# @values 真偽値。true で入力欄、false でステータス行。
+# composer_preview = true
+
+# @section Jarvis の表示
+# @source crates/jcode-base/src/config.rs#L1057
+# [jarvis]
+
+# @effect Jarvis の入力を文字起こし、状態、文脈、指示の各欄に分けて表示する。
+# @values 真偽値。show_exact_request_payload が true ならそちらを優先。
+# show_raw_requests = false
+
+# @effect Jarvis の整形済み表示の代わりに元のユーザーペイロードを表示する。
+# @values 真偽値（true / false）。
+# show_exact_request_payload = false
+
+# @section Jarvis の読み上げ
+# @source crates/jcode-base/src/config.rs#L1097
+# [jarvis.speech]
+
+# @effect Jarvis の音声合成に使うモデルを指定する。
+# @values 音声合成サービスが受け付けるモデル名の文字列。例: "piper-jarvis"。
+# model = "piper-jarvis"
+
+# @effect Jarvis の読み上げ音声を指定する。
+# @values 音声合成サービスが受け付ける音声名の文字列。例: "jarvis"。
+# voice = "jarvis"
+
+# @effect Jarvis の外部音声合成サービスを設定する。
+# @values WAV を返す OpenAI 互換 POST エンドポイントの URL 文字列。未指定ならローカルの eSpeak を使う。
+# @unset endpoint
+
+# @effect 外部音声合成サービスの認証情報を取得する環境変数を指定する。
+# @values 環境変数名の文字列。認証情報そのものは書かない。未指定可。
+# @unset api_key_env
+
+# @section Jarvis の常時リスニング
+# @source crates/jcode-base/src/config.rs#L1070
+# [jarvis.listening]
+
+# @effect Jarvis の常時聴取で1時間に処理できる音声の長さを制限する。この設定だけでは常時聴取は有効にならない。
+# @values 1～3600 の整数（秒／時）。
+# max_audio_seconds_per_hour = 600
+
+# @effect Jarvis の常時聴取で発話を分類する回数に上限を設ける。
+# @values 1～600 の整数（回／時）。
+# max_classifications_per_hour = 120
+
+# @effect 常時聴取から Jarvis エージェントに依頼する回数に上限を設ける。
+# @values 0 で上限なし、1～120 の整数（回／時）で上限を設定。
+# max_agent_turns_per_hour = 0
+
+# @effect Jarvis が発話に基づいて行動するために必要な分類スコアを指定する。
+# @values 0.5～1.0 の有限な浮動小数点数。例: 0.97。
+# action_probability = 0.97
+
+# @effect 発話で Jarvis が反応したときに鳴らす音を指定する。
+# @values 音声ファイルのパス文字列。空文字で無音。
+# trigger_sound = "/usr/share/sounds/freedesktop/stereo/message-new-instant.oga"
+
+# @effect 発話開始時の接続待ちを減らすため、Nari への接続を1本待機させる。待機中は音声を送らない。
+# @values 真偽値（true / false）。
+# warm_nari = false
+
+# @section 機能フラグ
+# @source crates/jcode-config-types/src/lib.rs#L1063
 # [features]
+
+# @effect 起動時に Jcode の更新を確認してインストールする。
+# @values 真偽値（true / false）。
 # check_updates = true
+
+# @effect メモリの抽出と検索・再利用を有効にする。
+# @values 真偽値（true / false）。
 # memory = true
+
+# @effect 複数エージェントを協調させる swarm 機能を有効にする。
+# @values 真偽値（true / false）。
 # swarm = true
+
+# @effect Mermaid 図の描画と、Mermaid に関するモデル向けガイダンスを有効にする。
+# @values 真偽値（true / false）。
 # mermaid = true
+
+# @effect モデルの停止時に未完了の TODO があれば自動でフォローアップするか、既定の動作を設定する。
+# @values 真偽値（true / false）。セッションごとに /poke on または /poke off で上書き可。
 # auto_poke = true
+
+# @effect 弱点、確信度、担当などの自動 TODO 品質レビューを有効にする。
+# @values 真偽値（true / false）。自動フォローアップが有効な場合に動作する。
 # todo_gate_digest = false
+
+# @effect 無効な品質チェックを適用した場合の指摘も TODO 完了レポートに表示する。チェックの実行自体は有効にしない。
+# @values 真偽値（true / false）。
 # todo_gate_diagnostics = false
+
+# @effect モデルに送るユーザーメッセージとツール結果にタイムスタンプを加える。
+# @values 真偽値（true / false）。
 # message_timestamps = true
+
+# @effect 自動検索で取得したメモリを、一時的なリクエストだけでなく通常のセッション履歴にも保存する。
+# @values 真偽値（true / false）。
 # persist_memory_injections = false
+
+# @effect KV キャッシュの有意なミスを会話欄に通知する。初回の通常のキャッシュ作成や計測値の欠落は対象外。
+# @values 真偽値（true / false）。
 # kv_cache_miss_notices = true
+
+# @effect どの公開経路から更新を取得するか選ぶ。
+# @values "stable"（正式リリース、別名 "release"）、"preview"（プレビューリリース）、"main"（main の最新コミット、別名 "nightly"、"edge"）。未知の値ではオフにならず stable に戻る。
 # update_channel = "stable"
 
-# [websearch]
-# engine = "duckduckgo"
-# fallback_engines = ["bing"]
-# bing_api_key_env = "JCODE_BING_API_KEY"
-# bing_market = "en-US"
-# kagi_api_key_env = "KAGI_API_KEY"
-# searxng_url_env = "JCODE_SEARXNG_URL"
-# prefer_native = true
-# native_max_uses = 5
-# native_allowed_domains = []
-# native_blocked_domains = []
-# native_anthropic_tool_version = "web_search_20250305"
+# @group モデル・ツール
 
-[tools]
-# browser_handoff = false
-# auto_background_timeout_ms = 3000
-# profile = ""
-# enabled = []
-# disabled = []
-disabled = ["websearch", "webfetch"]
-# disable_base_tools = false
-# mcp_tools = "auto"
-# mcp_tools_token_threshold = 8000
-# codemode = true
-codemode = false
-
-[acp]
-# profile = "standard"
-# tool_profile = "full"
-tool_profile = "acp"
-
-# [auth]
-# trusted_external_sources = []
-# trusted_external_source_paths = []
-
+# @section モデル、推論、切り替え
+# @source crates/jcode-config-types/src/lib.rs#L1123
 [provider]
-# default_model is unset by default (use the provider's default model).
+
+# @effect 新規セッションの既定モデルを指定します。省略すると提供元の既定モデルを使います。
+# @values モデル指定文字列。例: "gpt-6.2-sol"、"openai-oauth@my-account:gpt-6.2-sol"。選択可能なモデルやアカウントは利用環境によります。
+# @unset default_model
 default_model = "openai-oauth@openai-otter:gpt-6.2-sol"
-# default_provider is unset by default (auto-detect).
+
+# @effect 利用可能なら起動時に優先する提供元、認証経路、またはプロファイルを指定します。省略すると自動選択します。
+# @values 文字列。例: "claude"、"anthropic-api"、"openai-oauth"、"openai-api"、"copilot"、"openrouter"、登録したプロファイル名。
+# @unset default_provider
 default_provider = "openai-oauth"
+
+# @effect OpenAI Responses API に指定する推論強度です。
+# @values 文字列: none、minimal、low、medium、high、xhigh、max。実際に選べる値はモデルと接続経路によります。
 # openai_reasoning_effort = "low"
 openai_reasoning_effort = "high"
+
+# @effect Anthropic Messages API に指定する推論強度です。
+# @values 文字列: none、low、medium、high、xhigh、max。使える値はモデルによります。max は対応時に最も強い推論を指定します。
 # anthropic_reasoning_effort = "low"
+
+# @effect Anthropic のプロンプトキャッシュ保持時間として 5 分ではなく 1 時間を要求します。
+# @values 真偽値: true / false。
 # anthropic_cache_ttl_1h = true
+
+# @effect OpenAI へのリクエストのサービス階層を上書きします。高速階層は料金や利用枠の消費が変わる場合があります。
+# @values 文字列: priority（fast）、ultrafast（ultra、ultra-fast）、flex。default、auto、none、off、standard または空文字は階層を指定しません。対応はモデルとアカウントによります。
 # openai_service_tier = "priority"
 openai_service_tier = "default"
+
+# @effect OpenAI の提供元側の履歴圧縮を使う方式です。compaction.mode とは別の設定です。
+# @values 文字列: auto（リクエストに自動圧縮設定を送る）、explicit（明示的に圧縮を要求する。manual も同義）、off（無効。disabled、none も同義）。
 # openai_native_compaction_mode = "auto"
+
+# @effect OpenAI の提供元側の履歴圧縮を開始するトークン数の目安です。
+# @values 非負整数。例: 200000。実行時の下限は 1000 で、auto ではモデルのコンテキスト上限も考慮します。
 # openai_native_compaction_threshold_tokens = 200000
+
+# @effect 対応する提供元では、後続ターンのコンテキストに提供元形式の推論情報を残します。画面への表示とは別です。
+# @values 真偽値: true / false。
 # preserve_reasoning_context = true
+
+# @effect 同じ入力を別の提供元に再送する際に、自動で切り替えるかどうかを決めます。
+# @values 文字列: countdown（通常は 3 秒待ち、Esc で中止可）、manual（自動切り替えなし。off、false、disabled、none も同義）。
 # cross_provider_failover = "countdown"
+
+# @effect 利用枠の枯渇が確定した場合に限り、別の提供元に切り替える前のカウントダウンを省きます。
+# @values 真偽値: true / false。cross_provider_failover = "manual" では自動で切り替えません。
 # exhausted_usage_immediate_failover = true
+
+# @effect 短時間で回復する Anthropic のレート制限では、別アカウントに移る前に同じアカウントで再試行します。
+# @values 真偽値: true / false。リセットまで長い場合は同一アカウントで待ち続けません。
 # anthropic_retry_recoverable_rate_limits = true
+
+# @effect 別の提供元へ移る前に、同じ提供元の別アカウントを自動で試します。
+# @values 真偽値: true / false。
 # same_provider_account_failover = true
+
+# @effect OpenAI OAuth の週間利用枠が尽きたとき、獲得済みのリセット権を自動適用して保留中のリクエストを再試行します。クレジットは購入しません。
+# @values 真偽値: true / false。
 # openai_auto_banked_reset = true
+
+# @effect Anthropic OAuth の週間利用枠が尽きたとき、獲得済みの Fable リセット権を自動適用します。クレジットは購入しません。
+# @values 真偽値: true / false。
 # anthropic_auto_fable_reset = false
+
+# @effect 承認済みの別経路が使える間は、自動リセット権を温存します。OpenAI と Anthropic の両方に適用します。
+# @values 真偽値: true / false。false では別経路に切り替える前にも自動適用できます。
 # auto_reset_only_when_no_routes = true
+
+# @effect Gemini API キーが設定されていても、Gemini Code Assist OAuth を優先します。
+# @values 真偽値: true / false。JCODE_GEMINI_FORCE_OAUTH で上書きできます。
 # gemini_force_oauth = false
+
+# @effect ストリーミング中にデータが届かないとき、タイムアウトまで待つ基準時間です。
+# @values 非負整数（秒）。例: 180。推論強度が high / xhigh / max の場合、基準値より長くなります。
 # stream_idle_timeout_secs = 180
+
+# @effect 一時的な通信エラーや応答エラーで許容する総試行回数です。最初のリクエストを含みます。
+# @values 非負整数（u32）。例: 8（初回と最大 7 回の再試行）。通常は 1 以上を指定します。
 # max_retries = 8
+
+# @effect 一時エラー後の再試行で使う指数バックオフの最大待ち時間です。
+# @values 非負整数（秒）。例: 30。
 # retry_backoff_cap_secs = 30
+
+# @effect 対応する接続先で、送信リクエストを圧縮する条件を選びます。
+# @values 文字列: auto（推定で高速なとき）、always（圧縮対象を常に圧縮）、off（圧縮しない）。
 # request_compression = "auto"
 
+# @effect OpenAI Responses API への接続方式を指定します。
+# @values 文字列: auto、websocket、https。
+# @unset openai_transport
+
+# @effect /model の候補を指定した提供元に絞ります。使用中のモデルの経路は非表示になりません。
+# @values プロバイダー名、経路名、プロファイル ID の文字列配列。例: ["openai", "claude-oauth", "myprofile"]。省略または [] は絞り込みなし。
+# @unset model_picker_providers
+
+# @section 名前付きプロバイダー
+# @source crates/jcode-config-types/src/lib.rs#L422
 # [providers]
 
+# @effect 名前付きのカスタム提供元を追加します。
+# @values 名前をキーにした TOML テーブル。例: [providers.local] に type = "openai-compatible" と base_url = "http://localhost:1234/v1"。type は open-ai-compatible / anthropic-compatible / open-router（openai-compatible も有効）。
+# @table-default 登録なし
+
+# @section Swarm とメモリ
+# @source crates/jcode-config-types/src/lib.rs#L509
 [agents]
-# swarm_model is unset by default (inherit the coordinator's model).
+
+# @effect ワーカー起動時にモデルが明示されなかった場合の既定モデルを指定します。未指定ならコーディネーターのモデルを継承します。swarm-prompt は選択方針で、起動時のモデル指定の代わりにはなりません。
+# @values モデルまたは経路の文字列。例: "gpt-6.2-sol"。"inherit"、"coordinator" は継承します。
+# @unset swarm_model
 swarm_model = "gpt-6.2-sol"
+
+# @effect エージェントがワーカーのモデルを選べるようにします。選べるモデルは許可リストに限られます。
+# @values 真偽値: true / false。
 # swarm_model_selection = false
+
+# @effect エージェントがワーカー起動時に指定できるモデルと経路を制限します。
+# @values 完全一致で比較するモデル・経路名の文字列配列。例: ["gpt-6.2-sol"]。[] は明示的な上書きを許可しません。
 # swarm_model_allowlist = []
+
+# @effect ワーカーの起動先と表示方法を指定します。
+# @values 文字列: visible（端末を開く）、headless（端末なし）、inline（端末なしでコーディネーター内にライブ表示）、auto（端末を開けない場合は headless）。
 # swarm_spawn_mode = "inline"
+
+# @effect 過去の記憶を取り出す際、関連性を判定する Jev Decisions の接続先を指定します。
+# @values 文字列: auto、openrouter、typesafe、laya、aimlapi、jcode。subscription と jcode-subscription は jcode の別名です。
 # memory_jev_provider = "auto"
+
+# @effect 取り出す記憶に求める、Jev の関連確率の下限です。値が無効なら記憶を取り出しません。
+# @values 0.0 から 1.0 の有限な数値。例: 0.8。
 # memory_jev_threshold = 0.800000011920929
+
+# @effect 記憶の自動抽出でテキスト生成用の補助モデルを使えるようにします。Jev による記憶の取り出しには影響しません。
+# @values 真偽値: true / false。
 # memory_sidecar_enabled = true
+
+# @effect 旧式の再順位付けの実行間隔です。互換性のためだけに保持され、Jev による記憶の取り出しには影響しません。
+# @values 非負整数。例: 3。
 # memory_rerank_cadence = 3
+
+# @effect 旧式の再順位付けの投票回数です。互換性のためだけに保持され、Jev による記憶の取り出しには影響しません。
+# @values 非負整数。例: 2。
 # memory_rerank_votes = 2
+
+# @effect 旧式の再順位付けに必要な最小一致票数です。互換性のためだけに保持され、Jev による記憶の取り出しには影響しません。
+# @values 非負整数。例: 2。
 # memory_rerank_min_agree = 2
+
+# @effect 旧方式のベンチマークやデバッグで埋め込みの生成先を選びます。Jev による記憶の取り出しには使われません。
+# @values 文字列。例: "local"、"openai"。
 # memory_embedding_backend = "local"
+
+# @effect 1 つの Swarm で同時に生存できるワーカー数を制限してメモリーを保護します。完了・停止済みは数えません。
+# @values 非負整数。例: 32。0 はこの制限を無効にしますが、Swarm 全体の絶対上限 1000 は残ります。
 # swarm_max_concurrent_agents = 32
+
+# @effect ツール実行中でないワーカーが出力・ツールイベント・ハートビートを送らない場合、停滞とみなしてコーディネーターへ通知するまでの時間です。
+# @values 非負整数（秒）。例: 600。0 は監視を無効にします。
 # swarm_stall_after_secs = 600
+
+# @effect 停滞を検知したとき、コーディネーターへの通知に加え、ワーカー自身にも短い催促を送ります。
+# @values 真偽値: true / false。
 # swarm_stall_nudge = false
 
-# [terminal]
+# @effect 起動するワーカーの推論強度を指定します。Swarm ツールから個別に指定する設定ではありません。
+# @values 推論強度の文字列。例: "low"、"medium"、"high"。省略時は low。使用可能な強度はモデルによります。
+# @unset swarm_effort
 
-[hooks]
-# session_start is unset by default.
-session_start = "'/Users/totto2727/.orca/agent-hooks/jcode-hook.sh'"
-# turn_start is unset by default.
-turn_start = "'/Users/totto2727/.orca/agent-hooks/jcode-hook.sh'"
-# pre_tool is unset by default.
-pre_tool = "'/Users/totto2727/.orca/agent-hooks/jcode-hook.sh'"
-# post_tool is unset by default.
-post_tool = "'/Users/totto2727/.orca/agent-hooks/jcode-hook.sh'"
-# turn_end is unset by default.
-turn_end = "'/Users/totto2727/.orca/agent-hooks/jcode-hook.sh'"
-# session_end is unset by default.
-session_end = "'/Users/totto2727/.orca/agent-hooks/jcode-hook.sh'"
-# pre_tool_transform_timeout_ms = 500
-# post_tool_feedback_timeout_ms = 10000
-# pre_tool_timeout_ms = 5000
+# @effect Swarm モードでルートセッションの推論強度を指定します。ワーカーの推論強度には影響しません。
+# @values 推論強度の文字列。例: "low"、"medium"、"high"。省略または無効な値の場合は low。
+# @unset swarm_root_effort
 
-# [ambient]
-# enabled = false
-# allow_api_keys = false
-# min_interval_minutes = 5
-# max_interval_minutes = 120
-# pause_on_active_session = true
-# proactive_work = true
-# work_branch_prefix = "ambient/"
-# visible = true
-
-# [safety]
-# ntfy_server = "https://ntfy.sh"
-# desktop_notifications = true
-# email_enabled = false
-# email_smtp_port = 587
-# email_imap_port = 993
-# email_reply_enabled = false
-# telegram_enabled = false
-# telegram_reply_enabled = false
-# discord_enabled = false
-# discord_reply_enabled = false
-# jade_relay_enabled = false
-# jade_relay_reply_enabled = false
-# jade_relay_launch_enabled = false
-
-# [notifications]
-# turn_complete = true
-# turn_complete_min_secs = 120
-# turn_complete_todo_min_secs = 30
-# turn_complete_only_when_unfocused = true
-# turn_complete_sound = "Glass"
-
-# [gateway]
-# enabled = false
-# port = 7643
-# bind_addr = "0.0.0.0"
-
+# @section 会話コンテキストの圧縮
+# @source crates/jcode-config-types/src/lib.rs#L293
 # [compaction]
+
+# @effect 会話履歴の圧縮を始める方式を選びます。
+# @values 文字列: reactive（固定しきい値）、proactive（トークン増加予測）、semantic（話題の変化と関連度）。
 # mode = "reactive"
+
+# @effect reactive モードで、バックグラウンド圧縮を始めるコンテキスト使用率です。
+# @values 割合の数値。通常 0.0 から 1.0。例: 0.8 は 80%。有効なトークン数しきい値とは先に達した方を使います。
 # reactive_threshold = 0.800000011920929
+
+# @effect reactive モードで、使用率とは別に指定できるバックグラウンド圧縮開始のトークン数です。
+# @values 非負整数（トークン）。例: 400000。0 はトークン数による開始判定を無効にします。
 # reactive_threshold_tokens = 400000
+
+# @effect proactive モードで、トークンの増加を何ターン先まで予測するかを指定します。
+# @values 非負整数（ターン数）。例: 15。
 # lookahead_turns = 15
+
+# @effect proactive モードのトークン増加予測で、指数加重移動平均が直近の測定値をどれだけ重く扱うかを指定します。
+# @values 平滑化係数の数値。通常 0.0 から 1.0。例: 0.3。大きいほど直近の変化を重視します。
 # ewma_alpha = 0.30000001192092896
+
+# @effect proactive または semantic モードで、圧縮を検討する最低コンテキスト使用率です。これだけで圧縮が始まるわけではありません。
+# @values 割合の数値。通常 0.0 から 1.0。例: 0.4 は 40%。有効なトークン数の下限とはどちらかを満たせば検討対象です。
 # proactive_floor = 0.4000000059604645
+
+# @effect proactive または semantic モードで、使用率の代わりに圧縮の検討を許す最低トークン数です。
+# @values 非負整数（トークン）。例: 150000。0 はトークン数の下限を無効にし、使用率だけで判定します。
 # proactive_floor_tokens = 150000
+
+# @effect proactive または semantic モードで、事前の圧縮を検討する前に必要なトークン数の計測サンプル数です。
+# @values 非負整数。例: 3。
 # min_samples = 3
+
+# @effect proactive または semantic モードで、トークン数が増えていないと判定して事前圧縮を見送るまでのターン数です。
+# @values 非負整数（ターン数）。例: 5。
 # stall_window = 5
+
+# @effect proactive または semantic モードで、前回の圧縮後に次の事前圧縮を許すまでの最低ターン数です。
+# @values 非負整数（ターン数）。例: 10。
 # min_turns_between_compactions = 10
+
+# @effect semantic モードで、コサイン類似度がこの値を下回ると話題が変わったとみなします。
+# @values しきい値の数値。通常 0.0 から 1.0。例: 0.45。
 # topic_shift_threshold = 0.44999998807907104
+
+# @effect semantic モードで、現在の目標とのコサイン類似度がこの値以上のメッセージを要約せずに保持します。
+# @values しきい値の数値。通常 0.0 から 1.0。例: 0.65。
 # relevance_keep_threshold = 0.6499999761581421
+
+# @effect semantic モードで、現在の目標を埋め込みで表現するために参照する直近のターン数です。
+# @values 非負整数（ターン数）。例: 5。
 # goal_window_turns = 5
+
+# @effect 圧縮開始の判定に使うコンテキスト予算の上限です。送信されるリクエストサイズそのものを制限する設定ではありません。
+# @values 非負整数（トークン）。例: 200000。0 は上限を追加せず、モデルのコンテキスト上限を使用します。
 # max_context_tokens = 0
 
-# [power]
-# prevent_sleep_while_streaming = true
-# block_lid_close = true
+# @section ツールの公開範囲
+# @source crates/jcode-base/src/config.rs#L843
+[tools]
 
-# [companion]
-# autostart = true
-# voice = true
-# voice_waveform = true
-# voice_notifications = true
-# jarvis_fn_key = false
-# jarvis_key = "fn"
-# jarvis_fn_launch = true
-# jarvis_fn_launch_args = []
-# open = true
-# spawn_terminal = true
-# lid = true
-# browser_updates = true
+# @effect Jev を使ったブラウザ操作の引き継ぎを有効にします。無効でも直接操作は使えます。
+# @values 真偽値: true / false。
+# browser_handoff = false
 
-# [menubar]
-# enabled = true
+# @effect 長く実行中のツール呼び出しを自動でバックグラウンドに移すまでの時間です。処理の中止や実行時間制限ではありません。
+# @values 非負整数（ミリ秒）。例: 3000。0 は自動移行なし。bg wait は対象外です。
+# auto_background_timeout_ms = 3000
 
-# [autoreview]
-# enabled = false
+# @effect モデルに公開する組み込みツールの基本セットを選びます。
+# @values 文字列: full（空文字、acp も全公開）、minimal（lite、small も同義）、none（off、disabled も同義）。enabled の明示指定が優先されます。
+# profile = ""
 
-# [autojudge]
-# enabled = false
+# @effect モデルに公開するツールを許可リストで指定します。
+# @values ツール名の文字列配列。例: ["bash", "read"]。[] はプロファイルに従い、["*"] または ["all"] は全件許可します。disabled はその後に適用されます。
+# enabled = []
 
+# @effect プロファイルや許可リストを適用した後、指定ツールを非公開にします。
+# @values ツール名の文字列配列。例: ["websearch", "webfetch"]。[] は個別の除外なし。
+# disabled = []
+disabled = ["websearch", "webfetch"]
+
+# @effect 明示的な許可リストがなければ、組み込みの基本ツールを公開しません。
+# @values 真偽値: true / false。空でない enabled の指定が優先されます。
+# disable_base_tools = false
+
+# @effect MCP ツールをモデルに公開する方法を選びます。auto はツール一覧のキャッシュを維持し、未対応の提供元では固定の mcp 検索・呼び出し窓口を使います。
+# @values 文字列: auto、deferred（auto と同じ）、eager（全 MCP 定義を直接公開）。
+# mcp_tools = "auto"
+
+# @effect 互換性のために読み込まれる旧設定です。現在は MCP ツールの公開方式に影響しません。
+# @values 非負整数。例: 8000。mcp_tools_threshold、mcp_tools_auto_threshold は旧名です。
+# mcp_tools_token_threshold = 8000
+
+# @effect モデルが JavaScript から複数のツールを呼び出す codemode ツールを有効にします。
+# @values 真偽値: true / false。
+# codemode = true
+
+# @section Web 検索エンジン
+# @source crates/jcode-config-types/src/web_search.rs#L113
+# [websearch]
+
+# @effect ツール呼び出しで検索エンジンを指定しなかったときの既定値です。native は対応するモデルの提供元に検索を任せます。
+# @values 文字列: duckduckgo、bing、kagi、searxng、custom、native。custom は websearch.custom が必要です。
+# engine = "duckduckgo"
+
+# @effect ローカル検索が失敗した場合や結果が空の場合に、順に試すエンジンです。代替先の Bing は API キー不要の HTML 検索を使います。
+# @values 文字列配列: duckduckgo、bing、kagi、searxng、custom。例: ["bing"]。[] は追加の代替先なし。native はローカルの代替先として実行されません。
+# fallback_engines = ["bing"]
+
+# @effect Bing を主エンジンとして使うときに、API キーを読み取る環境変数を指定します。
+# @values 環境変数名の文字列。例: "JCODE_BING_API_KEY"。
+# bing_api_key_env = "JCODE_BING_API_KEY"
+
+# @effect Bing 検索結果の対象地域と言語を指定します。
+# @values Bing の市場コードを表す文字列。例: "en-US"、"zh-CN"。
+# bing_market = "en-US"
+
+# @effect Kagi Search API のキーを読み取る環境変数を指定します。
+# @values 環境変数名の文字列。例: "KAGI_API_KEY"。Kagi を使うにはキーが必要です。
+# kagi_api_key_env = "KAGI_API_KEY"
+
+# @effect SearXNG の URL が設定ファイルで指定されていないときに、URL を読み取る環境変数を指定します。
+# @values 環境変数名の文字列。例: "JCODE_SEARXNG_URL"。
+# searxng_url_env = "JCODE_SEARXNG_URL"
+
+# @effect 対応する提供元では、ローカルの websearch を提供元のサーバー側検索に置き換えます。
+# @values 真偽値: true / false。engine = "native" の場合は false でもサーバー側検索を優先します。
+# prefer_native = true
+
+# @effect Anthropic のサーバー側検索を 1 リクエスト内で使える回数を制限します。OpenAI には適用されません。
+# @values 非負整数（u32）。例: 5。Anthropic API 側の制約も適用されます。
+# native_max_uses = 5
+
+# @effect サーバー側検索の結果を指定ドメインに限定します。
+# @values ドメイン名の文字列配列。例: ["example.org"]。[] は制限なし。Anthropic では native_blocked_domains と同時に指定できません。
+# native_allowed_domains = []
+
+# @effect 指定ドメインを Anthropic のサーバー側検索結果から除外します。
+# @values ドメイン名の文字列配列。例: ["example.org"]。[] は除外なし。native_allowed_domains と同時に指定できません。
+# native_blocked_domains = []
+
+# @effect Anthropic に送るサーバー側検索ツールのバージョンを指定します。
+# @values 文字列。例: "web_search_20250305"、"web_search_20260209"。有効なバージョンは提供元の対応状況によります。
+# native_anthropic_tool_version = "web_search_20250305"
+
+# @effect SearXNG の接続先を設定ファイルで直接指定します。
+# @values インスタンスのベース URL を表す文字列。例: "https://searx.example.org"。省略または空の場合は環境変数を参照します。
+# @unset searxng_url
+
+# @effect custom エンジンで使用する HTTP JSON 検索先を設定します。
+# @values TOML テーブル。endpoint に URL、method に "GET" / "POST"、query_param に検索語の項目名、results_pointer などに RFC 6901 JSON Pointer を指定します。
+# @unset custom
+
+# @section Agent Client Protocol の互換性
+# @source crates/jcode-base/src/config.rs#L788
+# [acp]
+
+# @effect ACP クライアントとの互換性を選びます。standard は仕様内の通知のみ、extended と full は _jcode/ 拡張通知も送信します。
+# @values 文字列: standard、extended、full。
+# profile = "standard"
+
+# @effect jcode acp が新規デーモンを起動したときに要求するツールプロファイルです。既存デーモンの設定は変更しません。
+# @values tools.profile と同じプロファイル名。例: "full"、"minimal"、"none"。"acp" は "full" と同じです。
+# tool_profile = "full"
+
+# @section 外部の認証情報への信頼
+# @source crates/jcode-config-types/src/lib.rs#L498
+# [auth]
+
+# @effect Jcode が他ツールの認証情報を読み取って利用できるよう、承認した外部ソース ID を記録します。
+# @values ソース ID の文字列配列。ID の前後の空白と英字の大小は無視されます。[] はソース単位の承認なし。
+# trusted_external_sources = []
+
+# @effect 他ツールの認証情報を読み取る承認を、特定の認証ファイルに結びつけて記録します。
+# @values 「ソースID|正規化済み絶対パス」の文字列配列。Jcode は検証済みの実パスを英字小文字にして記録します。[] はパス単位の承認なし。
+# trusted_external_source_paths = []
+
+# @section 外部サービス連携の検索
+# @source crates/jcode-config-types/src/lib.rs#L867
 # [sponsors]
+
+# @effect エージェントがホスト型ディレクトリから外部サービス連携を探す機能を有効にする。無効ならディレクトリへ問い合わせず、検索用ツールを登録しない。
+# @values true / false。
 # enabled = false
+
+# @effect 外部連携ディレクトリにアクセスする API URL を選ぶ。
+# @values URL の文字列。sponsors.enabled が有効な場合に使用。
 # endpoint = "https://api.jcode.sh/v1/discovery"
 
+# @group セッション・端末
+
+# @section アイドル時の休止
+# @source crates/jcode-config-types/src/session.rs#L7
+# [session]
+
+# @effect 処理も操作もないセッションが、再生成できるメモリを解放するまでの時間。実行中の作業は中断しない。
+# @values 0以上の整数（秒）。0で休止を無効化。
+# hibernation_idle_secs = 1800
+
+# @effect 端末クライアントの休止で、メモリの節約と復帰時に残す情報の度合いを選ぶ。
+# @values "caches" は描画キャッシュのみ。"transcript" は会話を再読込し、端末内だけの通知と正確なスクロール位置を失う。"exit" はクライアントを終了し、次のキー入力で復帰する。
+# hibernation_mode = "caches"
+
+# @section デーモンとウェイク
+# @source crates/jcode-base/src/config.rs#L777
+# [server]
+
+# @effect 自律的なウェイク要求を誰が実行するかを指定する。
+# @values "internal" はデーモンが処理。"external" は要求を通知し、実行は外部の管理側に委ねる。
+# wake_mode = "internal"
+
+# @effect アカウントキーがあるときに、Jcode API 経由でモバイルへのプッシュ通知を送るかを指定する。
+# @values true / false。未指定時は許可。
+# @unset mobile_push
+
+# @section 端末の起動方法
+# @source crates/jcode-config-types/src/lib.rs#L677
+# [terminal]
+
+# @effect 新しい端末でのセッション起動、既存ウィンドウへのフォーカス、macOS の利用端末を設定します。
+# @values TOML テーブル。spawn_hook と focus_hook は外部コマンド文字列。macOS 専用の preferred は ghostty、iterm2、wezterm、warp、alacritty、vscode、terminal。
+# @table-default 個別の指定なし
+
+# @section 外部コマンドの自動実行
+# @source crates/jcode-config-types/src/lib.rs#L783
+# @note コマンドと引数はシェル風に分割した後、直接実行します。追加するコマンドは信頼できるものに限ってください。
+[hooks]
+
+# @effect 新規・再開などでセッションがアクティブになったとき、外部コマンドを実行する。
+# @values 実行コマンドの文字列、または文字列の配列。省略すると実行しない。
+# @unset session_start
+session_start = "'/Users/totto2727/.orca/agent-hooks/jcode-hook.sh'"
+
+# @effect ユーザーメッセージを追加した後、モデルが応答を生成する前に外部コマンドを実行する。
+# @values 実行コマンドの文字列、または文字列の配列。省略すると実行しない。
+# @unset turn_start
+turn_start = "'/Users/totto2727/.orca/agent-hooks/jcode-hook.sh'"
+
+# @effect ツール実行前にコマンドを同期実行する。終了コード0で許可、2で拒否。それ以外やタイムアウトではツール実行を許可する。
+# @values 実行コマンドの文字列、または文字列の配列。省略するとフックなし。
+# @unset pre_tool
+pre_tool = "'/Users/totto2727/.orca/agent-hooks/jcode-hook.sh'"
+
+# @effect ツール実行の後、成否・時間などを受け取る外部コマンドを非同期で実行する。
+# @values 実行コマンドの文字列、または文字列の配列。省略すると実行しない。
+# @unset post_tool
+post_tool = "'/Users/totto2727/.orca/agent-hooks/jcode-hook.sh'"
+
+# @effect ターン終了時に外部コマンドを実行する。ターンの成否や経過時間などを渡す。
+# @values 実行コマンドの文字列、または文字列の配列。省略すると実行しない。
+# @unset turn_end
+turn_end = "'/Users/totto2727/.orca/agent-hooks/jcode-hook.sh'"
+
+# @effect セッションを正常に閉じたときに外部コマンドを実行する。
+# @values 実行コマンドの文字列、または文字列の配列。省略すると実行しない。
+# @unset session_end
+session_end = "'/Users/totto2727/.orca/agent-hooks/jcode-hook.sh'"
+
+# @effect ツール入力を変換するコマンド一つあたりの待ち時間を制限する。
+# @values 0以上の整数（ミリ秒）。
+# pre_tool_transform_timeout_ms = 500
+
+# @effect ツール実行後のフィードバック用コマンド一つあたりの待ち時間を制限する。
+# @values 0以上の整数（ミリ秒）。
+# post_tool_feedback_timeout_ms = 10000
+
+# @effect ツール実行可否を判定するフックの待ち時間。時間切れの場合はツールの実行を許可する。
+# @values 0以上の整数（ミリ秒）。
+# pre_tool_timeout_ms = 5000
+
+# @effect ツールの入力JSONを、実行可否チェックの前に変換する。失敗時や出力が空の場合は元の入力を使う。
+# @values 実行コマンドの文字列、または文字列の配列。標準入力でJSONを受け、標準出力に置換JSONを返す。
+# @unset pre_tool_transform
+
+# @effect 成功したツールの実行直後にコマンドを同期実行し、標準出力をモデルが読むツール結果に追加する。
+# @values 実行コマンドの文字列、または文字列の配列。省略すると追加しない。
+# @unset post_tool_feedback
+
+# @section macOS のグローバル起動キー
+# @source crates/jcode-config-types/src/lib.rs#L1478
 [launch_hotkeys]
-# enabled is unset by default (use automatic installation rules).
+
+# @effect macOS のシステム全体で、Jcode 起動ショートカットをインストールするかを明示する。
+# @values true / false。未指定は従来の自動インストール条件に従う。
+# @unset enabled
 enabled = false
+
+# @effect macOS の起動ショートカットに、開くディレクトリを割り当てる。空なら内蔵ショートカットを使用する。
+# @values [[launch_hotkeys.entries]] の配列。key と dir を指定。dir は絶対パスや $HOME、$LAST_DIR、$LAST_REPO。label と self_dev は任意。
 # entries = []
+
+# @effect 起動ショートカットの自動取り込みが済んだかを記録する内部フラグ。true では再インポートしない。
+# @values true / false。手動変更すると自動取り込みが再度走る場合がある。
 # imported = false
 imported = true
+
+# @section デスクトップの補助プロセス
+# @source crates/jcode-base/src/config.rs#L998
+# @note 一部の変更は補助プロセスの再起動時に反映されます。
+# [companion]
+
+# @effect Jcode クライアントの起動時に、未起動なら補助プロセスをバックグラウンドで起動する。
+# @values true / false。
+# autostart = true
+
+# @effect Linux の Copilot キーでプッシュトゥトークを使う。
+# @values true / false。Linux では dictation.global_devices の設定も必要。
+# voice = true
+
+# @effect 補助プロセス経由で録音中、フォーカス中の Jcode CLI に波形や文字起こしを表示する。
+# @values true / false。
+# voice_waveform = true
+
+# @effect 補助プロセスによる音声入力の状態をデスクトップ通知に表示する。無効時は CLI の波形表示が録音の視覚的な目印になる。
+# @values true / false。
+# voice_notifications = true
+
+# @effect Linux で Fn などを押して、ウィンドウを切り替えずに常時起動した Jarvis に話しかける。
+# @values true / false。dictation.global_devices と対象キーを認識できるキーボードが必要。
+# jarvis_fn_key = false
+
+# @effect Jarvis のプッシュトゥトークに使用するキーを選ぶ。
+# @values "fn" または "rightshift"。
+# jarvis_key = "fn"
+
+# @effect 常時起動の Jarvis セッションがない場合、対象キーの長押しで新しい端末に Jarvis を起動する。
+# @values true / false。jarvis_fn_key が有効な場合に適用。
+# jarvis_fn_launch = true
+
+# @effect キー操作で新規起動する Jarvis に、追加のコマンドライン引数を渡す。
+# @values 文字列の配列。例：["--jarvis-screen"]。[] は追加なし。
+# jarvis_fn_launch_args = []
+
+# @effect デーモンからの URL・ファイルを開くリクエストを補助プロセスが処理する。無効時はクライアント側の方法を使う。
+# @values true / false。
+# open = true
+
+# @effect デーモンからの新規端末起動リクエストを補助プロセスが処理する。無効時はクライアント側が起動する。
+# @values true / false。
+# spawn_terminal = true
+
+# @effect macOS と Windows で、補助プロセスのふた閉じ抑止機能を許可する。
+# @values true / false。power.block_lid_close も参照。
+# lid = true
+
+# @effect 補助プロセスがブラウザーブリッジの自動更新を定期的に確認するかを指定する。
+# @values true / false。確認の周期は約1時間。
+# browser_updates = true
+
+# @section スリープとふた閉じ
+# @source crates/jcode-config-types/src/power.rs#L8
+# [power]
+
+# @effect セッションの処理中だけ自動スリープを抑止する。画面のスリープは許可する。
+# @values true / false。JCODE_DISABLE_POWER_INHIBIT が設定を上書きできる。
+# prevent_sleep_while_streaming = true
+
+# @effect macOS と Windows で、処理中のふた閉じによるスリープを抑止する。macOS では必要な権限がない場合は適用されない。
+# @values true / false。Linux のふた閉じ抑止は prevent_sleep_while_streaming 側が制御。
+# block_lid_close = true
+
+# @section macOS メニューバー表示
+# @source crates/jcode-config-types/src/menubar.rs#L8
+# [menubar]
+
+# @effect 実行中の Jcode セッション数を macOS のメニューバーに表示する。無効化すると起動中の表示ヘルパーも次の更新で終了する。
+# @values true / false。JCODE_NO_MENUBAR でも無効化できる。
+# enabled = true
+
+# @group 自動化・通知・接続
+
+# @section バックグラウンドの保守
+# @source crates/jcode-config-types/src/lib.rs#L1237
+# [ambient]
+
+# @effect バックグラウンドでリポジトリを保守する Ambient モードを有効にする。
+# @values true / false。
+# enabled = false
+
+# @effect Ambient で従量課金の API キーの使用を許可するための設定。v1.0.3 のプロバイダー選択処理では、この値による制限は確認できない。
+# @values true / false。課金防止の保証には使わない。
+# allow_api_keys = false
+
+# @effect Ambient の実行サイクル間隔の下限。小さくすると続けて実行できる間隔が短くなる。
+# @values 0以上の整数（分）。max_interval_minutes 以下にする。
+# min_interval_minutes = 5
+
+# @effect Ambient のスケジューラーが使う実行サイクル間隔の上限。停止条件がある場合の実行を保証する値ではない。
+# @values 0以上の整数（分）。min_interval_minutes 以上にする。
+# max_interval_minutes = 120
+
+# @effect ユーザーがアクティブなセッションを持つ間は Ambient のスケジュールを一時停止する。
+# @values true / false。
+# pause_on_active_session = true
+
+# @effect 新機能やリファクタリングなどの積極的な作業を許可するための設定。v1.0.3 の Ambient 実行側で、この値を参照する箇所は確認できない。
+# @values true / false。動作の切り替えは確認できていない。
+# proactive_work = true
+
+# @effect Ambient の作業ブランチ名の接頭辞として予約されている設定。v1.0.3 では設定表示以外での参照は確認できない。
+# @values 文字列。例："ambient/"。
+# work_branch_prefix = "ambient/"
+
+# @effect Ambient の実行サイクルを端末ウィンドウに表示する設定。
+# @values true / false。
+# visible = true
+
+# @section ターン終了後の自動レビュー
+# @source crates/jcode-config-types/src/lib.rs#L851
+# [autoreview]
+
+# @effect 新規・再開セッションで、自動のコードレビューを既定で有効にする。
+# @values true / false。
+# enabled = false
+
+# @effect 自動レビューに使うモデルを個別に指定する。
+# @values 利用可能なモデル ID の文字列。省略すると自動レビュー側の既定ルート。
+# @unset model
+
+# @section ターン終了後の自動判定
+# @source crates/jcode-config-types/src/lib.rs#L889
+# [autojudge]
+
+# @effect ターン終了時に実行結果を自動で判定する機能を既定で有効にする。
+# @values true / false。
+# enabled = false
+
+# @effect 自動判定に使うモデルを個別に指定する。
+# @values 利用可能なモデル ID の文字列。省略すると自動判定側の既定ルート。
+# @unset model
+
+# @section 通常セッションの完了通知
+# @source crates/jcode-config-types/src/lib.rs#L1287
+# [notifications]
+
+# @effect 対話セッションで、条件を満たすターンの完了をデスクトップ通知に出す。
+# @values true / false。
+# turn_complete = true
+
+# @effect Todo を持たない通常のターンが、完了通知の対象になる最短実行時間。
+# @values 0以上の整数（秒）。
+# turn_complete_min_secs = 120
+
+# @effect Todo があるセッションに適用する、完了通知の最短実行時間。
+# @values 0以上の整数（秒）。
+# turn_complete_todo_min_secs = 30
+
+# @effect 端末が非フォーカスのときだけターン完了通知を送る。端末側のフォーカスイベントに依存する。
+# @values true / false。
+# turn_complete_only_when_unfocused = true
+
+# @effect ターン完了通知で再生する macOS の通知音を選ぶ。ほかの OS では無視される。
+# @values "Glass"、"Ping"、"Hero" など実在する通知音名。空文字は無音。
+# turn_complete_sound = "Glass"
+
+# @section Ambient などの通知と返信
+# @source crates/jcode-config-types/src/lib.rs#L1322
+# @note 通常の TUI におけるターン完了通知は、notifications にあります。
+# [safety]
+
+# @effect ntfy 通知に使うサーバーを選ぶ。
+# @values URL の文字列。例："https://ntfy.sh"。
+# ntfy_server = "https://ntfy.sh"
+
+# @effect 安全通知をローカルのデスクトップ通知に出す。通常のターン完了通知は notifications が制御する。
+# @values true / false。
+# desktop_notifications = true
+
+# @effect 安全通知をメールで送る機能を有効にする。
+# @values true / false。送信先や SMTP の設定は別途必要。
+# email_enabled = false
+
+# @effect メール送信で接続する SMTP サーバーのポートを指定する。
+# @values 通常1〜65535の整数。サーバー指定のポートを使う。
+# email_smtp_port = 587
+
+# @effect 返信を取り込む IMAP サーバーのポートを指定する。
+# @values 通常1〜65535の整数。サーバー指定のポートを使う。
+# email_imap_port = 993
+
+# @effect メール返信をエージェントへの指示として取り込む機能を有効にする。
+# @values true / false。利用にはメール・IMAP の設定が必要。
+# email_reply_enabled = false
+
+# @effect 安全通知を Telegram Bot API 経由で送る。
+# @values true / false。Bot トークンとチャット ID は別途必要。
+# telegram_enabled = false
+
+# @effect 設定された Telegram チャットからの返信をエージェントへの指示として取り込む。
+# @values true / false。Telegram の設定が前提。
+# telegram_reply_enabled = false
+
+# @effect 安全通知を Discord Bot API 経由で送る。
+# @values true / false。Bot トークンとチャンネル ID は別途必要。
+# discord_enabled = false
+
+# @effect 設定された Discord チャンネルからの返信をエージェントへの指示として取り込む。
+# @values true / false。Discord の設定が前提。
+# discord_reply_enabled = false
+
+# @effect Jade クラウドのリレーを有効にする。端末からアウトバウンドでポーリングする方式。
+# @values true / false。API と認証情報は別途必要。
+# jade_relay_enabled = false
+
+# @effect Jade リレー経由のプロンプトを、設定したセッションへの指示として取り込む。
+# @values true / false。Jade リレーの設定が前提。
+# jade_relay_reply_enabled = false
+
+# @effect Jade 端末コマンドからローカルの画面付きセッションを開けるようにする。
+# @values true / false。Jade リレーの設定が前提。
+# jade_relay_launch_enabled = false
+
+# @effect Ambient などのプッシュ通知の送信先となる ntfy トピックを指定する。
+# @values トピック名の文字列。未指定なら ntfy 通知なし。
+# @unset ntfy_topic
+
+# @section クラウド引き継ぎ後の権限
+# @source crates/jcode-base/src/config.rs#L619
+# [cloud]
+
+# @effect クラウドへ引き継いだセッションに、この端末の限定されたローカルリソースへのアクセスを許す期間。切断やセッション切り替えでも失効する。
+# @values 0以上の整数（秒）。0で許可しない。86400秒は24時間。
+# local_access_seconds = 86400
+
+# @section WebSocket の待受
+# @source crates/jcode-config-types/src/lib.rs#L1425
+# [gateway]
+
+# @effect iOS や Web クライアント向けの WebSocket ゲートウェイを有効にする。
+# @values true / false。有効時は bind_addr と公開範囲を確認。
+# enabled = false
+
+# @effect WebSocket ゲートウェイの待受ポートを選ぶ。
+# @values 通常1〜65535の未使用ポートを整数で指定。
+# port = 7643
+
+# @effect WebSocket ゲートウェイの待受アドレスを選ぶ。ポートの公開範囲に影響する。
+# @values IPアドレスの文字列。"127.0.0.1" はローカルのみ、"0.0.0.0" は全IPv4インターフェース。
+# bind_addr = "0.0.0.0"
