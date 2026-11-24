@@ -81,10 +81,6 @@ All names below refer to skills, not commands. Follow each skill for execution d
 - For repository work, create deliverables within the repository and place temporary files under `<repository-root>/tmp/`. This rule does not apply to configuration work outside a repository.
 - Before committing, apply the Artifact Lifecycle principles: keep needed temporary files locally, exclude them from commits and pull requests, and delete unneeded task-created files.
 
-### Jcode Settings
-
-- Use the [Jcode settings reference skill](.agent/skills/jcode-config-reference/SKILL.md) when changing Jcode settings or regenerating the HTML reference.
-
 ### Fork Divergence Records
 
 - Document retained upstream differences in `docs/upstream-differences.md`, unless the repository specifies another location. Always record the exact upstream commit hash on which the fork is based, along with the purpose, affected areas, and operational impact. Link the record from a maintained entry point.
