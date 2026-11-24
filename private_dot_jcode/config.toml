@@ -592,13 +592,15 @@ openai_service_tier = "default"
 # @unset swarm_model
 swarm_model = "gpt-6.2-sol"
 
-# @effect エージェントがワーカーのモデルを選べるようにします。選べるモデルは許可リストに限られます。
+# @effect ワーカーの起動ごとにモデルを指定できるようにします。true かつ swarm_model_allowlist が空でない場合だけ、swarm ツールに model 引数が表示されます。
 # @values 真偽値: true / false。
 # swarm_model_selection = false
+swarm_model_selection = true
 
 # @effect エージェントがワーカー起動時に指定できるモデルと経路を制限します。
-# @values 完全一致で比較するモデル・経路名の文字列配列。例: ["gpt-6.2-sol"]。[] は明示的な上書きを許可しません。
+# @values 完全一致で比較するモデル・経路名の文字列配列。例: ["openai-oauth:gpt-6.2-sol"]。[] は明示的な上書きを許可しません。
 # swarm_model_allowlist = []
+swarm_model_allowlist = ["openai-oauth:gpt-6.2-sol", "openai-oauth:gpt-6.2-astra"]
 
 # @effect ワーカーの起動先と表示方法を指定します。
 # @values 文字列: visible（端末を開く）、headless（端末なし）、inline（端末なしでコーディネーター内にライブ表示）、auto（端末を開けない場合は headless）。
