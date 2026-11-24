@@ -77,7 +77,7 @@ diff_mode_cycle = "alt+g"
 # trigger_sound = "/usr/share/sounds/freedesktop/stereo/message-new-instant.oga"
 # warm_nari = false
 
-[display]
+# [display]
 # diff_mode = "inline"
 # queue_mode = false
 # auto_server_reload = true
@@ -88,7 +88,6 @@ diff_mode_cycle = "alt+g"
 # show_thinking = true
 # compact_thinking = false
 # reasoning_display = "full"
-reasoning_display = "current"
 # diagram_mode = "none"
 # markdown_spacing = "compact"
 # show_link_urls = false
