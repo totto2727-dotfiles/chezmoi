@@ -585,7 +585,7 @@ openai_service_tier = "default"
 
 # @section Swarm とメモリ
 # @source crates/jcode-config-types/src/lib.rs#L509
-# @note Swarm の選択方針では、軽い調査・抽出には Luna、画像や画面の確認には Terra、通常の実装・デバッグには Sol、難しい設計判断には Astra を使います。公式 Jcode v1.0.3 の swarm ツールでは、推論強度は全ワーカー共通で high です。
+# @note 日常作業と判断が必要な実装は Sol、方針が明確な実装や画面確認は Terra、大量の情報収集は Luna、Sol で対応しにくい設計は Astra を使います。用途別の推論強度はページ上部の swarm-prompt.md を参照してください。公式 Jcode v1.0.3 では全ワーカー共通で high です。
 [agents]
 
 # @effect ワーカー起動時にモデルが明示されなかった場合の既定モデルを指定します。未指定ならコーディネーターのモデルを継承します。swarm-prompt は選択方針で、起動時のモデル指定の代わりにはなりません。

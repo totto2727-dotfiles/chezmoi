@@ -14,19 +14,18 @@
 
 ## Task defaults
 
-Select the model based on the task and use `high` as the baseline for reasoning.
-Use a lower effort for bounded, routine work only if `swarm spawn` exposes an `effort` argument and the selected model supports that level.
+Use the model and effort pair for the worker's actual task. The effort column applies only when `swarm spawn` supports individual effort selection.
 
 | Task | Model route | Recommended effort |
 | --- | --- | --- |
-| Bounded source lookup, straightforward extraction, and short summaries | `openai-oauth:gpt-6-luna` | `low` for mechanical work, `medium` when synthesis matters |
-| Screenshots, visual comparison, and UI or computer-use verification | `openai-oauth:gpt-6.1-terra` | `medium` for a straightforward visual check, `high` for multi-step verification |
-| Implementation, debugging, routine design and review, and text-based verification | `openai-oauth:gpt-6.2-sol` | `high` |
-| Advanced architecture or a critical correctness question that remains unresolved | `openai-oauth:gpt-6.2-astra` | `high` |
+| Everyday tasks, quick questions, and straightforward one-off work | `openai-oauth:gpt-6.2-sol` | `low` |
+| Coding, debugging, or review that requires investigation or nontrivial judgment | `openai-oauth:gpt-6.2-sol` | `high` |
+| Large or complex work, architecture, or deep reasoning beyond what Sol at `high` can handle reliably | `openai-oauth:gpt-6.2-astra` | `high` |
+| Implementation with a clear plan and acceptance criteria, or visual, UI, and computer-use verification | `openai-oauth:gpt-6.1-terra` | `medium` |
+| High-volume source gathering, extraction, or classification split into independent batches | `openai-oauth:gpt-6-luna` | `low` for collection and extraction, `medium` when a batch needs to reconcile conflicting sources |
 
-- Prefer Terra when visual evidence is central to the task, and Sol when code or logs are central.
-- Escalate to Astra when a Sol pass leaves a concrete unresolved question, competing explanations, or a verification failure that needs deeper reasoning. State the question, the evidence, and why another Sol pass is unlikely to resolve it.
-- Use Astra directly when the user explicitly requests it. Otherwise, a label such as "design", "security", or "review", a large diff, or multiple files alone does not justify Astra.
+- Prefer Terra when the implementation path is already decided or visual evidence is central. Prefer Sol at `high` when the worker must decide how to implement the change or diagnose an unclear failure.
+- Use Astra directly when the task clearly exceeds Sol at `high` or the user requests it. Otherwise, escalate when a Sol pass leaves a concrete unresolved question, competing explanations, or a verification failure that needs deeper reasoning. State what makes the task hard and cite the evidence. A label, diff size, or file count alone does not justify escalation.
 - Reserve `"xhigh"` or `"max"` for a specific unresolved problem that remained after a high-effort Astra pass, or an explicit user request. Increase effort only when the additional reasoning can change a necessary decision.
 - Missing access, unavailable sources, authentication, permissions, and user-controlled prerequisites are blockers, not reasons to change models or increase effort.
 - If the requested route is unavailable, report that exact limitation. Obtain approval before substituting a different model or provider. An explicit user model request must not silently fall back to `inherit`.
