@@ -14,17 +14,17 @@
 
 ## Task defaults
 
-Use the model and effort pair for the worker's actual task. The effort column applies only when `swarm spawn` supports individual effort selection.
+Route each worker by the judgment it needs, how much of the approach is already decided, and whether the main work is visual or can be split into independent batches. The effort column applies only when `swarm spawn` supports individual effort selection.
 
 | Task | Model route | Recommended effort |
 | --- | --- | --- |
-| Everyday tasks, quick questions, and straightforward one-off work | `openai-oauth:gpt-6.2-sol` | `low` |
-| Coding, debugging, or review that requires investigation or nontrivial judgment | `openai-oauth:gpt-6.2-sol` | `high` |
-| Large or complex work, architecture, or deep reasoning beyond what Sol at `high` can handle reliably | `openai-oauth:gpt-6.2-astra` | `high` |
-| Implementation with a clear plan and acceptance criteria, or visual, UI, and computer-use verification | `openai-oauth:gpt-6.1-terra` | `medium` |
-| High-volume source gathering, extraction, or classification split into independent batches | `openai-oauth:gpt-6-luna` | `low` for collection and extraction, `medium` when a batch needs to reconcile conflicting sources |
+| Everyday, bounded work with little ambiguity. Examples: quick questions, short drafts, and small edits. | `openai-oauth:gpt-6.2-sol` | `low` |
+| Work that requires investigation, synthesis, or choosing between plausible approaches. Examples: coding or debugging, comparing options, planning, and drafting a recommendation from evidence. | `openai-oauth:gpt-6.2-sol` | `high` |
+| Work that needs deeper reasoning than Sol at `high` can reliably provide. Examples: high-stakes decisions, designs with tightly coupled trade-offs, and large projects whose parts cannot be planned independently. | `openai-oauth:gpt-6.2-astra` | `high` |
+| Execution with clear steps and acceptance criteria, or work centered on visual evidence or a GUI. Examples: implementing an agreed change, updating documents to a defined format, and checking screenshots or workflows. | `openai-oauth:gpt-6.1-terra` | `medium` |
+| High-volume work that can be split into independent batches. Examples: collecting sources, extracting fields, and classifying records. | `openai-oauth:gpt-6-luna` | `low` for routine collection and extraction, `medium` for reconciling conflicting sources within a batch |
 
-- Prefer Terra when the implementation path is already decided or visual evidence is central. Prefer Sol at `high` when the worker must decide how to implement the change or diagnose an unclear failure.
+- When it helps to split the work, separate evidence gathering, decisions, and execution. For example, use Luna to collect evidence in batches, Sol at `high` to weigh it and decide on a plan, and Terra to carry out the agreed steps when that execution can be verified independently.
 - Use Astra directly when the task clearly exceeds Sol at `high` or the user requests it. Otherwise, escalate when a Sol pass leaves a concrete unresolved question, competing explanations, or a verification failure that needs deeper reasoning. State what makes the task hard and cite the evidence. A label, diff size, or file count alone does not justify escalation.
 - Reserve `"xhigh"` or `"max"` for a specific unresolved problem that remained after a high-effort Astra pass, or an explicit user request. Increase effort only when the additional reasoning can change a necessary decision.
 - Missing access, unavailable sources, authentication, permissions, and user-controlled prerequisites are blockers, not reasons to change models or increase effort.
