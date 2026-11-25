@@ -1,0 +1,493 @@
+///|
+import {
+  "moonbit-community/toml@0.5.1",
+  "moonbitlang/core/env",
+  "moonbitlang/x@0.5.7/fs",
+  "moonbitlang/x@0.5.7/sys",
+}
+
+///|
+suberror ReferenceError {
+  Invalid(String)
+}
+
+///|
+enum DefaultValue {
+  Literal(String)
+  Unset
+  TableDefault(String)
+}
+
+///|
+struct Setting {
+  key : String
+  effect : String
+  values : String
+  default_value : DefaultValue
+}
+
+///|
+struct Section {
+  key : String
+  title : String
+  source : String
+  note : String?
+  settings : Array[Setting]
+}
+
+///|
+struct Group {
+  title : String
+  sections : Array[Section]
+}
+
+///|
+struct Reference {
+  version : String
+  revision : String
+  groups : Array[Group]
+}
+
+///|
+struct Lines {
+  entries : Array[StringView]
+  mut next : Int32
+}
+
+///|
+fn Lines::expect(self : Lines, prefix : String) -> String raise ReferenceError {
+  let line = self.next + 1
+  guard self.entries.get(self.next) is Some(text) &&
+    text.trim().strip_prefix(prefix) is Some(value) &&
+    !value.trim().is_empty() else {
+    raise Invalid("config.toml:\{line}: expected \{prefix}")
+  }
+  self.next += 1
+  value.trim().to_owned()
+}
+
+///|
+fn is_key(key : String, dotted~ : Bool = false) -> Bool {
+  !key.is_empty() &&
+  !key.has_prefix(".") &&
+  !key.has_suffix(".") &&
+  !key.contains("..") &&
+  key
+  .iter()
+  .all(c => {
+    match c {
+      'A'..<='Z' | 'a'..<='z' | '0'..<='9' | '_' | '-' => true
+      '.' => dotted
+      _ => false
+    }
+  })
+}
+
+///|
+fn read_section(lines : Lines, title : String) -> Section raise ReferenceError {
+  let source = lines.expect("# @source ")
+  guard source.has_prefix("crates/") && !source.contains_any(chars=" \t\"<>") else {
+    raise Invalid("config.toml:\{lines.next}: expected a crates/ source path")
+  }
+  let note = if lines.entries.get(lines.next) is Some(text) &&
+    text.trim().has_prefix("# @note ") {
+    Some(lines.expect("# @note "))
+  } else {
+    None
+  }
+  guard lines.entries.get(lines.next) is Some(header) &&
+    header.trim().strip_prefix("# ").unwrap_or(header.trim()).strip_prefix("[")
+    is Some(rest) &&
+    rest.strip_suffix("]") is Some(key) &&
+    is_key(key.to_owned(), dotted=true) else {
+    raise Invalid(
+      "config.toml:\{lines.next + 1}: expected [table] or # [table]",
+    )
+  }
+  lines.next += 1
+  { key: key.to_owned(), title, source, note, settings: [], }
+}
+
+///|
+fn read_setting(
+  lines : Lines,
+  section : String,
+  effect : String,
+) -> Setting raise {
+  let values = lines.expect("# @values ")
+  let default_line = lines.expect("# ")
+  let (key, default_value) = match default_line {
+    text if text.strip_prefix("@unset ") is Some(name) &&
+      is_key(name.to_owned()) => ("\{section}.\{name}", Unset)
+    text if text.strip_prefix("@table-default ") is Some(label) &&
+      !label.is_empty() => (section, TableDefault(label.to_owned()))
+    text if text.split_once("=") is Some((name, literal)) &&
+      is_key(name.trim().to_owned()) => {
+      ignore(@toml.parse(text))
+      ("\{section}.\{name.trim()}", Literal(literal.trim().to_owned()))
+    }
+    _ =>
+      raise Invalid(
+        "config.toml:\{lines.next}: expected # key = value, # @unset key, or # @table-default label",
+      )
+  }
+  { key, effect, values, default_value, }
+}
+
+///|
+fn parse_reference(source : String) -> Reference raise {
+  let lines = { entries: source.split("\n").collect(), next: 0, }
+  let metadata = lines.expect("# @jcode ")
+  guard metadata.split_once(" ") is Some((version, hash)) &&
+    version.has_prefix("v") &&
+    is_key(version.to_owned(), dotted=true) &&
+    hash.length() == 40 &&
+    hash
+    .to_owned()
+    .iter()
+    .all(c => {
+      match c {
+        '0'..<='9' | 'a'..<='f' => true
+        _ => false
+      }
+    }) else {
+    raise Invalid(
+      "config.toml:1: expected # @jcode vX.Y.Z followed by a Git revision",
+    )
+  }
+  let groups : Array[Group] = []
+  let section_keys : Map[String, Bool] = Map([])
+  let mut group : Group? = None
+  let mut section : Section? = None
+  while lines.entries.get(lines.next) is Some(line) {
+    lines.next += 1
+    let text = line.trim()
+    if text.strip_prefix("# @group ") is Some(title) && !title.is_empty() {
+      let item = { title: title.to_owned(), sections: [], }
+      groups.push(item)
+      group = Some(item)
+      section = None
+    } else if text.strip_prefix("# @section ") is Some(title) &&
+      !title.is_empty() {
+      guard group is Some(parent) else {
+        raise Invalid(
+          "config.toml:\{lines.next}: @section needs a preceding @group",
+        )
+      }
+      let item = read_section(lines, title.to_owned())
+      if section_keys.contains(item.key) {
+        raise Invalid("Duplicate section: \{item.key}")
+      }
+      section_keys[item.key] = true
+      parent.sections.push(item)
+      section = Some(item)
+    } else if text.strip_prefix("# @effect ") is Some(effect) &&
+      !effect.is_empty() {
+      guard section is Some(parent) else {
+        raise Invalid(
+          "config.toml:\{lines.next}: @effect needs a preceding @section",
+        )
+      }
+      parent.settings.push(read_setting(lines, parent.key, effect.to_owned()))
+    } else if text.has_prefix("# @") {
+      raise Invalid("config.toml:\{lines.next}: unexpected annotation \{text}")
+    }
+  }
+  if groups.is_empty() || groups.any(group => group.sections.is_empty()) {
+    raise Invalid("Every @group needs a section")
+  }
+  { version: version.to_owned(), revision: hash.to_owned(), groups, }
+}
+
+///|
+fn active_values(
+  value : @toml.TomlValue,
+  path : String,
+  defaults : Map[String, DefaultValue],
+  overrides : Map[String, @toml.TomlValue],
+) -> Unit raise ReferenceError {
+  if defaults.get(path) is Some(default_value) {
+    if !(default_value is TableDefault(_) &&
+      value is TomlTable(table) &&
+      table.is_empty()) {
+      overrides[path] = value
+    }
+  } else if value is TomlTable(table) {
+    for key, child in table {
+      let child_path = if path.is_empty() { key } else { "\{path}.\{key}" }
+      if !is_key(key) {
+        raise Invalid("Active setting has no documentation: \{child_path}")
+      }
+      active_values(child, child_path, defaults, overrides)
+    }
+  } else {
+    raise Invalid("Active setting has no documentation: \{path}")
+  }
+}
+
+///|
+fn escape_html(text : String) -> String {
+  text
+  .replace_all(old="&", new="&amp;")
+  .replace_all(old="<", new="&lt;")
+  .replace_all(old=">", new="&gt;")
+  .replace_all(old="\"", new="&quot;")
+  .replace_all(old="'", new="&#x27;")
+}
+
+///|
+fn render_value(key : String, value : @toml.TomlValue) -> String {
+  match value {
+    TomlTable(table) if table.is_empty() => "{}"
+    TomlTable(_) | TomlArray([TomlTable(_), ..]) => {
+      let keys = key.split(".").collect()
+      let mut document = value
+      for i = keys.length() - 1; i >= 0; i = i - 1 {
+        document = TomlTable(Map([(keys[i].to_owned(), document)]))
+      }
+      document.to_string().trim().to_owned()
+    }
+    _ => value.to_string()
+  }
+}
+
+///|
+fn render_row(setting : Setting, active : @toml.TomlValue?) -> String {
+  let key = escape_html(setting.key)
+  let effect = escape_html(setting.effect)
+  let values = escape_html(setting.values)
+  let default_value = match setting.default_value {
+    Literal(value) => "<code>\{escape_html(value)}</code>"
+    Unset => "<span class=\"unset\">未指定</span>"
+    TableDefault(label) => escape_html(label)
+  }
+  let override_value = match active {
+    None => ""
+    Some(value) => {
+      let text = escape_html(render_value(setting.key, value))
+      "<div class=\"value-line overridden\"><span>上書き</span><code>\{text}</code></div>"
+    }
+  }
+  (
+    $|<tr id="\{key}" data-override="\{active is Some(_)}"><th scope="row"><a class="row-link" href="#\{key}"><code>\{key}</code></a></th><td data-label="効果">\{effect}</td><td class="values" data-label="指定できる値">\{values}</td><td data-label="既定値・上書き"><div class="value-line"><span>既定</span>\{default_value}</div>\{override_value}</td></tr>
+  )
+}
+
+///|
+fn render(
+  config : String,
+  template : String,
+  agents_md~ : String,
+  swarm_prompt~ : String,
+) -> String raise {
+  let reference = parse_reference(config)
+  let defaults : Map[String, DefaultValue] = Map([])
+  for group in reference.groups {
+    for section in group.sections {
+      if section.settings.is_empty() {
+        raise Invalid("No settings in [\{section.key}]")
+      }
+      for setting in section.settings {
+        if defaults.contains(setting.key) {
+          raise Invalid("Duplicate setting: \{setting.key}")
+        }
+        defaults[setting.key] = setting.default_value
+      }
+    }
+  }
+  let overrides : Map[String, @toml.TomlValue] = Map([])
+  active_values(@toml.parse(config), "", defaults, overrides)
+  let index = StringBuilder()
+  let content = StringBuilder()
+  let revision = reference.revision
+  for group in reference.groups {
+    let title = escape_html(group.title)
+    index.write_string("<div><h3>\{title}</h3><ul>\n")
+    content.write_string(
+      "<div class=\"category\"><h2 class=\"group-title\">\{title}</h2>\n",
+    )
+    for section in group.sections {
+      let key = escape_html(section.key)
+      let label = escape_html(section.title)
+      let url = "https://github.com/1jehuang/jcode/blob/\{revision}/\{escape_html(section.source)}"
+      index.write_string(
+        "<li><a href=\"#section-\{key}\"><code>[\{key}]</code></a></li>\n",
+      )
+      content.write_string(
+        (
+          $|<section class="config-section" id="section-\{key}" aria-labelledby="title-\{key}">
+          $|<div class="section-head"><h3 id="title-\{key}"><code>[\{key}]</code><span class="topic">\{label}</span></h3><a class="source" href="\{url}">公式ソース</a></div>
+          $|
+        ),
+      )
+      if section.note is Some(note) {
+        content.write_string(
+          "<p class=\"section-note\">\{escape_html(note)}</p>\n",
+        )
+      }
+      content.write_string(
+        (
+          $|<div class="table-frame"><table aria-labelledby="title-\{key}"><colgroup><col><col><col><col></colgroup><thead><tr><th scope="col">設定キー</th><th scope="col">効果</th><th scope="col">指定できる値</th><th scope="col">既定値・上書き</th></tr></thead><tbody>
+          $|
+        ),
+      )
+      for setting in section.settings {
+        content.write_string(
+          render_row(setting, overrides.get(setting.key)) + "\n",
+        )
+      }
+      content.write_string("</tbody></table></div></section>\n")
+    }
+    index.write_string("</ul></div>\n")
+    content.write_string("</div>\n")
+  }
+  let replacements = {
+    "VERSION": reference.version,
+    "REVISION": revision,
+    "SHORT_REVISION": revision[:8].to_owned(),
+    "SETTING_COUNT": defaults.length().to_string(),
+    "OVERRIDE_COUNT": overrides.length().to_string(),
+    "AGENTS_MD": escape_html(agents_md),
+    "SWARM_PROMPT": escape_html(swarm_prompt),
+    "INDEX": index.to_string(),
+    "SETTINGS": content.to_string(),
+  }
+  let parts = template.split("@@").collect()
+  if parts.length() % 2 == 0 {
+    raise Invalid("Unclosed HTML template placeholder")
+  }
+  let output = StringBuilder()
+  for i, part in parts {
+    if i % 2 == 0 {
+      output.write_view(part)
+    } else {
+      guard replacements.get(part.to_owned()) is Some(replacement) else {
+        raise Invalid("Unknown HTML template placeholder: \{part}")
+      }
+      output.write_string(replacement)
+    }
+  }
+  output.to_string()
+}
+
+///|
+fn run() -> Unit raise {
+  let check = match @env.args() {
+    [_] => false
+    [_, "--check"] => true
+    _ =>
+      raise Invalid(
+        "Usage: run generate.mbtx from the chezmoi repository root [--check]",
+      )
+  }
+  let config = @fs.read_file_to_string("private_dot_jcode/config.toml")
+  let template = @fs.read_file_to_string(
+    ".agent/skills/jcode-config-reference/assets/reference.html",
+  )
+  let output = "private_dot_jcode/config-reference.html"
+  let agents_md = @fs.read_file_to_string("AGENTS.md")
+  let swarm_prompt = @fs.read_file_to_string("private_dot_jcode/swarm-prompt.md")
+  let html = render(config, template, agents_md~, swarm_prompt~)
+  if check {
+    if @fs.read_file_to_string(output) != html {
+      raise Invalid("Settings reference is out of date. Rerun without --check.")
+    }
+  } else {
+    @fs.write_string_to_file(output, html)
+  }
+  println(if check { "Up to date: \{output}" } else { "Generated: \{output}" })
+}
+
+///|
+fn main {
+  run() catch {
+    Invalid(message) => {
+      println(message)
+      @sys.exit(1)
+    }
+    other => {
+      println(other.to_string())
+      @sys.exit(1)
+    }
+  }
+}
+
+///|
+let example : String =
+  #|# @jcode v1.2.3 0123456789012345678901234567890123456789
+  #|# @group 入力
+  #|# @section 起動
+  #|# @source crates/example.rs#L1
+  #|[launch]
+  #|# @effect <launch> & ready
+  #|# @values 文字列
+  #|# mode = "builtin"
+  #|mode = "<local>"
+  #|# @effect 起動シェル
+  #|# @values 文字列
+  #|# @unset shell
+  #|# @effect ショートカット
+  #|# @values テーブル配列
+  #|# entries = []
+  #|[[launch.entries]]
+  #|key = "alt+a"
+  #|
+
+///|
+test "render defaults and active overrides as separate escaped values" {
+  let html = render(
+    example,
+    "@@SETTING_COUNT@@/@@OVERRIDE_COUNT@@\n@@INDEX@@@@SETTINGS@@",
+    agents_md="",
+    swarm_prompt="",
+  )
+  assert_true(html.has_prefix("3/2\n"))
+  assert_true(html.contains("href=\"#section-launch\""))
+  assert_true(html.contains("id=\"launch.mode\" data-override=\"true\""))
+  assert_true(
+    html.contains("<span>既定</span><code>&quot;builtin&quot;</code>"),
+  )
+  assert_true(
+    html.contains(
+      "<span>上書き</span><code>&quot;&lt;local&gt;&quot;</code>",
+    ),
+  )
+  assert_true(html.contains("id=\"launch.shell\" data-override=\"false\""))
+  assert_true(html.contains("<span class=\"unset\">未指定</span>"))
+  assert_true(html.contains("&lt;launch&gt; &amp; ready"))
+  assert_true(html.contains("[[launch.entries]]\nkey = &quot;alt+a&quot;"))
+}
+
+///|
+test "embed the two Markdown sources as escaped literal text" {
+  let html = render(
+    example,
+    "@@AGENTS_MD@@|@@SWARM_PROMPT@@",
+    agents_md="# Policy\n</pre><script>@@VERSION@@</script>",
+    swarm_prompt="# Swarm\nTerra & Luna <worker>\n",
+  )
+  assert_eq(
+    html,
+    "# Policy\n&lt;/pre&gt;&lt;script&gt;@@VERSION@@&lt;/script&gt;|# Swarm\nTerra &amp; Luna &lt;worker&gt;\n",
+  )
+}
+
+///|
+test "reject active settings without a reference row" {
+  try
+    render(
+      example + "\n[extra]\nundocumented = false\n",
+      "@@SETTINGS@@",
+      agents_md="",
+      swarm_prompt="",
+    )
+  catch {
+    Invalid(message) =>
+      assert_eq(
+        message, "Active setting has no documentation: extra.undocumented",
+      )
+    other => raise other
+  } noraise {
+    _ => fail("Expected a missing setting error")
+  }
+}

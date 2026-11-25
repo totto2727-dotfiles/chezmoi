@@ -4,23 +4,31 @@
 
 ## Selection and verification
 
-- Priority: the user's explicit model or route request, then configured `agents.swarm_model`, then the task defaults below.
-- The standard model family is OpenAI Sol 6.2 and Astra 6.2 through `openai-oauth`. Do not silently use an older Sol, Astra, or another provider.
-- Use `swarm list_models` to verify candidate identifiers and routes. Use `swarm list` after spawn to verify the worker's effective model and reasoning effort. A catalog entry or a configured default alone does not prove effective selection.
-- When `model` is exposed and allowed by `agents.swarm_model_selection` and `agents.swarm_model_allowlist`, pass the exact model identifier. Pass `effort` only if the tool exposes it. Do not invent a separate `provider` argument or an unsupported route identifier.
-- If the tool does not expose model selection, omit `model` to use the configured `agents.swarm_model`. Without a configured default, omission inherits the coordinator. Do not change the shared default just to route one lane.
-- Verify the spawned worker's effective model before assigning substantive work. If selection is unavailable or cannot be verified, report the limitation instead of claiming that the requested model is active.
+- If `model` is available, choose an allowed route based on the user's explicit request. If the user did not specify a model or route, use the task defaults below.
+- Use `swarm list_models` to verify candidate identifiers and routes. After spawn, use `swarm list` to check the effective route and reasoning effort. If it omits these fields, check `model`, `provider_key`, and `reasoning_effort` in the spawned worker's local session record (`~/.jcode/sessions/<session_id>.json`). A catalog entry or a configured default alone does not prove effective selection.
+- When `model` is exposed and allowed by `agents.swarm_model_selection` and `agents.swarm_model_allowlist`, pass the exact model identifier. Do not invent a separate `provider` argument or an unsupported route identifier.
+- `agents.swarm_model` is the fallback when `model` is omitted, not a rule for choosing the model when selection is available. If no default is configured, omission inherits the coordinator. Do not change the shared default just to route one lane.
+- When `swarm spawn` exposes `effort`, pass the user's requested level or the applicable level below, provided the selected model supports it. Otherwise, omit `effort` and use `agents.swarm_effort` (`high` in this config). Do not change the shared default for one worker.
+- Verify the spawned worker's effective model and effort before assigning substantive work. If an explicit request cannot be applied or verified, report the limitation instead of claiming it is active.
 - After a user changes the required model, preserve partial edits, drain or stop old-model workers, and continue their tasks on verified new-model workers. Resuming an existing worker must not be described as changing its model unless the effective model was actually changed and checked.
 
 ## Task defaults
 
-- Implementation, debugging, investigation, routine architecture, review, and verification: `gpt-6.2-sol`, normally `effort: "medium"`. Use `"high"` for a concrete need for deeper cross-file reasoning, difficult diagnosis, or a demanding independent review, not just for task size.
-- Context fetching, bulk reading, extraction, and summarization: `gpt-6.2-sol`, normally `effort: "medium"`, with bounded source scope and an explicit output contract. Do not add a separate older-model route merely because the work is mechanical.
-- Advanced architectural judgment or a critical unresolved correctness question: `gpt-6.2-astra`, normally `effort: "high"`. Escalate after Sol identifies a concrete unresolved question, competing explanations, or a verification failure that requires stronger reasoning. State the question, evidence already gathered, and why another Sol pass is unlikely to resolve it.
-- Use Astra directly when the user explicitly requests it. Otherwise, a label such as "design", "security", or "review", a large diff, or multiple files alone does not justify Astra.
+Route each worker by the judgment it needs, how much of the approach is already decided, and whether the main work is visual or can be split into independent batches. The effort column applies only when `swarm spawn` supports individual effort selection.
+
+| Task | Model route | Recommended effort |
+| --- | --- | --- |
+| Everyday, bounded work with little ambiguity. Examples: quick questions, short drafts, and small edits. | `openai-oauth:gpt-6.2-sol` | `low` |
+| Work that requires investigation, synthesis, or choosing between plausible approaches. Examples: coding or debugging, comparing options, planning, and drafting a recommendation from evidence. | `openai-oauth:gpt-6.2-sol` | `high` |
+| Work that needs deeper reasoning than Sol at `high` can reliably provide. Examples: high-stakes decisions, designs with tightly coupled trade-offs, and large projects whose parts cannot be planned independently. | `openai-oauth:gpt-6.2-astra` | `high` |
+| Execution with clear steps and acceptance criteria, or work centered on visual evidence or a GUI. Examples: implementing an agreed change, updating documents to a defined format, and checking screenshots or workflows. | `openai-oauth:gpt-6.1-terra` | `medium` |
+| High-volume work that can be split into independent batches. Examples: collecting sources, extracting fields, and classifying records. | `openai-oauth:gpt-6-luna` | `low` for routine collection and extraction, `medium` for reconciling conflicting sources within a batch |
+
+- When it helps to split the work, separate evidence gathering, decisions, and execution. For example, use Luna to collect evidence in batches, Sol at `high` to weigh it and decide on a plan, and Terra to carry out the agreed steps when that execution can be verified independently.
+- Use Astra directly when the task clearly exceeds Sol at `high` or the user requests it. Otherwise, escalate when a Sol pass leaves a concrete unresolved question, competing explanations, or a verification failure that needs deeper reasoning. State what makes the task hard and cite the evidence. A label, diff size, or file count alone does not justify escalation.
 - Reserve `"xhigh"` or `"max"` for a specific unresolved problem that remained after a high-effort Astra pass, or an explicit user request. Increase effort only when the additional reasoning can change a necessary decision.
 - Missing access, unavailable sources, authentication, permissions, and user-controlled prerequisites are blockers, not reasons to change models or increase effort.
-- If the requested 6.2 route is unavailable, report that exact limitation. Obtain approval before substituting an older model or a different provider. An explicit user model request must not silently fall back to `inherit`.
+- If the requested route is unavailable, report that exact limitation. Obtain approval before substituting a different model or provider. An explicit user model request must not silently fall back to `inherit`.
 
 ## Work allocation and handoff
 
