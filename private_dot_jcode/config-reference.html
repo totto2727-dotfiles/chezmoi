@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Generated from config.toml by .agent/skills/jcode-config-reference. Do not edit by hand. -->
+<!-- Generated from config.toml, AGENTS.md, and swarm-prompt.md by .agent/skills/jcode-config-reference. Do not edit by hand. -->
 <html lang="ja">
 <head>
 <meta charset="utf-8">
@@ -15,7 +15,7 @@
 html{scroll-padding-top:6.5rem}
 body{margin:0;background:var(--bg);color:var(--ink);font:1rem/1.65 system-ui,-apple-system,sans-serif}
 a{color:var(--accent);text-underline-offset:.18em}
-a:focus-visible,input:focus-visible,button:focus-visible{outline:.18rem solid var(--focus);outline-offset:.16rem}
+a:focus-visible,input:focus-visible,button:focus-visible,summary:focus-visible{outline:.18rem solid var(--focus);outline-offset:.16rem}
 code{font-family:var(--mono);font-size:.86em;overflow-wrap:anywhere}
 .skip{position:absolute;top:.5rem;left:.5rem;transform:translateY(-200%);padding:.5rem;background:var(--card);z-index:5}.skip:focus{transform:none}
 .wrap{max-width:92rem;margin:auto;padding-inline:clamp(1rem,4vw,4rem)}
@@ -24,6 +24,7 @@ code{font-family:var(--mono);font-size:.86em;overflow-wrap:anywhere}
 h1{font-size:clamp(2rem,5.7vw,4.3rem);line-height:1.12;letter-spacing:-.045em;margin:0 0 1rem;font-weight:760}
 .hero p:not(.eyebrow){max-width:52rem;margin:.55rem 0;color:var(--muted)}
 .metrics{display:flex;align-items:baseline;gap:1rem 2rem;flex-wrap:wrap;margin:1.4rem 0 0}.metrics div{display:flex;align-items:baseline;gap:.55rem}.metrics dt{font-size:.85rem;color:var(--muted)}.metrics dd{order:-1;margin:0;color:var(--accent);font:700 1.38rem/1.2 var(--mono)}
+.policies{padding-block:1.2rem 0}.policies h2{margin:0 0 .45rem;font-size:1.13rem}.policy{background:var(--card);border:1px solid var(--line);border-radius:.55rem;margin:.4rem 0}.policy summary{padding:.65rem .85rem;color:var(--accent);cursor:pointer;font-weight:700}.policy pre{margin:0;padding:.85rem;border-top:1px solid var(--line);font:.85rem/1.65 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere}
 .layout{display:grid;grid-template-columns:minmax(11rem,15rem) minmax(0,1fr);gap:clamp(1rem,3.3vw,3.4rem);align-items:start}
 .index{position:sticky;top:1.2rem;max-height:calc(100vh - 2.4rem);overflow:auto;padding:.9rem .35rem 1rem 0;margin-top:1rem;scrollbar-width:thin}
 .index summary{font-size:.91rem;font-weight:700;margin:.25rem 0 .5rem;cursor:pointer}.index h3{margin:.85rem 0 .16rem;color:var(--muted);font-size:.75rem;letter-spacing:.04em}.index ul{padding:0;margin:0;list-style:none}.index a{display:block;padding:.11rem .3rem;border-radius:.25rem;text-decoration:none}.index a:hover{background:var(--soft);text-decoration:underline}.index code{font-size:.8rem}
@@ -51,6 +52,155 @@ th,td{text-align:left;vertical-align:top;padding:.6rem .65rem;overflow-wrap:anyw
 <p>Jcode の各設定について、何が変わるか、指定できる値、macOS での既定値、chezmoi の <a href="config.toml"><code>config.toml</code></a> にある上書き値をまとめました。</p>
 <dl class="metrics"><div><dt>設定項目</dt><dd>258</dd></div><div><dt>上書き</dt><dd>18</dd></div><div><dt>Jcode CLI</dt><dd>v1.0.3</dd></div></dl>
 </div></header>
+<section class="policies wrap" aria-labelledby="policy-title">
+<h2 id="policy-title">エージェントの指示と Swarm の方針</h2>
+<details class="policy" id="agents-md"><summary><code>AGENTS.md</code></summary><pre><span># Global Agent Policy
+
+## Principles
+
+Principles are product-independent values and decision criteria that apply across environments.
+Concrete products, configuration values, locations, and procedures belong in Knowledge.
+
+### Instruction Priority
+
+- Follow explicit user requests and more specific repository instructions over this global policy.
+
+### Scope and Proportionality
+
+- Overengineering is harmful. Complexity beyond what the requested outcome requires increases maintenance cost and failure risk without adding necessary value.
+- Make the changes needed to achieve the requested outcome. Avoid unrelated cleanup, rewrites, or speculative refactoring.
+- Match the quality and validation of temporary deliverables to their intended use. Apply production-grade standards only when requested.
+- Validate affected behavior sufficiently to establish correctness. Avoid unrelated or redundant checks.
+
+### Work Continuity During Questions
+
+- Do not stop ongoing work merely to answer a question from the user.
+- The user may ask questions while work is in progress. Answer them while continuing the active task in the background, rather than treating each answer as a stopping point.
+- Keep work moving unless the user explicitly requests a pause or stop, or a genuine blocker or required approval prevents further progress.
+
+### Evidence and Uncertainty
+
+- Base investigation conclusions on objective evidence. Consult relevant official documentation and include direct source URLs in research reports.
+- Clearly distinguish verified facts, assumptions, and recommendations. Do not present unsupported judgment as fact.
+
+### Verification Stop Conditions
+
+- If verification is blocked by authentication, permissions, or another user-controlled prerequisite, stop attempts to bypass it. Report what remains unverified and what user action is needed.
+
+### Artifact Lifecycle
+
+- Keep artifacts with lasting project value in the repository and commit them by default. This includes documentation and regression tests that support continued use or maintenance.
+- Keep temporary deliverables that the user needs as local files, without committing them by default. Keeping a file does not imply committing it. Temporary reports, one-off experiments, and progress logs do not belong in permanent project history by default.
+- Before finalizing changes, review your task-created artifacts. Delete unneeded temporary files and exclude needed temporary deliverables from commits. Do not delete files belonging to the user or other agents.
+
+### Dependency Safety
+
+- Prefer the newest compatible dependency releases that satisfy supply-chain safeguards, including the configured release-age policy.
+- Respect the post-release waiting period unless an update is genuinely urgent.
+- Avoid bypassing safeguards. Apply an exception only when necessary, and explain its urgency, scope, and risk before proceeding.
+
+### Automation and Maintainability
+
+- Centralize automation entry points rather than scattering orchestration across separate scripts.
+- Use separate implementation code only when the work cannot reasonably be expressed through the chosen task runner.
+- Keep downstream customization distinguishable from upstream behavior, and maintain documentation of its purpose and operational impact.
+
+## Knowledge
+
+Knowledge contains environment-specific facts, product choices, and operational constraints.
+Reusable procedures belong in skills. Keep task-based skill references here instead of copies of their setup and execution steps.
+Their placement here does not make mandatory operational constraints optional.
+
+### Environment
+
+- Assume that all environment variables required for the task are already available in the execution environment. Use them without requesting or recreating configuration unless an actual failure shows that a required variable is missing.
+
+### Skill Selection
+
+All names below refer to skills, not commands. Follow each skill for execution details.
+
+- Use pstack as the default workflow. For non-trivial tasks, use `poteto-mode` and follow the playbook that fits the task.
+- For human-facing reports, use a pstack skill when it fits the purpose and format: `ketchup` for session recaps, `technical-writing` for technical reports, or `statechart` for state diagrams backed by a TLA+ model. If no pstack skill fits, use the format required by the task.
+
+- Use the installed [`projektor`](https://github.com/totto2727-org/agent/blob/main/plugins/external-information/skills/projektor/SKILL.md) skill for project and issue management through OpenConnector. If the skill is unavailable locally, follow the linked source.
+- Use the `open-connector` skill for connected services and external API operations, such as GitHub, and for OpenConnector configuration.
+- Use the `web-search` skill for web research, page retrieval, and API-based retrieval of online resources such as X posts.
+- Use the `doc-search` skill for library and framework documentation.
+
+### GitHub Identity
+
+- By default, use `totto2727-ai &lt;2000.0727.hayato+ai@gmail.com&gt;` as the GitHub user and email identity, including Git commit author and committer metadata.
+- When using the GitHub CLI (`gh`), follow the `open-connector` skill and access GitHub through OOMOL Proxy. The proxy connection determines the authenticated GitHub identity.
+
+### Artifact Placement
+
+- For repository work, create deliverables within the repository and place temporary files under `&lt;repository-root&gt;/tmp/`. This rule does not apply to configuration work outside a repository.
+- Before committing, apply the Artifact Lifecycle principles: keep needed temporary files locally, exclude them from commits and pull requests, and delete unneeded task-created files.
+
+### Fork Divergence Records
+
+- Document retained upstream differences in `docs/upstream-differences.md`, unless the repository specifies another location. Always record the exact upstream commit hash on which the fork is based, along with the purpose, affected areas, and operational impact. Link the record from a maintained entry point.
+- Update the recorded upstream commit hash whenever merging or syncing upstream changes, and commit the update with that work.
+- Update and commit the record together with changes to fork-specific behavior, configuration, or divergent source-submodule revisions.
+- Distinguish deployment customization from runtime source changes, and state when upstream runtime source is unchanged. Keep the record as maintained documentation, not a progress log or task list, and exclude secrets.
+
+### Pull Request Workflow
+
+- Take validated repository implementation work through to a pull request unless the user limits the scope. Local-only configuration, temporary experiments, and work outside a pull-request workflow do not require one.
+- Open pull requests only in repositories owned by `totto2727`, `totto2727-*`, or `creastudio`. For forks, target the user&#x27;s fork, not upstream.
+- Follow the specified target branch. Otherwise, use `main` when the branch structure permits, or the repository&#x27;s default branch.
+- Open each independently complete pull request as soon as it is ready, then continue the remaining work.
+
+### Writing: Markdown
+
+- Generate all reports and documentation recorded in repositories in Markdown.
+- Write Markdown without soft wrapping. Keep each sentence on one line unless list indentation or deliberate multi-line structure requires otherwise.
+</span></pre></details>
+<details class="policy" id="swarm-prompt"><summary><code>swarm-prompt.md</code></summary><pre><span>&lt;!-- Swarm routing policy: global ~/.jcode/swarm-prompt.md, overridden per project by ./.jcode/swarm-prompt.md. --&gt;
+
+# Swarm model routing
+
+## Selection and verification
+
+- If `model` is available, choose an allowed route based on the user&#x27;s explicit request. If the user did not specify a model or route, use the task defaults below.
+- Use `swarm list_models` to verify candidate identifiers and routes. After spawn, use `swarm list` to check the effective route and reasoning effort. If it omits these fields, check `model`, `provider_key`, and `reasoning_effort` in the spawned worker&#x27;s local session record (`~/.jcode/sessions/&lt;session_id&gt;.json`). A catalog entry or a configured default alone does not prove effective selection.
+- When `model` is exposed and allowed by `agents.swarm_model_selection` and `agents.swarm_model_allowlist`, pass the exact model identifier. Do not invent a separate `provider` argument or an unsupported route identifier.
+- `agents.swarm_model` is the fallback when `model` is omitted, not a rule for choosing the model when selection is available. If no default is configured, omission inherits the coordinator. Do not change the shared default just to route one lane.
+- When `swarm spawn` exposes `effort`, pass the user&#x27;s requested level or the applicable level below, provided the selected model supports it. Otherwise, omit `effort` and use `agents.swarm_effort` (`high` in this config). Do not change the shared default for one worker.
+- Verify the spawned worker&#x27;s effective model and effort before assigning substantive work. If an explicit request cannot be applied or verified, report the limitation instead of claiming it is active.
+- After a user changes the required model, preserve partial edits, drain or stop old-model workers, and continue their tasks on verified new-model workers. Resuming an existing worker must not be described as changing its model unless the effective model was actually changed and checked.
+
+## Task defaults
+
+Select the model based on the task and use `high` as the baseline for reasoning.
+Use a lower effort for bounded, routine work only if `swarm spawn` exposes an `effort` argument and the selected model supports that level.
+
+| Task | Model route | Recommended effort |
+| --- | --- | --- |
+| Bounded source lookup, straightforward extraction, and short summaries | `openai-oauth:gpt-6-luna` | `low` for mechanical work, `medium` when synthesis matters |
+| Screenshots, visual comparison, and UI or computer-use verification | `openai-oauth:gpt-6.1-terra` | `medium` for a straightforward visual check, `high` for multi-step verification |
+| Implementation, debugging, routine design and review, and text-based verification | `openai-oauth:gpt-6.2-sol` | `high` |
+| Advanced architecture or a critical correctness question that remains unresolved | `openai-oauth:gpt-6.2-astra` | `high` |
+
+- Prefer Terra when visual evidence is central to the task, and Sol when code or logs are central.
+- Escalate to Astra when a Sol pass leaves a concrete unresolved question, competing explanations, or a verification failure that needs deeper reasoning. State the question, the evidence, and why another Sol pass is unlikely to resolve it.
+- Use Astra directly when the user explicitly requests it. Otherwise, a label such as &quot;design&quot;, &quot;security&quot;, or &quot;review&quot;, a large diff, or multiple files alone does not justify Astra.
+- Reserve `&quot;xhigh&quot;` or `&quot;max&quot;` for a specific unresolved problem that remained after a high-effort Astra pass, or an explicit user request. Increase effort only when the additional reasoning can change a necessary decision.
+- Missing access, unavailable sources, authentication, permissions, and user-controlled prerequisites are blockers, not reasons to change models or increase effort.
+- If the requested route is unavailable, report that exact limitation. Obtain approval before substituting a different model or provider. An explicit user model request must not silently fall back to `inherit`.
+
+## Work allocation and handoff
+
+- Always pass a nonempty, task-specific `label` when spawning.
+- Give each worker a verifiable outcome, bounded source scope, file ownership, required checks, and a concise reporting contract. Prefer separate files or independent read-only questions over shared writes.
+- Use the smallest useful number of workers. Do not fan out several agents over the same question without distinct hypotheses or independently valuable coverage.
+- A review worker should judge behavior and evidence independently. Do not use a stronger model as a substitute for running the real acceptance workflow.
+- Workers must distinguish verified observations, assumptions, remaining risks, and blockers. Include exact commands, source locations, or URLs sufficient for the coordinator to verify claims.
+- On escalation or model change, hand off the unresolved question, relevant evidence, partial edits, and the next discriminating check. Do not restart completed investigation or discard valid work.
+- In normal and light-swarm mode, only the root session may spawn agents. Workers complete their assigned tasks directly and report back.
+- Recursive spawning is reserved for a root running in `swarm-deep` mode, and only when another level materially improves coverage.
+</span></pre></details>
+</section>
 <div class="layout wrap">
 <nav class="index" aria-label="設定セクション"><details id="section-menu" open><summary>セクション</summary><div class="index-groups"><div><h3>画面・入力</h3><ul>
 <li><a href="#section-keybindings"><code>[keybindings]</code></a></li>
@@ -292,7 +442,7 @@ reasoning_display = "current"</code></pre></details>
 </tbody></table></div></section>
 <section class="config-section" id="section-agents" aria-labelledby="title-agents">
 <div class="section-head"><h3 id="title-agents"><code>[agents]</code><span class="topic">Swarm とメモリ</span></h3><a class="source" href="https://github.com/1jehuang/jcode/blob/a0ae514c45451f12d5633ed4fa7c71614a9f4a42/crates/jcode-config-types/src/lib.rs#L509">公式ソース</a></div>
-<p class="section-note">Swarm の選択方針では、軽い調査・抽出には Luna、画像や画面の確認には Terra、通常の実装・デバッグには Sol、難しい設計判断には Astra を使います。Jcode v1.0.3 では推論強度は全ワーカー共通で medium です。</p>
+<p class="section-note">Swarm の選択方針では、軽い調査・抽出には Luna、画像や画面の確認には Terra、通常の実装・デバッグには Sol、難しい設計判断には Astra を使います。公式 Jcode v1.0.3 の swarm ツールでは、推論強度は全ワーカー共通で high です。</p>
 <div class="table-frame"><table aria-labelledby="title-agents"><colgroup><col><col><col><col></colgroup><thead><tr><th scope="col">設定キー</th><th scope="col">効果</th><th scope="col">指定できる値</th><th scope="col">既定値・上書き</th></tr></thead><tbody>
 <tr id="agents.swarm_model" data-override="false"><th scope="row"><a class="row-link" href="#agents.swarm_model"><code>agents.swarm_model</code></a></th><td data-label="効果">ワーカー起動時にモデルが明示されなかった場合の既定モデルを指定します。未指定ならコーディネーターのモデルを継承します。swarm-prompt は選択方針で、起動時のモデル指定の代わりにはなりません。</td><td class="values" data-label="指定できる値">モデルまたは経路の文字列。例: &quot;gpt-6.2-sol&quot;。&quot;inherit&quot;、&quot;coordinator&quot; は継承します。</td><td data-label="既定値・上書き"><div class="value-line"><span>既定</span><span class="unset">未指定</span></div></td></tr>
 <tr id="agents.swarm_model_selection" data-override="true"><th scope="row"><a class="row-link" href="#agents.swarm_model_selection"><code>agents.swarm_model_selection</code></a></th><td data-label="効果">ワーカーの起動ごとにモデルを指定できるようにします。true かつ swarm_model_allowlist が空でない場合だけ、swarm ツールに model 引数が表示されます。</td><td class="values" data-label="指定できる値">真偽値: true / false。</td><td data-label="既定値・上書き"><div class="value-line"><span>既定</span><code>false</code></div><div class="value-line overridden"><span>上書き</span><code>true</code></div></td></tr>
@@ -308,7 +458,7 @@ reasoning_display = "current"</code></pre></details>
 <tr id="agents.swarm_max_concurrent_agents" data-override="false"><th scope="row"><a class="row-link" href="#agents.swarm_max_concurrent_agents"><code>agents.swarm_max_concurrent_agents</code></a></th><td data-label="効果">1 つの Swarm で同時に生存できるワーカー数を制限してメモリーを保護します。完了・停止済みは数えません。</td><td class="values" data-label="指定できる値">非負整数。例: 32。0 はこの制限を無効にしますが、Swarm 全体の絶対上限 1000 は残ります。</td><td data-label="既定値・上書き"><div class="value-line"><span>既定</span><code>32</code></div></td></tr>
 <tr id="agents.swarm_stall_after_secs" data-override="false"><th scope="row"><a class="row-link" href="#agents.swarm_stall_after_secs"><code>agents.swarm_stall_after_secs</code></a></th><td data-label="効果">ツール実行中でないワーカーが出力・ツールイベント・ハートビートを送らない場合、停滞とみなしてコーディネーターへ通知するまでの時間です。</td><td class="values" data-label="指定できる値">非負整数（秒）。例: 600。0 は監視を無効にします。</td><td data-label="既定値・上書き"><div class="value-line"><span>既定</span><code>600</code></div></td></tr>
 <tr id="agents.swarm_stall_nudge" data-override="false"><th scope="row"><a class="row-link" href="#agents.swarm_stall_nudge"><code>agents.swarm_stall_nudge</code></a></th><td data-label="効果">停滞を検知したとき、コーディネーターへの通知に加え、ワーカー自身にも短い催促を送ります。</td><td class="values" data-label="指定できる値">真偽値: true / false。</td><td data-label="既定値・上書き"><div class="value-line"><span>既定</span><code>false</code></div></td></tr>
-<tr id="agents.swarm_effort" data-override="true"><th scope="row"><a class="row-link" href="#agents.swarm_effort"><code>agents.swarm_effort</code></a></th><td data-label="効果">起動するワーカーに共通の推論強度を指定します。Jcode v1.0.3 の Swarm ツールではワーカーごとに上書きできません。</td><td class="values" data-label="指定できる値">推論強度の文字列。例: &quot;low&quot;、&quot;medium&quot;、&quot;high&quot;。省略時は low。使用可能な強度はモデルによります。</td><td data-label="既定値・上書き"><div class="value-line"><span>既定</span><span class="unset">未指定</span></div><div class="value-line overridden"><span>上書き</span><code>&quot;medium&quot;</code></div></td></tr>
+<tr id="agents.swarm_effort" data-override="true"><th scope="row"><a class="row-link" href="#agents.swarm_effort"><code>agents.swarm_effort</code></a></th><td data-label="効果">起動するワーカーの既定の推論強度を指定します。公式 Jcode v1.0.3 の Swarm ツールではワーカーごとに上書きできません。</td><td class="values" data-label="指定できる値">推論強度の文字列。例: &quot;low&quot;、&quot;medium&quot;、&quot;high&quot;。省略時は low。使用可能な強度はモデルによります。</td><td data-label="既定値・上書き"><div class="value-line"><span>既定</span><span class="unset">未指定</span></div><div class="value-line overridden"><span>上書き</span><code>&quot;high&quot;</code></div></td></tr>
 <tr id="agents.swarm_root_effort" data-override="false"><th scope="row"><a class="row-link" href="#agents.swarm_root_effort"><code>agents.swarm_root_effort</code></a></th><td data-label="効果">Swarm モードでルートセッションの推論強度を指定します。ワーカーの推論強度には影響しません。</td><td class="values" data-label="指定できる値">推論強度の文字列。例: &quot;low&quot;、&quot;medium&quot;、&quot;high&quot;。省略または無効な値の場合は low。</td><td data-label="既定値・上書き"><div class="value-line"><span>既定</span><span class="unset">未指定</span></div></td></tr>
 </tbody></table></div></section>
 <section class="config-section" id="section-compaction" aria-labelledby="title-compaction">

@@ -8,20 +8,20 @@
 - Use `swarm list_models` to verify candidate identifiers and routes. After spawn, use `swarm list` to check the effective route and reasoning effort. If it omits these fields, check `model`, `provider_key`, and `reasoning_effort` in the spawned worker's local session record (`~/.jcode/sessions/<session_id>.json`). A catalog entry or a configured default alone does not prove effective selection.
 - When `model` is exposed and allowed by `agents.swarm_model_selection` and `agents.swarm_model_allowlist`, pass the exact model identifier. Do not invent a separate `provider` argument or an unsupported route identifier.
 - `agents.swarm_model` is the fallback when `model` is omitted, not a rule for choosing the model when selection is available. If no default is configured, omission inherits the coordinator. Do not change the shared default just to route one lane.
-- Verify the spawned worker's effective model before assigning substantive work. If selection is unavailable or cannot be verified, report the limitation instead of claiming that the requested model is active.
+- When `swarm spawn` exposes `effort`, pass the user's requested level or the applicable level below, provided the selected model supports it. Otherwise, omit `effort` and use `agents.swarm_effort` (`high` in this config). Do not change the shared default for one worker.
+- Verify the spawned worker's effective model and effort before assigning substantive work. If an explicit request cannot be applied or verified, report the limitation instead of claiming it is active.
 - After a user changes the required model, preserve partial edits, drain or stop old-model workers, and continue their tasks on verified new-model workers. Resuming an existing worker must not be described as changing its model unless the effective model was actually changed and checked.
 
 ## Task defaults
 
-Select the model based on what the worker needs to do.
-Jcode v1.0.3 does not expose per-worker `effort` in the `swarm` tool, so all workers use `agents.swarm_effort` (`medium` in this config).
-The effort column applies only if the tool exposes a supported `effort` argument. Do not change the shared effort for one worker.
+Select the model based on the task and use `high` as the baseline for reasoning.
+Use a lower effort for bounded, routine work only if `swarm spawn` exposes an `effort` argument and the selected model supports that level.
 
 | Task | Model route | Recommended effort |
 | --- | --- | --- |
 | Bounded source lookup, straightforward extraction, and short summaries | `openai-oauth:gpt-6-luna` | `low` for mechanical work, `medium` when synthesis matters |
-| Screenshots, visual comparison, and UI or computer-use verification | `openai-oauth:gpt-6.1-terra` | `medium` |
-| Implementation, debugging, routine design and review, and text-based verification | `openai-oauth:gpt-6.2-sol` | `medium`, or `high` for difficult diagnosis or cross-file reasoning |
+| Screenshots, visual comparison, and UI or computer-use verification | `openai-oauth:gpt-6.1-terra` | `medium` for a straightforward visual check, `high` for multi-step verification |
+| Implementation, debugging, routine design and review, and text-based verification | `openai-oauth:gpt-6.2-sol` | `high` |
 | Advanced architecture or a critical correctness question that remains unresolved | `openai-oauth:gpt-6.2-astra` | `high` |
 
 - Prefer Terra when visual evidence is central to the task, and Sol when code or logs are central.

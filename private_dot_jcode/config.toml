@@ -585,7 +585,7 @@ openai_service_tier = "default"
 
 # @section Swarm とメモリ
 # @source crates/jcode-config-types/src/lib.rs#L509
-# @note Swarm の選択方針では、軽い調査・抽出には Luna、画像や画面の確認には Terra、通常の実装・デバッグには Sol、難しい設計判断には Astra を使います。Jcode v1.0.3 では推論強度は全ワーカー共通で medium です。
+# @note Swarm の選択方針では、軽い調査・抽出には Luna、画像や画面の確認には Terra、通常の実装・デバッグには Sol、難しい設計判断には Astra を使います。公式 Jcode v1.0.3 の swarm ツールでは、推論強度は全ワーカー共通で high です。
 [agents]
 
 # @effect ワーカー起動時にモデルが明示されなかった場合の既定モデルを指定します。未指定ならコーディネーターのモデルを継承します。swarm-prompt は選択方針で、起動時のモデル指定の代わりにはなりません。
@@ -646,10 +646,10 @@ swarm_model_allowlist = ["openai-oauth:gpt-6.2-sol", "openai-oauth:gpt-6.2-astra
 # @values 真偽値: true / false。
 # swarm_stall_nudge = false
 
-# @effect 起動するワーカーに共通の推論強度を指定します。Jcode v1.0.3 の Swarm ツールではワーカーごとに上書きできません。
+# @effect 起動するワーカーの既定の推論強度を指定します。公式 Jcode v1.0.3 の Swarm ツールではワーカーごとに上書きできません。
 # @values 推論強度の文字列。例: "low"、"medium"、"high"。省略時は low。使用可能な強度はモデルによります。
 # @unset swarm_effort
-swarm_effort = "medium"
+swarm_effort = "high"
 
 # @effect Swarm モードでルートセッションの推論強度を指定します。ワーカーの推論強度には影響しません。
 # @values 推論強度の文字列。例: "low"、"medium"、"high"。省略または無効な値の場合は low。

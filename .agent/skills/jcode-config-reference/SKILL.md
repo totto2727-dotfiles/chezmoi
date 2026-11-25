@@ -11,6 +11,7 @@ metadata:
 Edit [config.toml](../../../private_dot_jcode/config.toml) as the source of truth.
 Use the setting key or link fragment in [config-reference.html](../../../private_dot_jcode/config-reference.html) to locate the setting.
 Do not edit the generated HTML.
+The generator includes the repository root [AGENTS.md](../../../AGENTS.md) and the managed [swarm-prompt.md](../../../private_dot_jcode/swarm-prompt.md) as read-only text in collapsed sections above the settings.
 
 1. To use a default, remove the active assignment and leave the annotation.
 2. To override a default, keep the commented assignment and add an active assignment below it.
@@ -23,7 +24,8 @@ moon run --target wasm --target-dir tmp/jcode-reference-moon .agent/skills/jcode
 
 Append `-- --check` to compare the existing HTML without writing it.
 Commit the HTML and the source changes together.
-If asked to apply a setting locally, apply only `~/.jcode/config.toml` with chezmoi.
+Apply only the changed Jcode files with chezmoi when the user asks for local changes.
+Do not change or apply `AGENTS.md` just to refresh the reference.
 
 ## Annotations
 

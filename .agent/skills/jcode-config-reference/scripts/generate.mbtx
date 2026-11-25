@@ -274,7 +274,12 @@ fn render_row(setting : Setting, active : @toml.TomlValue?) -> String {
 }
 
 ///|
-fn render(config : String, template : String) -> String raise {
+fn render(
+  config : String,
+  template : String,
+  agents_md~ : String,
+  swarm_prompt~ : String,
+) -> String raise {
   let reference = parse_reference(config)
   let defaults : Map[String, DefaultValue] = Map([])
   for group in reference.groups {
@@ -342,6 +347,8 @@ fn render(config : String, template : String) -> String raise {
     "SHORT_REVISION": revision[:8].to_owned(),
     "SETTING_COUNT": defaults.length().to_string(),
     "OVERRIDE_COUNT": overrides.length().to_string(),
+    "AGENTS_MD": escape_html(agents_md),
+    "SWARM_PROMPT": escape_html(swarm_prompt),
     "INDEX": index.to_string(),
     "SETTINGS": content.to_string(),
   }
@@ -378,7 +385,9 @@ fn run() -> Unit raise {
     ".agent/skills/jcode-config-reference/assets/reference.html",
   )
   let output = "private_dot_jcode/config-reference.html"
-  let html = render(config, template)
+  let agents_md = @fs.read_file_to_string("AGENTS.md")
+  let swarm_prompt = @fs.read_file_to_string("private_dot_jcode/swarm-prompt.md")
+  let html = render(config, template, agents_md~, swarm_prompt~)
   if check {
     if @fs.read_file_to_string(output) != html {
       raise Invalid("Settings reference is out of date. Rerun without --check.")
@@ -427,7 +436,10 @@ let example : String =
 ///|
 test "render defaults and active overrides as separate escaped values" {
   let html = render(
-    example, "@@SETTING_COUNT@@/@@OVERRIDE_COUNT@@\n@@INDEX@@@@SETTINGS@@",
+    example,
+    "@@SETTING_COUNT@@/@@OVERRIDE_COUNT@@\n@@INDEX@@@@SETTINGS@@",
+    agents_md="",
+    swarm_prompt="",
   )
   assert_true(html.has_prefix("3/2\n"))
   assert_true(html.contains("href=\"#section-launch\""))
@@ -447,9 +459,28 @@ test "render defaults and active overrides as separate escaped values" {
 }
 
 ///|
+test "embed the two Markdown sources as escaped literal text" {
+  let html = render(
+    example,
+    "@@AGENTS_MD@@|@@SWARM_PROMPT@@",
+    agents_md="# Policy\n</pre><script>@@VERSION@@</script>",
+    swarm_prompt="# Swarm\nTerra & Luna <worker>\n",
+  )
+  assert_eq(
+    html,
+    "# Policy\n&lt;/pre&gt;&lt;script&gt;@@VERSION@@&lt;/script&gt;|# Swarm\nTerra &amp; Luna &lt;worker&gt;\n",
+  )
+}
+
+///|
 test "reject active settings without a reference row" {
   try
-    render(example + "\n[extra]\nundocumented = false\n", "@@SETTINGS@@")
+    render(
+      example + "\n[extra]\nundocumented = false\n",
+      "@@SETTINGS@@",
+      agents_md="",
+      swarm_prompt="",
+    )
   catch {
     Invalid(message) =>
       assert_eq(
